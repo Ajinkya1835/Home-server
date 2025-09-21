@@ -1,0 +1,9 @@
+Buy a domain (Namecheap, GoDaddy, etc.).
+
+Point nameservers to Cloudflare.
+
+Add A record → your server’s public IP.
+
+Enable SSL/TLS → Full (Strict) in Cloudflare dashboard.
+
+Install Certbot for HTTPS:
