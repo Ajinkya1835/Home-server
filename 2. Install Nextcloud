@@ -1,0 +1,23 @@
+Install required packages:
+sudo apt install apache2 mariadb-server libapache2-mod-php \
+php php-mysql php-xml php-mbstring php-curl php-gd unzip -y
+
+Download Nextcloud:
+wget https://download.nextcloud.com/server/releases/nextcloud-29.0.0.zip
+unzip nextcloud-29.0.0.zip
+sudo mv nextcloud /var/www/
+
+Configure Apache:
+sudo nano /etc/apache2/sites-available/nextcloud.conf
+Add:
+<VirtualHost *:80>
+  DocumentRoot /var/www/nextcloud
+  ServerName yourdomain.com
+
+  <Directory /var/www/nextcloud>
+    Require all granted
+    AllowOverride All
+    Options FollowSymLinks MultiViews
+  </Directory>
+</VirtualHost>
+
