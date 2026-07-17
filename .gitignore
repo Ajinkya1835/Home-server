@@ -1,0 +1,34 @@
+# Environment
+.env
+.env.*
+
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Logs
+*.log
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Docker runtime data
+docker/**/postgres/
+docker/**/redis/
+docker/**/upload/
+docker/**/uploads/
+docker/**/data/
+docker/**/model-cache/
+
+# Nextcloud
+docker/**/nextcloud/data/
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
