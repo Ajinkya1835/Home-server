@@ -1,8 +1,16 @@
-# Home Server — Self-Hosted Media, Monitoring & Automation
+![Ubuntu](https://img.shields.io/badge/Ubuntu-22.04-E95420?logo=ubuntu)
+
+![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED?logo=docker)
+
+![License](https://img.shields.io/github/license/Ajinkya1835/Home-server)
+
+![Last Commit](https://img.shields.io/github/last-commit/Ajinkya1835/Home-server)
+# Home Server
+> A self-hosted Ubuntu Server running on a repurposed 2012 MacBook Pro for personal cloud storage, photo management, monitoring, remote access, and automation.
 
 This repository documents my self-hosted home server, running on a repurposed 2012 MacBook Pro turned into a 24/7 Ubuntu Server box. It covers everything from storage and Docker services to remote access, monitoring, and a custom Telegram bot for managing the server from anywhere.
 
-> This started as a simple Nextcloud + Cloudflare project (see [`docs/history.md`](docs/history.md) for the original writeup) and has since evolved into a full home lab with photo management, monitoring, and automation.
+> This project started as a simple personal cloud server and has gradually evolved into a complete home lab. Every service, configuration, and setup guide in this repository reflects the current state of my server.
 
 ---
 
@@ -18,6 +26,7 @@ This repository documents my self-hosted home server, running on a repurposed 20
 - **UFW Firewall** — locked down to only required ports
 - **SMART + sensors monitoring** — disk health and temperature tracking
 - **Telegram Bot** — check status, temps, logs, restart containers, or reboot the server from your phone
+- **Nextcloud** — personal cloud storage, file synchronization, document management, contacts and calendar
 
 ---
 
@@ -28,16 +37,16 @@ MacBook Pro (2012) — Ubuntu Server 22.04.5 LTS
 ├── SSD (256GB) — OS, Docker, system files
 ├── HDD (500GB, LUKS encrypted) — mounted at /mnt/hdd1
 │
-├── Docker
-│   ├── Immich (server, postgres, redis, machine-learning)
-│   ├── Portainer
-│   ├── Uptime Kuma
-│   └── Netdata (host network)
-│
-├── Telegram Bot (Python, systemd service)
-├── SMART monitoring (systemd)
-├── Tailscale (remote SSH + web UI access)
-└── UFW (firewall)
+ Docker
+├── Immich
+├── Nextcloud
+├── PostgreSQL (Immich)
+├── PostgreSQL (Nextcloud)
+├── Redis (Immich)
+├── Redis (Nextcloud)
+├── Portainer
+├── Uptime Kuma
+└── Netdata
 ```
 
 ---
@@ -60,10 +69,14 @@ MacBook Pro (2012) — Ubuntu Server 22.04.5 LTS
 
 | Service | Purpose | Port |
 |---|---|---|
-| [Immich](docker-compose/immich/) | Photo & video management | 2283 |
+| [Immich](docker/immich/) | Photo & video management | 2283 |
 | [Portainer](docker-compose/portainer/) | Docker management UI | 9000 |
 | [Uptime Kuma](docker-compose/uptime-kuma/) | Service/uptime monitoring | 3001 |
 | [Netdata](docker-compose/netdata/) | Real-time system metrics | 19999 (host network) |
+| Service   | Purpose                | Port     |
+| --------- | ---------------------- | -------- |
+| Nextcloud | Personal Cloud Storage | **8080** |
+
 
 All containers run with `restart: unless-stopped` for automatic recovery after reboot or crash.
 
@@ -82,7 +95,7 @@ All containers run with `restart: unless-stopped` for automatic recovery after r
   19999 (Netdata)
   ```
 
-See [`scripts/firewall-setup.sh`](scripts/firewall-setup.sh) for the UFW rules.
+Firewall configuration is documented in `docs/networking.md`.
 
 ---
 
@@ -90,8 +103,17 @@ See [`scripts/firewall-setup.sh`](scripts/firewall-setup.sh) for the UFW rules.
 
 - **SSD** — root filesystem (`/`), OS + Docker + system files
 - **HDD** — encrypted with LUKS, auto-mounted at `/mnt/hdd1` via `/etc/fstab`
+/mnt/hdd1
 
-See [`docs/storage-setup.md`](docs/storage-setup.md) for the LUKS + fstab configuration.
+├── immich
+├── nextcloud
+│   ├── apps
+│   ├── config
+│   ├── data
+│   ├── postgres
+│   └── redis
+
+The complete setup is documented in `docs/telegram-bot.md`.
 
 ---
 
@@ -153,20 +175,23 @@ See [`telegram-bot/`](telegram-bot/) for the bot source and systemd unit.
 - SMART + temperature monitoring configured
 - Telegram bot working, restricted to owner
 - Automatic boot verified with reboot test
+- Nextcloud healthy
+- PostgreSQL healthy
+- Redis healthy
+- Remote access via Tailscale
 
 ---
 
 ## Roadmap
 
-- Automated backup scripts
-- Daily Telegram health report
-- Telegram alerts for container failures / SMART changes
-- Samba file sharing
-- Reverse proxy with HTTPS (Caddy/Nginx)
-- GitHub Actions for configuration backup
-- Docker auto-update notifications (Watchtower or similar)
-- Immich backup automation
-- Home Assistant integration
+- Automated Docker backups
+- Off-site backup
+- Reverse proxy
+- HTTPS
+- Daily Telegram reports
+- Container failure notifications
+- Watchtower
+- Samba/NFS shares
 
 ---
 
@@ -174,26 +199,26 @@ See [`telegram-bot/`](telegram-bot/) for the bot source and systemd unit.
 
 ```
 Home-server/
-├── README.md
-├── docker-compose/
-│   ├── immich/docker-compose.yml
-│   ├── portainer/docker-compose.yml
-│   ├── uptime-kuma/docker-compose.yml
-│   └── netdata/docker-compose.yml
-├── telegram-bot/
-│   ├── bot.py
-│   ├── requirements.txt
-│   └── telegram-bot.service
+├── docker/
+├── docs/
+├── screenshots/
 ├── scripts/
-│   ├── firewall-setup.sh
-│   ├── luks-hdd-setup.sh
-│   └── smart-setup.sh
-└── docs/
-    ├── storage-setup.md
-    ├── recovery-guide.md
-    └── history.md
+├── systemd/
+├── .gitignore
+├── CHANGELOG.md
+├── LICENSE
+└── README.md
 ```
+## Documentation
 
+- Installation Guide
+- Networking
+- Cloudflare
+- Immich
+- Telegram Bot
+- Backup
+- Recovery
+- Troubleshooting
 ---
 
 ## Recreating This Setup
