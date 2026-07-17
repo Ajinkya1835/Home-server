@@ -1,15 +1,30 @@
-Install required packages:
+Nextcloud Installation Notes (legacy bare-metal flow)
+
+Back to README: ./README.md
+
+This file keeps the original non-container Nextcloud install notes for reference.
+The active repository path for this project is Docker-based Nextcloud, documented in:
+
+- ./docs/nextcloud.md
+
+1) Install required packages
+
+sudo apt update
 sudo apt install apache2 mariadb-server libapache2-mod-php \
 php php-mysql php-xml php-mbstring php-curl php-gd unzip -y
 
-Download Nextcloud:
+2) Download and unpack Nextcloud
+
 wget https://download.nextcloud.com/server/releases/nextcloud-29.0.0.zip
 unzip nextcloud-29.0.0.zip
 sudo mv nextcloud /var/www/
 
-Configure Apache:
+3) Configure Apache vhost
+
 sudo nano /etc/apache2/sites-available/nextcloud.conf
-Add:
+
+VirtualHost template:
+
 <VirtualHost *:80>
   DocumentRoot /var/www/nextcloud
   ServerName yourdomain.com
@@ -20,4 +35,17 @@ Add:
     Options FollowSymLinks MultiViews
   </Directory>
 </VirtualHost>
+
+4) Enable site and required modules
+
+sudo a2ensite nextcloud.conf
+sudo a2enmod rewrite headers env dir mime
+sudo systemctl reload apache2
+
+5) Database and web installer
+
+- Create a dedicated database/user in MariaDB.
+- Open the server URL and complete setup.
+
+TODO: If this bare-metal path is still used, add exact DB creation commands and hardening checklist.
 

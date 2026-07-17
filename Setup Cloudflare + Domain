@@ -1,9 +1,32 @@
-Buy a domain (Namecheap, GoDaddy, etc.).
+Cloudflare + Domain Setup Notes
 
-Point nameservers to Cloudflare.
+Back to README: ./README.md
+Detailed documentation: ./docs/cloudflare.md
 
-Add A record → your server’s public IP.
+1) Domain and DNS onboarding
 
-Enable SSL/TLS → Full (Strict) in Cloudflare dashboard.
+- Buy a domain from your registrar.
+- Move nameservers to Cloudflare.
+- Wait for DNS propagation.
 
-Install Certbot for HTTPS:
+2) Record setup
+
+- Add A/AAAA record for required subdomain(s) to origin public IP.
+- Use proxied/unproxied mode based on service exposure policy.
+
+3) SSL/TLS policy
+
+- Set SSL/TLS mode to Full (strict) once origin certificates are valid.
+- Avoid insecure fallback modes in production.
+
+4) Origin hardening
+
+- Restrict direct origin exposure wherever possible.
+- Keep admin services private over Tailscale unless intentionally published.
+
+5) HTTPS at origin
+
+- Install and renew certificates (Certbot or equivalent).
+- Validate endpoint with curl and browser checks.
+
+TODO: Add final domain names, DNS record map, and whether Cloudflare Tunnel is used.

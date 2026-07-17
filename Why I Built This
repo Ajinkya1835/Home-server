@@ -1,13 +1,16 @@
-My Google Drive was full, and instead of paying monthly fees, I decided to self-host.
+Why I Built This
 
-Learned about:
+Back to README: ./README.md
 
-Linux server administration
+My cloud storage limits were growing, and instead of increasing monthly subscriptions, I decided to build a self-hosted stack on hardware I already had.
 
-DNS & domains
+What this project helped me learn:
 
-SSL certificates
+- Linux server administration
+- Dockerized operations
+- DNS and domain routing
+- SSL/TLS fundamentals
+- Monitoring and incident response
+- Backup and recovery planning
 
-Web server & database configuration
-
-This project was a fun mix of problem-solving and upskilling!
+The result is a practical personal homelab that is useful day-to-day and also acts as a long-term learning platform.
