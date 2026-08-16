@@ -1,0 +1,16 @@
+Why I Built This
+
+Back to README: ./README.md
+
+My cloud storage limits were growing, and instead of increasing monthly subscriptions, I decided to build a self-hosted stack on hardware I already had.
+
+What this project helped me learn:
+
+- Linux server administration
+- Dockerized operations
+- DNS and domain routing
+- SSL/TLS fundamentals
+- Monitoring and incident response
+- Backup and recovery planning
+
+The result is a practical personal homelab that is useful day-to-day and also acts as a long-term learning platform.
