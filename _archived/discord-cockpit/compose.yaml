@@ -1,0 +1,18 @@
+services:
+  discord-cockpit:
+    build: .
+    container_name: discord-cockpit
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./bot/data:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /mnt/hdd1:/mnt/hdd1:ro
+    devices:
+      - /dev/sda:/dev/sda
+      - /dev/sdb:/dev/sdb
+    cap_add:
+      - SYS_RAWIO
+    security_opt:
+      - no-new-privileges:true

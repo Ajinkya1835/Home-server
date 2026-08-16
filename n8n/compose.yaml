@@ -1,0 +1,23 @@
+services:
+  n8n:
+    build: .
+    container_name: n8n
+    restart: unless-stopped
+    environment:
+      - N8N_SECURE_COOKIE=false
+      - TZ=Asia/Kolkata
+      - GENERIC_TIMEZONE=Asia/Kolkata
+      - N8N_EDITOR_BASE_URL=https://ajinkya.tail32b205.ts.net:8445
+      - WEBHOOK_URL=https://ajinkya.tail32b205.ts.net:8445/
+      - N8N_PROTOCOL=https
+      - N8N_PROXY_HOPS=1
+      - NODE_FUNCTION_ALLOW_EXTERNAL=cheerio
+    volumes:
+      - n8n_data:/home/node/.n8n
+    ports:
+      - "127.0.0.1:5678:5678"
+
+volumes:
+  n8n_data:
+    external: true
+    name: n8n_n8n_data
