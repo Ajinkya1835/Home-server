@@ -1,0 +1,112 @@
+---
+- Core Services:
+    - Immich:
+        icon: immich.png
+        href: https://ajinkya.tail32b205.ts.net:8444
+        description: Photo & video library
+        widget:
+          type: docker
+          container: immich_server
+    - Nextcloud:
+        icon: nextcloud.png
+        href: https://ajinkya.tail32b205.ts.net:8443
+        description: Files & sync
+        widget:
+          type: docker
+          container: nextcloud
+    - Vaultwarden:
+        icon: vaultwarden.png
+        href: https://ajinkya.tail32b205.ts.net/vault
+        description: Password manager
+        widget:
+          type: docker
+          container: vaultwarden
+    - n8n:
+        icon: n8n.png
+        href: https://ajinkya.tail32b205.ts.net:8445
+        description: Automation
+        widget:
+          type: docker
+          container: n8n
+
+- Management:
+    - Portainer:
+        icon: portainer.png
+        href: https://ajinkya.tail32b205.ts.net:8446
+        description: Docker management
+        widget:
+          type: docker
+          container: portainer
+    - Grafana:
+        icon: grafana.png
+        href: https://ajinkya.tail32b205.ts.net:8447
+        description: Monitoring dashboards
+        widget:
+          type: docker
+          container: grafana
+    - Uptime Kuma:
+        icon: uptime-kuma.png
+        href: https://ajinkya.tail32b205.ts.net:8449
+        description: Service uptime
+        widget:
+          type: docker
+          container: uptime-kuma
+    - Homepage:
+        icon: homepage.png
+        href: https://ajinkya.tail32b205.ts.net:8450
+        description: Homelab command center
+        widget:
+          type: docker
+          container: homepage
+
+- Monitoring Stack:
+    - Prometheus:
+        icon: prometheus.png
+        description: Metrics collection
+        widget:
+          type: docker
+          container: prometheus
+    - Loki:
+        icon: loki.png
+        description: Log aggregation
+        widget:
+          type: docker
+          container: loki
+    - Alertmanager:
+        icon: alertmanager.png
+        description: Alert routing
+        widget:
+          type: docker
+          container: alertmanager
+
+- Infrastructure:
+    - Immich ML:
+        icon: immich.png
+        description: Machine learning
+        widget:
+          type: docker
+          container: immich_machine_learning
+    - Immich PostgreSQL:
+        icon: postgres.png
+        description: Immich database
+        widget:
+          type: docker
+          container: immich_postgres
+    - Immich Redis:
+        icon: redis.png
+        description: Immich cache
+        widget:
+          type: docker
+          container: immich_redis
+    - Nextcloud PostgreSQL:
+        icon: postgres.png
+        description: Nextcloud database
+        widget:
+          type: docker
+          container: nextcloud_postgres
+    - Nextcloud Redis:
+        icon: redis.png
+        description: Nextcloud cache
+        widget:
+          type: docker
+          container: nextcloud_redis
