@@ -37,13 +37,6 @@
         widget:
           type: docker
           container: grafana
-    - Uptime Kuma:
-        icon: uptime-kuma.png
-        href: https://ajinkya.tail32b205.ts.net:8449
-        description: Service uptime
-        widget:
-          type: docker
-          container: uptime-kuma
     - Homepage:
         icon: homepage.png
         href: https://ajinkya.tail32b205.ts.net:8450
