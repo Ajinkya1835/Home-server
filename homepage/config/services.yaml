@@ -16,7 +16,7 @@
           container: nextcloud
     - Vaultwarden:
         icon: vaultwarden.png
-        href: https://ajinkya.tail32b205.ts.net/vault
+        href: https://ajinkya.tail32b205.ts.net:8451
         description: Password manager
         widget:
           type: docker
