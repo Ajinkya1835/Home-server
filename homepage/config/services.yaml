@@ -24,7 +24,7 @@
     - n8n:
         icon: n8n.png
         href: https://ajinkya.tail32b205.ts.net:8445
-        description: Automation
+        description: Workflow automation
         widget:
           type: docker
           container: n8n
@@ -78,6 +78,12 @@
         widget:
           type: docker
           container: alertmanager
+    - Alertmanager Discord:
+        icon: discord.png
+        description: Discord alert bridge
+        widget:
+          type: docker
+          container: alertmanager-discord
 
 - Infrastructure:
     - Immich ML:
@@ -110,3 +116,9 @@
         widget:
           type: docker
           container: nextcloud_redis
+    - Node Exporter:
+        icon: prometheus.png
+        description: Host metrics exporter
+        widget:
+          type: docker
+          container: node-exporter
