@@ -1,43 +1,46 @@
-nano .gitignore
-**/.env
-**/data/
-**/*.sqlite
-**/*.db
-
-
-
-# Environment
+# Secrets / local configuration
 .env
 .env.*
+!.env.example
+**/.env
+**/.env.*
+**/secrets/
+**/*.key
+**/*.pem
+**/*.p12
+**/*.pfx
+**/*token*
+**/*credentials*
 
-# Python
-venv/
-__pycache__/
-*.pyc
+# Runtime data
+**/data/
+**/postgres/
+**/redis/
+**/upload/
+**/uploads/
+**/model-cache/
+**/monitoring-data/
+**/volumes/
 
-# Logs
-*.log
-
-# Databases
+# Databases / state
 *.db
 *.sqlite
 *.sqlite3
+**/*.db
+**/*.sqlite
+**/*.sqlite3
 
-# Docker runtime data
-docker/**/postgres/
-docker/**/redis/
-docker/**/upload/
-docker/**/uploads/
-docker/**/data/
-docker/**/model-cache/
+# Logs
+*.log
+logs/
 
-# Nextcloud
-docker/**/nextcloud/data/
-
-# VS Code
+# Local / editor
 .vscode/
-
-# OS
+.idea/
 .DS_Store
 Thumbs.db
-b3a13fee3b12817c8d7d77c8c18cf934b346c1a8
+
+# Generated bundles
+*.zip
+*.tar
+*.tar.gz
