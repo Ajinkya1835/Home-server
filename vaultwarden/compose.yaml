@@ -6,7 +6,7 @@ services:
     environment:
       - WEBSOCKET_ENABLED=true
       - SIGNUPS_ALLOWED=false
-      - DOMAIN=http://100.94.248.64:8081
+      - DOMAIN=https://ajinkya.tail32b205.ts.net:8451
     volumes:
       - ./data:/data
     ports:
