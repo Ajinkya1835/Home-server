@@ -33,8 +33,8 @@ services:
 
   immich-machine-learning:
     container_name: immich_machine_learning
-    cpus: 2
-    mem_limit: 1g
+    cpus: 1.0
+    mem_limit: 512m
     # For hardware acceleration, add one of -[armnn, cuda, rocm, openvino, rknn] to the image tag.
     # Example tag: ${IMMICH_VERSION:-release}-cuda
     image: ghcr.io/immich-app/immich-machine-learning:${IMMICH_VERSION:-release}
