@@ -1,0 +1,26 @@
+---
+# Homepage settings
+# Keep secrets and provider API keys on the server, not in Git.
+
+layout:
+  Core Services:
+    style: row
+    columns: 4
+  Management:
+    style: row
+    columns: 4
+  Monitoring Stack:
+    style: row
+    columns: 4
+  Infrastructure:
+    style: row
+    columns: 4
+
+statusStyle: dot
+headerStyle: clean
+cardBlur: md
+hideVersion: true
+
+providers:
+  openweathermap: openweathermapapikey
+  weatherapi: weatherapiapikey
