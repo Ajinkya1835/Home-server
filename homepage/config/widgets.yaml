@@ -1,0 +1,22 @@
+---
+- resources:
+    cpu: true
+    memory: true
+    disk:
+      - /
+      - /mnt/hdd1
+
+- search:
+    provider: duckduckgo
+    target: _blank
+
+- datetime:
+    text_size: xl
+    format:
+      dateStyle: long
+      timeStyle: short
+      hour12: false
+
+- greeting:
+    text_size: xl
+    text: AJINKYA HOMELAB
