@@ -7,13 +7,6 @@
         widget:
           type: docker
           container: immich_server
-    - Nextcloud:
-        icon: nextcloud.png
-        href: https://ajinkya.tail32b205.ts.net:8443
-        description: Files & sync
-        widget:
-          type: docker
-          container: nextcloud
     - Vaultwarden:
         icon: vaultwarden.png
         href: https://ajinkya.tail32b205.ts.net:8451
@@ -104,18 +97,6 @@
         widget:
           type: docker
           container: immich_redis
-    - Nextcloud PostgreSQL:
-        icon: postgres.png
-        description: Nextcloud database
-        widget:
-          type: docker
-          container: nextcloud_postgres
-    - Nextcloud Redis:
-        icon: redis.png
-        description: Nextcloud cache
-        widget:
-          type: docker
-          container: nextcloud_redis
     - Node Exporter:
         icon: prometheus.png
         description: Host metrics exporter
