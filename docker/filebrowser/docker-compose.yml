@@ -8,10 +8,17 @@ services:
       - "127.0.0.1:8092:80"
     volumes:
       - type: bind
-        source: /mnt/hdd1/files
-        target: /srv
+        source: /mnt/hdd1
+        target: /srv/hdd1
         bind:
           create_host_path: false
+      - type: bind
+        source: /mnt/backup
+        target: /srv/backup
+        read_only: true
+        bind:
+          create_host_path: false
+      - /home/ajinkya:/srv/home
       - ./data/filebrowser.db:/database/filebrowser.db
     environment:
       - FB_DATABASE=/database/filebrowser.db
