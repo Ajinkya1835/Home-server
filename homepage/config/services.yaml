@@ -1,98 +1,453 @@
----
-- Core Services:
-    - Immich:
-        icon: immich.png
-        href: https://ajinkya.tail32b205.ts.net:8444
-        description: Photo & video library
-        widget:
-          type: docker
-          container: immich_server
-    - Vaultwarden:
-        icon: vaultwarden.png
-        href: https://ajinkya.tail32b205.ts.net:8451
-        description: Password manager
-        widget:
-          type: docker
-          container: vaultwarden
-    - n8n:
-        icon: n8n.png
-        href: https://ajinkya.tail32b205.ts.net:8445
-        description: Workflow automation
-        widget:
-          type: docker
-          container: n8n
-
-- Management:
-    - Portainer:
-        icon: portainer.png
-        href: https://ajinkya.tail32b205.ts.net:8446
-        description: Docker management
-        widget:
-          type: docker
-          container: portainer
-    - Grafana:
-        icon: grafana.png
-        href: https://ajinkya.tail32b205.ts.net:8447
-        description: Monitoring dashboards
-        widget:
-          type: docker
-          container: grafana
-    - Homepage:
-        icon: homepage.png
-        href: https://ajinkya.tail32b205.ts.net:8450
-        description: Homelab command center
-        widget:
-          type: docker
-          container: homepage
-
-- Monitoring Stack:
-    - Prometheus:
-        icon: prometheus.png
-        description: Metrics collection
-        widget:
-          type: docker
-          container: prometheus
-    - Loki:
-        icon: loki.png
-        description: Log aggregation
-        widget:
-          type: docker
-          container: loki
-    - Alertmanager:
-        icon: alertmanager.png
-        description: Alert routing
-        widget:
-          type: docker
-          container: alertmanager
-    - Alertmanager Discord:
-        icon: discord.png
-        description: Discord alert bridge
-        widget:
-          type: docker
-          container: alertmanager-discord
-
-- Infrastructure:
-    - Immich ML:
-        icon: immich.png
-        description: Machine learning
-        widget:
-          type: docker
-          container: immich_machine_learning
-    - Immich PostgreSQL:
-        icon: postgres.png
-        description: Immich database
-        widget:
-          type: docker
-          container: immich_postgres
-    - Immich Redis:
-        icon: redis.png
-        description: Immich cache
-        widget:
-          type: docker
-          container: immich_redis
-    - Node Exporter:
-        icon: prometheus.png
-        description: Host metrics exporter
-        widget:
-          type: docker
-          container: node-exporter
+- Live graphs:
+  - Netdata alerts:
+      icon: netdata.png
+      description: Live from Netdata
+      href: https://ajinkya.tail32b205.ts.net:8461
+      widget:
+        type: netdata
+        url: http://netdata:19999
+  - System graphs:
+      icon: mdi-chart-areaspline
+      description: CPU, RAM, network, disk, temps, containers
+      widget:
+        type: iframe
+        name: graphs
+        src: https://ajinkya.tail32b205.ts.net:8462
+        classes: h-[1250px]
+        loadingStrategy: eager
+- Media & Files:
+  - Immich:
+      icon: immich.png
+      href: https://ajinkya.tail32b205.ts.net
+      description: Photos and videos
+      server: homelab
+      container: immich_server
+      widget:
+        type: immich
+        url: http://immich_server:2283
+        key: '{{HOMEPAGE_VAR_IMMICH_KEY}}'
+        version: 2
+  - Jellyfin:
+      icon: jellyfin.png
+      href: https://ajinkya.tail32b205.ts.net:10000
+      description: Movies and shows
+      server: homelab
+      container: jellyfin
+      siteMonitor: http://jellyfin:8096
+      widget:
+        type: jellyfin
+        url: http://jellyfin:8096
+        key: '{{HOMEPAGE_VAR_JELLYFIN_KEY}}'
+        version: 2
+        enableUser: true
+        enableBlocks: true
+        enableNowPlaying: true
+  - File Browser:
+      icon: filebrowser.png
+      href: https://ajinkya.tail32b205.ts.net:8451
+      description: Files on hdd1
+      server: homelab
+      container: filebrowser
+- Security & Automation:
+  - Vaultwarden:
+      icon: vaultwarden.png
+      href: https://ajinkya.tail32b205.ts.net:8443
+      description: Password vault
+      server: homelab
+      container: vaultwarden
+  - n8n:
+      icon: n8n.png
+      href: https://ajinkya.tail32b205.ts.net:8445
+      description: Workflows and outreach
+      server: homelab
+      container: n8n
+  - Tailscale:
+      icon: tailscale.png
+      href: https://login.tailscale.com/admin/machines
+      description: Private network admin
+- Host telemetry:
+  - Compute:
+      icon: mdi-cpu-64-bit
+      description: CPU and temperature
+  - Storage:
+      icon: mdi-harddisk
+      description: Disk fill and throughput
+  - Network:
+      icon: mdi-lan
+      description: Traffic on real interfaces
+  - Biggest appetites:
+      icon: mdi-memory
+      description: RAM by container (cAdvisor)
+- Admin Tools:
+  - Remote Desktop:
+      icon: mdi-monitor-screenshot
+      href: https://ajinkya.tail32b205.ts.net:8453
+      description: noVNC screen of the server
+  - Tab Status:
+      icon: mdi-tab
+      href: https://ajinkya.tail32b205.ts.net:8457
+      description: Status page
+      server: homelab
+      container: tabstatus
+  - Router:
+      icon: mdi-router-wireless
+      href: http://192.168.29.1
+      description: Home gateway
+- Under the Hood:
+  - Immich ML:
+      icon: immich.png
+      description: Face and search AI
+      server: homelab
+      container: immich_machine_learning
+  - Immich DB:
+      icon: postgres.png
+      description: Photo database
+      server: homelab
+      container: immich_postgres
+  - Immich Redis:
+      icon: redis.png
+      description: Immich cache
+      server: homelab
+      container: immich_redis
+  - Homepage:
+      icon: homepage.png
+      description: This dashboard
+      server: homelab
+      container: homepage
+- Hello World:
+  - Resume:
+      icon: mdi-file-download
+      href: https://ajinkya.tail32b205.ts.net:8462/resume.pdf
+      target: _blank
+      description: Download the PDF
+  - Email:
+      icon: mdi-email-fast
+      href: mailto:ajinkyayadav1803@gmail.com
+      target: _self
+      description: ajinkyayadav1803@gmail.com
+  - Phone:
+      icon: mdi-phone
+      href: tel:+919892460089
+      target: _self
+      description: +91 98924 60089
+  - LinkedIn:
+      icon: mdi-linkedin
+      href: https://linkedin.com/in/ajinkya-yadav-70b3671a6
+      description: ajinkya-yadav-70b3671a6
+  - GitHub:
+      icon: mdi-github
+      href: https://github.com/Ajinkya1835
+      description: Ajinkya1835
+- Experience:
+  - MetaGrad Labs:
+      icon: mdi-rocket-launch
+      href: https://metagrad.in
+      description: Software Engineer Intern, Jun 2026 to now, remote. Moved metagrad.in
+        from Vite to Next.js 14, added prerendering and JSON-LD across 18 pages, and
+        built an n8n sales outreach pipeline for 70+ school leads.
+  - OptimSkool:
+      icon: mdi-school-outline
+      href: https://optimskool.com
+      description: 'Work done at MetaGrad: built 8 ERP module pages and a reusable
+        PageHero in Next.js, and fixed production nginx 403s caused by trailing slashes
+        in the static export.'
+  - Vibrant Viral Media:
+      icon: mdi-palette
+      description: Graphic Design Intern, Jun to Jul 2025, remote. Social media and
+        campaign graphics, plus visual assets for client websites.
+- Projects:
+  - Home server:
+      icon: mdi-server-network
+      href: https://github.com/Ajinkya1835/Home-server
+      description: This machine. Ubuntu, Docker Compose and Tailscale, with a LUKS
+        data drive, nightly backups, and a full migration after a boot-drive failure
+        with zero data loss.
+  - NeuroAI care platform:
+      icon: mdi-brain
+      description: Parent and therapist platform on Next.js 14, Express and MongoDB
+        with JWT roles, PDF worksheets, and optional Ollama analysis.
+  - PVMS:
+      icon: mdi-map-marker-alert
+      description: Municipal violation portal with four roles, Google Maps reporting,
+        automatic fines, and GitHub Actions CI.
+  - Price comparison tool:
+      icon: mdi-tag-multiple
+      description: Python scraper and REST API that compares product prices across
+        e-commerce sites in real time.
+- Skills:
+  - Languages:
+      icon: mdi-code-braces
+      description: JavaScript, Python, SQL, Java, C
+  - Frontend:
+      icon: si-react
+      description: React, Next.js 14 App Router, Tailwind CSS, technical SEO
+  - Backend:
+      icon: si-nodedotjs
+      description: Node.js, Express, REST design, JWT auth, role-based access
+  - Databases:
+      icon: si-mongodb
+      description: MongoDB, MySQL, SQLite
+  - DevOps:
+      icon: si-docker
+      description: Docker, Compose, Linux, Nginx, AWS EC2, GitHub Actions, Tailscale
+  - Automation and AI:
+      icon: mdi-robot-outline
+      description: n8n, Playwright, scraping, OpenRouter, Ollama
+  - ML and data:
+      icon: si-tensorflow
+      description: NumPy, Pandas, TensorFlow, Scikit-learn
+- Education & interests:
+  - B.E. Computer Science (AI & ML):
+      icon: mdi-school
+      description: Lokmanya Tilak College of Engineering, Mumbai. 2023 to 2027 (expected).
+  - Off the clock:
+      icon: mdi-dumbbell
+      description: Weight lifting, badminton, home-lab, IoT and automation.
+- Live:
+  - CPU now:
+      icon: mdi-cpu-64-bit
+      widget:
+        type: customapi
+        url: http://netdata:19999/api/v1/data?chart=system.cpu&after=-1&points=1&format=json
+        refreshInterval: 2000
+        mappings:
+        - field: data.0.6
+          label: User
+          format: float
+          suffix: '%'
+        - field: data.0.7
+          label: System
+          format: float
+          suffix: '%'
+        - field: data.0.9
+          label: IO wait
+          format: float
+          suffix: '%'
+  - RAM now:
+      icon: mdi-memory
+      widget:
+        type: customapi
+        url: http://netdata:19999/api/v1/data?chart=system.ram&after=-1&points=1&format=json
+        refreshInterval: 2000
+        mappings:
+        - field: data.0.2
+          label: Used
+          format: float
+          suffix: ' MiB'
+        - field: data.0.3
+          label: Cache
+          format: float
+          suffix: ' MiB'
+        - field: data.0.1
+          label: Free
+          format: float
+          suffix: ' MiB'
+  - Load:
+      icon: mdi-gauge
+      widget:
+        type: customapi
+        url: http://netdata:19999/api/v1/data?chart=system.load&after=-1&points=1&format=json
+        refreshInterval: 2000
+        mappings:
+        - field: data.0.1
+          label: 1 min
+          format: float
+        - field: data.0.2
+          label: 5 min
+          format: float
+        - field: data.0.3
+          label: 15 min
+          format: float
+  - Network:
+      icon: mdi-lan
+      widget:
+        type: customapi
+        url: http://netdata:19999/api/v1/data?chart=system.net&after=-1&points=1&format=json
+        refreshInterval: 2000
+        mappings:
+        - field: data.0.1
+          label: Down
+          format: float
+          suffix: ' kb/s'
+        - field: data.0.2
+          label: Up
+          format: float
+          scale: -1
+          suffix: ' kb/s'
+  - Total disk I/O:
+      icon: mdi-harddisk
+      widget:
+        type: customapi
+        url: http://netdata:19999/api/v1/data?chart=system.io&after=-1&points=1&format=json
+        refreshInterval: 2000
+        mappings:
+        - field: data.0.1
+          label: Read
+          format: float
+          suffix: ' KiB/s'
+        - field: data.0.2
+          label: Write
+          format: float
+          scale: -1
+          suffix: ' KiB/s'
+  - Boot SSD I/O:
+      icon: mdi-harddisk
+      widget:
+        type: customapi
+        url: http://netdata:19999/api/v1/data?chart=disk.sdb&after=-1&points=1&format=json
+        refreshInterval: 2000
+        mappings:
+        - field: data.0.1
+          label: Read
+          format: float
+          suffix: ' KiB/s'
+        - field: data.0.2
+          label: Write
+          format: float
+          scale: -1
+          suffix: ' KiB/s'
+  - Boot SSD busy:
+      icon: mdi-speedometer
+      widget:
+        type: customapi
+        url: http://netdata:19999/api/v1/data?chart=disk_busy.sdb&after=-1&points=1&format=json
+        refreshInterval: 2000
+        mappings:
+        - field: data.0.1
+          label: Busy
+          format: float
+          suffix: ' %'
+  - Boot SSD latency:
+      icon: mdi-timer-outline
+      widget:
+        type: customapi
+        url: http://netdata:19999/api/v1/data?chart=disk_await.sdb&after=-1&points=1&format=json
+        refreshInterval: 2000
+        mappings:
+        - field: data.0.1
+          label: Read
+          format: float
+          suffix: ' ms'
+        - field: data.0.2
+          label: Write
+          format: float
+          scale: -1
+          suffix: ' ms'
+  - hdd1 I/O:
+      icon: mdi-harddisk
+      widget:
+        type: customapi
+        url: http://netdata:19999/api/v1/data?chart=disk.sda&after=-1&points=1&format=json
+        refreshInterval: 2000
+        mappings:
+        - field: data.0.1
+          label: Read
+          format: float
+          suffix: ' KiB/s'
+        - field: data.0.2
+          label: Write
+          format: float
+          scale: -1
+          suffix: ' KiB/s'
+  - hdd1 busy:
+      icon: mdi-speedometer
+      widget:
+        type: customapi
+        url: http://netdata:19999/api/v1/data?chart=disk_busy.sda&after=-1&points=1&format=json
+        refreshInterval: 2000
+        mappings:
+        - field: data.0.1
+          label: Busy
+          format: float
+          suffix: ' %'
+  - hdd1 latency:
+      icon: mdi-timer-outline
+      widget:
+        type: customapi
+        url: http://netdata:19999/api/v1/data?chart=disk_await.sda&after=-1&points=1&format=json
+        refreshInterval: 2000
+        mappings:
+        - field: data.0.1
+          label: Read
+          format: float
+          suffix: ' ms'
+        - field: data.0.2
+          label: Write
+          format: float
+          scale: -1
+          suffix: ' ms'
+  - Backup I/O:
+      icon: mdi-harddisk
+      widget:
+        type: customapi
+        url: http://netdata:19999/api/v1/data?chart=disk.sdc&after=-1&points=1&format=json
+        refreshInterval: 2000
+        mappings:
+        - field: data.0.1
+          label: Read
+          format: float
+          suffix: ' KiB/s'
+        - field: data.0.2
+          label: Write
+          format: float
+          scale: -1
+          suffix: ' KiB/s'
+  - Backup busy:
+      icon: mdi-speedometer
+      widget:
+        type: customapi
+        url: http://netdata:19999/api/v1/data?chart=disk_busy.sdc&after=-1&points=1&format=json
+        refreshInterval: 2000
+        mappings:
+        - field: data.0.1
+          label: Busy
+          format: float
+          suffix: ' %'
+  - Backup latency:
+      icon: mdi-timer-outline
+      widget:
+        type: customapi
+        url: http://netdata:19999/api/v1/data?chart=disk_await.sdc&after=-1&points=1&format=json
+        refreshInterval: 2000
+        mappings:
+        - field: data.0.1
+          label: Read
+          format: float
+          suffix: ' ms'
+        - field: data.0.2
+          label: Write
+          format: float
+          scale: -1
+          suffix: ' ms'
+  - CPU temp:
+      icon: mdi-thermometer
+      widget:
+        type: customapi
+        url: http://netdata:19999/api/v1/data?chart=sensors.temperature_k10temp-pci-00c3_temp1_Tctl_input&after=-1&points=1&format=json
+        refreshInterval: 2000
+        mappings:
+        - field: data.0.1
+          label: CPU
+          format: float
+          suffix: ' °C'
+  - GPU temp:
+      icon: mdi-expansion-card
+      widget:
+        type: customapi
+        url: http://netdata:19999/api/v1/data?chart=sensors.temperature_amdgpu-pci-0300_temp1_edge_input&after=-1&points=1&format=json
+        refreshInterval: 2000
+        mappings:
+        - field: data.0.1
+          label: GPU
+          format: float
+          suffix: ' °C'
+- Architecture:
+  - Infrastructure map:
+      icon: mdi-sitemap
+      description: 'Live topology: ports, containers, storage, exposure'
+      widget:
+        type: iframe
+        name: arch
+        src: https://ajinkya.tail32b205.ts.net:8462/arch.html
+        classes: h-[1130px]
+        loadingStrategy: eager

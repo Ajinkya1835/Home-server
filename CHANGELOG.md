@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Added
+- File Browser (docker/filebrowser), tailnet-only on :8451, serving /mnt/hdd1/files
+- File Browser tile on Homepage
+
 ## [1.0.0] - 2026-07-17
 
 ### Added
