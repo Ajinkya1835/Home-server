@@ -1,0 +1,22 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:pinned-fea863d
+    container_name: jellyfin
+    restart: unless-stopped
+    devices:
+      - /dev/dri:/dev/dri
+    group_add:
+      - "video"
+      - "110"
+    volumes:
+      - /home/ajinkya/docker-data/jellyfin/config:/config
+      - /mnt/backup/media/movies:/media/movies
+      - /mnt/backup/media/tv:/media/tv
+      - /mnt/backup/media/youtube:/media/youtube
+      - /mnt/backup/media/archive:/media/archive
+      - /mnt/backup/media/music:/media/music
+    ports:
+      - "127.0.0.1:8096:8096"
+    environment:
+      - TZ=Asia/Kolkata
+      - JELLYFIN_WEB_DIR=/jellyfin/jellyfin-web
