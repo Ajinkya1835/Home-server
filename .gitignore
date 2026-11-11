@@ -1,47 +1,14 @@
-# Secrets / local configuration
 .env
-.env.*
+*.key
+*.pass
+*.bak*
+*/data/
+*/config.bak*
+server-notify.log
 !.env.example
-**/.env
-**/.env.*
-**/secrets/
-**/*.key
-**/*.pem
-**/*.p12
-**/*.pfx
-**/*token*
-**/*credentials*
-
-# Runtime data
-**/data/
-**/postgres/
-**/redis/
-**/upload/
-**/uploads/
-**/model-cache/
-**/monitoring-data/
-**/volumes/
-
-# Databases / state
-*.db
-*.sqlite
-*.sqlite3
-**/*.db
-**/*.sqlite
-**/*.sqlite3
-
-# Logs
-*.log
-logs/
-
-# Local / editor
-.vscode/
-.idea/
-.DS_Store
-Thumbs.db
-
-# Generated bundles
-*.zip
-*.tar
-*.tar.gz
-vaultwarden/data-empty-*/
+!**/.env.example
+**/postgres*/
+**/*.bak*
+*.tgz
+homepage/config/logs/
+deploy.log

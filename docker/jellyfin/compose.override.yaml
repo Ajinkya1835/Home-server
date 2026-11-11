@@ -1,0 +1,8 @@
+services:
+  jellyfin:
+    volumes:
+      - /mnt/backup/media/home-videos:/media/home-videos
+    devices:
+      - /dev/dri:/dev/dri
+    group_add:
+      - "110"

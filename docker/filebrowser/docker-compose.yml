@@ -4,6 +4,8 @@ services:
     container_name: filebrowser
     restart: unless-stopped
     user: "1000:1000"
+    group_add:
+      - "1001"
     ports:
       - "127.0.0.1:8092:80"
     volumes:
@@ -18,7 +20,10 @@ services:
         read_only: true
         bind:
           create_host_path: false
-      - /home/ajinkya:/srv/home
+      - /home/ajinkya/Documents:/srv/documents
+      - /home/ajinkya/Downloads:/srv/downloads
+      - /home/ajinkya/Desktop:/srv/desktop
+      - /home/ajinkya/Home-server:/srv/home-server
       - ./data/filebrowser.db:/database/filebrowser.db
     environment:
       - FB_DATABASE=/database/filebrowser.db

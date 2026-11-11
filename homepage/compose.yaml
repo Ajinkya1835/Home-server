@@ -10,4 +10,4 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /mnt/hdd1:/mnt/hdd1:ro
     environment:
-      - HOMEPAGE_ALLOWED_HOSTS=ajinkya.tail32b205.ts.net:8450
+      - HOMEPAGE_ALLOWED_HOSTS=YOUR-HOST.YOUR-TAILNET.ts.net:8450

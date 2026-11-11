@@ -6,11 +6,11 @@ services:
     environment:
       - WEBSOCKET_ENABLED=true
       - SIGNUPS_ALLOWED=false
-      - DOMAIN=https://ajinkya.tail32b205.ts.net:8451
+      - DOMAIN=https://ajinkya.tail32b205.ts.net:8455
     volumes:
       - ./data:/data
     ports:
-      - "8081:80"
+      - "127.0.0.1:8081:80"
     security_opt:
       - no-new-privileges:true
 

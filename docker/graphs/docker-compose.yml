@@ -1,0 +1,18 @@
+services:
+  graphs:
+    image: nginx:alpine
+    container_name: graphs
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8462:80"
+    volumes:
+      - ./index.html:/usr/share/nginx/html/index.html:ro
+      - ./arch.html:/usr/share/nginx/html/arch.html:ro
+      - ./chart.umd.min.js:/usr/share/nginx/html/chart.umd.min.js:ro
+      - ./resume.pdf:/usr/share/nginx/html/resume.pdf:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - netdata_default
+networks:
+  netdata_default:
+    external: true

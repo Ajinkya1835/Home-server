@@ -1,0 +1,16 @@
+services:
+  tabstatus:
+    image: python:3-alpine
+    container_name: tabstatus
+    restart: unless-stopped
+    command: python /app/app.py
+    volumes:
+      - ./app.py:/app/app.py:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "127.0.0.1:8090:8080"
+    networks: [monitoring]
+networks:
+  monitoring:
+    name: monitoring_default
+    external: true

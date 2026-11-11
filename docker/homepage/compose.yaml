@@ -1,0 +1,52 @@
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    env_file:
+      - .env
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3030:3000"
+    volumes:
+      - ./config:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /mnt:/mnt:ro,rslave
+    environment:
+      - HOMEPAGE_ALLOWED_HOSTS=ajinkya.tail32b205.ts.net:8450,localhost:3030,127.0.0.1:3030
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - default
+      - monitoring
+      - immich
+      - nagarkot
+      - n8n
+      - vaultwarden
+      - dozzle
+      - nextcloud
+      - jellyfin
+networks:
+  monitoring:
+    name: monitoring_default
+    external: true
+  immich:
+    name: immich_default
+    external: true
+  nagarkot:
+    name: nagarkot_default
+    external: true
+  n8n:
+    name: n8n_default
+    external: true
+  vaultwarden:
+    name: vaultwarden_default
+    external: true
+  dozzle:
+    name: dozzle_default
+    external: true
+  nextcloud:
+    name: nextcloud_network
+    external: true
+  jellyfin:
+    name: jellyfin_default
+    external: true
