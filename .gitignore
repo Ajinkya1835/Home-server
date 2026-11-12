@@ -12,3 +12,7 @@ server-notify.log
 *.tgz
 homepage/config/logs/
 deploy.log
+bin/ntfy-send
+system/
+vaultwarden/data-*/
+scripts/
