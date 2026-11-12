@@ -49,6 +49,7 @@ n8n | n8n-n8n | 2b5228af4416
 netdata | netdata/netdata:stable | c7eab00e2090
 portainer | portainer/portainer-ce:latest | 5f9b4bda5582
 scrutiny | ghcr.io/analogj/scrutiny:latest-omnibus | 90062edac57a
+serverlog | alpine | be2656061b53
 tabstatus | python:3-alpine | a0f2e268f2ce
 vaultwarden | vaultwarden/server:1.37.1 | ebdfe70701c6
 ```
@@ -70,6 +71,7 @@ n8n | 127.0.0.1:5678->5678/tcp
 netdata | 127.0.0.1:19999->19999/tcp
 portainer | 
 scrutiny | 127.0.0.1:8085->8080/tcp
+serverlog | 
 tabstatus | 127.0.0.1:8090->8080/tcp
 vaultwarden | 127.0.0.1:8081->80/tcp
 ```
@@ -320,17 +322,20 @@ a78e942f7650 /home/ajinkya/bin/backup
 fc6c7db84684 /home/ajinkya/bin/backup.bak
 75204d0e0414 /home/ajinkya/bin/backup.old
 f7efcf37f2d0 /home/ajinkya/bin/daily-check
-afdaddc01d1e /home/ajinkya/bin/deploy
+3168e5e0d08b /home/ajinkya/bin/deploy
+afdaddc01d1e /home/ajinkya/bin/deploy.old
 b6fa9dae4b18 /home/ajinkya/bin/fullcheck.sh
 5746da486c82 /home/ajinkya/bin/music-english
 5e5096f49d92 /home/ajinkya/bin/music-hindi
-14d87c201b7d /home/ajinkya/bin/ntfy-send
+8867629b8db8 /home/ajinkya/bin/notify
+63dd8b7e587c /home/ajinkya/bin/ntfy-send
+14d87c201b7d /home/ajinkya/bin/ntfy-send.orig
 e41a1ac09045 /home/ajinkya/bin/server-doc
-87c48c936cbc /home/ajinkya/bin/server-snapshot
+7d628b01b582 /home/ajinkya/bin/server-snapshot
 75ff9166fa9b /home/ajinkya/bin/status-digest
 f512666acfc4 /home/ajinkya/bin/watchdog
 9f7322bc7bf7 /home/ajinkya/bin/yt-music.sh
-50e0544c389f /home/ajinkya/docker/dozzle/compose.yaml
+cde75582fdfe /home/ajinkya/docker/dozzle/compose.yaml
 0d040fc628cc /home/ajinkya/docker/homepage/compose.override.yaml
 94097127862e /home/ajinkya/docker/homepage/compose.yaml
 557dfd226c74 /home/ajinkya/docker/homepage-tab/compose.yaml
@@ -346,4 +351,4 @@ e4f672f487a4 /home/ajinkya/docker/n8n/compose.yaml
 6a022230a456 /home/ajinkya/docker/scrutiny/docker-compose.yml
 ```
 
-_Last change recorded: 2026-11-12 16:03:30_
+_Last change recorded: 2026-11-12 16:20:05_
