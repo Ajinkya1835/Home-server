@@ -1,30 +1,63 @@
 #!/bin/bash
+# ~/bin/deploy - keep live stacks in sync with ~/Home-server (GitHub pulls AND local edits)
 set -uo pipefail
-exec 9>/tmp/deploy.lock; flock -n 9 || exit 0
-R=$HOME/Home-server; LOG=$HOME/deploy.log
+exec 9>/tmp/repo.lock; flock -w 120 9 || exit 0
+R=$HOME/Home-server; LOG=$HOME/deploy.log; ST=$HOME/.deploy-state
 N8N_WEBHOOK=""; HERMES_CMD=""
 [ -f "$HOME/.deploy.env" ] && . "$HOME/.deploy.env"
+mkdir -p "$ST"
 log(){ echo "$(date '+%F %T') $*" >> "$LOG"; }
 cd "$R" || exit 1
+
+# wait if a compose file was edited in the last 2 minutes (avoid committing half-saved edits)
+[ -n "$(find docker -maxdepth 2 -name '*.y*ml' -mmin -2 2>/dev/null)" ] && exit 0
+
+OLD=$(git rev-parse HEAD)
+git add -A -- 'docker/*/compose*.y*ml' 'docker/*/docker-compose.y*ml' 2>/dev/null
+if ! git diff --cached --quiet; then
+  CH=$(git diff --cached --name-only | tr '\n' ' ')
+  git commit -q -m "auto: local config change: $CH" && log "committed local edit: $CH"
+fi
 git fetch -q origin || { log "fetch failed"; exit 1; }
-OLD=$(git rev-parse HEAD); NEW=$(git rev-parse origin/main)
-[ "$OLD" = "$NEW" ] && exit 0
-[ "$(git merge-base "$OLD" "$NEW")" = "$NEW" ] && exit 0
-git merge --ff-only -q origin/main 2>>"$LOG" || { log "merge FAILED"; "$HOME/bin/ntfy-send" "Deploy FAILED" "merge failed" high warning; exit 1; }
-SUBJ=$(git log -1 --format='%h %s')
-ok=1; done_list=""
-for s in $(git diff --name-only "$OLD" "$NEW" | awk -F/ '$1=="docker"{print $2}' | sort -u); do
-  [ -d "$HOME/docker/$s" ] || continue
-  cp docker/$s/compose*.y*ml docker/$s/docker-compose.y*ml "$HOME/docker/$s/" 2>/dev/null
-  if (cd "$HOME/docker/$s" && docker compose config -q && docker compose up -d) >>"$LOG" 2>&1; then
-    done_list="$done_list $s"; log "deployed $s"
-  else ok=0; log "FAILED $s"; fi
+if ! git pull --rebase --autostash -q origin main 2>>"$LOG"; then
+  git rebase --abort 2>/dev/null
+  log "pull/rebase FAILED"
+  "$HOME/bin/notify" "Deploy FAILED" "git pull/rebase conflict, see ~/deploy.log" high
+  exit 1
+fi
+[ "$(git rev-parse HEAD)" = "$(git rev-parse origin/main)" ] || git push -q origin main 2>>"$LOG" || log "push failed"
+
+done_list=""
+for d in docker/*/; do
+  s=$(basename "$d")
+  files=$(ls "$d"compose*.y*ml "$d"docker-compose.y*ml 2>/dev/null | sort)
+  [ -n "$files" ] || continue
+  if grep -q CHANGE_ME $files; then log "skip $s (CHANGE_ME placeholder)"; continue; fi
+  H=$(cat $files | sha256sum | cut -c1-16)
+  [ "$(cat "$ST/$s.ok" 2>/dev/null)" = "$H" ] && continue
+  if [ ! -f "$ST/$s.ok" ]; then echo "$H" > "$ST/$s.ok"; continue; fi   # first run: baseline only
+  [ "$(cat "$ST/$s.fail" 2>/dev/null)" = "$H" ] && continue              # already reported
+  W=$(docker ps -q --filter "label=com.docker.compose.project=$s" | head -1 | xargs -r docker inspect --format '{{index .Config.Labels "com.docker.compose.project.working_dir"}}' 2>/dev/null)
+  if [ -z "$W" ] || [ ! -d "$W" ]; then
+    log "skip $s (not running, no working dir)"; echo "$H" > "$ST/$s.fail"; continue
+  fi
+  [ "$(cd "$W" && pwd -P)" = "$(cd "$R/$d" && pwd -P)" ] || cp $files "$W/"
+  if (cd "$W" && docker compose config -q && docker compose up -d) >>"$LOG" 2>&1; then
+    echo "$H" > "$ST/$s.ok"; rm -f "$ST/$s.fail"; done_list="$done_list $s"; log "deployed $s"
+  else
+    echo "$H" > "$ST/$s.fail"; log "FAILED $s"
+    "$HOME/bin/notify" "Deploy FAILED: $s" "compose invalid or up failed, see ~/deploy.log" high
+  fi
 done
-ST=ok; [ $ok = 1 ] || ST=failed
-log "$ST $SUBJ [$done_list ]"
-if [ $ok = 1 ]; then "$HOME/bin/ntfy-send" "Deploy ok" "$SUBJ |$done_list" default white_check_mark
-else "$HOME/bin/ntfy-send" "Deploy FAILED" "$SUBJ" high warning; fi
-[ -n "$N8N_WEBHOOK" ] && curl -fsS -m 10 -H 'Content-Type: application/json' \
-  -d "{\"commit\":\"$SUBJ\",\"status\":\"$ST\",\"stacks\":\"$done_list\"}" "$N8N_WEBHOOK" >/dev/null 2>&1
-[ -n "$HERMES_CMD" ] && git diff "$OLD" "$NEW" | $HERMES_CMD >>"$LOG" 2>&1
+
+if [ -n "$done_list" ]; then
+  SUBJ=$(git log -1 --format='%h %s')
+  log "ok $SUBJ [$done_list ]"
+  "$HOME/bin/notify" "Deploy ok" "$SUBJ |$done_list" default
+  if [ -n "$N8N_WEBHOOK" ]; then
+    python3 -c 'import json,sys;print(json.dumps({"commit":sys.argv[1],"status":"ok","stacks":sys.argv[2]}))' "$SUBJ" "$done_list" \
+      | curl -fsS -m 10 -H 'Content-Type: application/json' -d @- "$N8N_WEBHOOK" >/dev/null 2>&1
+  fi
+  [ -n "$HERMES_CMD" ] && git diff "$OLD" HEAD | $HERMES_CMD >>"$LOG" 2>&1
+fi
 exit 0
