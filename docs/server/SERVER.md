@@ -49,7 +49,6 @@ n8n | n8n-n8n | 2b5228af4416
 netdata | netdata/netdata:stable | c7eab00e2090
 portainer | portainer/portainer-ce:latest | 5f9b4bda5582
 scrutiny | ghcr.io/analogj/scrutiny:latest-omnibus | 90062edac57a
-snaptest | alpine | be2656061b53
 tabstatus | python:3-alpine | a0f2e268f2ce
 vaultwarden | vaultwarden/server:1.37.1 | ebdfe70701c6
 ```
@@ -71,7 +70,6 @@ n8n | 127.0.0.1:5678->5678/tcp
 netdata | 127.0.0.1:19999->19999/tcp
 portainer | 
 scrutiny | 127.0.0.1:8085->8080/tcp
-snaptest | 
 tabstatus | 127.0.0.1:8090->8080/tcp
 vaultwarden | 127.0.0.1:8081->80/tcp
 ```
@@ -348,4 +346,4 @@ e4f672f487a4 /home/ajinkya/docker/n8n/compose.yaml
 6a022230a456 /home/ajinkya/docker/scrutiny/docker-compose.yml
 ```
 
-_Last change recorded: 2026-11-12 16:03:19_
+_Last change recorded: 2026-11-12 16:03:30_
