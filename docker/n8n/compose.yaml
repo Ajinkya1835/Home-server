@@ -8,7 +8,7 @@ services:
       - TZ=Asia/Kolkata
       - GENERIC_TIMEZONE=Asia/Kolkata
       - N8N_EDITOR_BASE_URL=https://ajinkya.tail32b205.ts.net:8445
-      - WEBHOOK_URL=CHANGE_ME
+      - WEBHOOK_URL=https://ajinkya.tail32b205.ts.net:8445/
       - N8N_PROTOCOL=https
       - N8N_PROXY_HOPS=1
       - NODE_FUNCTION_ALLOW_EXTERNAL=cheerio
