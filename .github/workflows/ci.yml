@@ -12,7 +12,7 @@ jobs:
             f=$(ls "$d"compose.y*ml "$d"docker-compose.y*ml 2>/dev/null | head -1)
             [ -n "$f" ] || continue
             if [ -f "$d.env.example" ]; then cp "$d.env.example" "$d.env"; else touch "$d.env"; fi
-            (cd "$d" && docker compose config -q) || { echo "invalid: $d"; exit 1; }
+            (cd "$d" && docker compose config -q --no-interpolate) || { echo "invalid: $d"; exit 1; }
           done
       - name: shellcheck
         run: shellcheck -S error bin/deploy
