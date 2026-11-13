@@ -162,8 +162,6 @@ tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8461
 tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8462
 tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8463
 udp 0.0.0.0:41641
-udp 0.0.0.0:48504
-udp 0.0.0.0:51514
 udp 127.0.0.53%lo:53
 udp [::]:41641
 udp [fe80::affc:b6a1:a0c7:1af3]%wlo1:546
@@ -353,4 +351,4 @@ e4f672f487a4 /home/ajinkya/docker/n8n/compose.yaml
 6a022230a456 /home/ajinkya/docker/scrutiny/docker-compose.yml
 ```
 
-_Last change recorded: 2026-11-13 17:40:13_
+_Last change recorded: 2026-11-13 17:50:04_
