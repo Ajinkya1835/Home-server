@@ -42,6 +42,9 @@ cmd_copy "$O/crontab.txt" bash -c "crontab -l | grep -vE '^#|^$'"
 cmd_copy "$O/ufw.txt" sudo -n ufw status numbered
 cmd_copy "$O/tailscale-serve.txt" tailscale serve status
 cmd_copy "$O/apt-manual.txt" bash -c "apt-mark showmanual | sort"
+# 3b. hermes agent (exported nightly by the anoushka user: comments stripped, secrets redacted)
+HX=/var/lib/hermes-export
+for f in "$HX"/*; do safe_copy "$f" "$O/hermes/$(basename "$f")"; done
 # 4. make sure secrets stay ignored
 cd "$R" || exit 1
 for p in '.deploy.env' '*.img' '*.pem' 'id_rsa*' 'id_ed25519*' '*.sqlite*' '*.db' 'thumbs/' 'hdd1-luks*'; do grep -qxF "$p" .gitignore 2>/dev/null || echo "$p" >> .gitignore; done

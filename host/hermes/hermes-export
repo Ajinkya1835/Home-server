@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -eu
+D=/var/lib/hermes-export
+umask 027
+install -m 640 ~/.hermes/SOUL.md "$D/SOUL.md"
+install -m 640 ~/bin/hermes-update ~/bin/hermes-export "$D/"
+grep -vE '^[[:space:]]*(#|$)' ~/.hermes/config.yaml \
+  | sed -E 's/^([[:space:]-]*[A-Za-z0-9_.-]*(key|token|secret|password|passwd|credential)[A-Za-z0-9_.-]*:[[:space:]]*)[^[:space:]]{8,}.*/\1<redacted>/I' \
+  > "$D/config.yaml"

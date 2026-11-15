@@ -1,8 +1,8 @@
 
 # Funnel on:
-#     - https://ajinkya.tail32b205.ts.net:10000
 #     - https://ajinkya.tail32b205.ts.net
 #     - https://ajinkya.tail32b205.ts.net:8443
+#     - https://ajinkya.tail32b205.ts.net:10000
 
 https://ajinkya.tail32b205.ts.net:10000 (Funnel on)
 |-- / proxy http://127.0.0.1:8096

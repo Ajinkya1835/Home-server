@@ -3,3 +3,4 @@
 30 3 * * * $HOME/bin/server-doc
 */5 * * * * $HOME/bin/deploy
 */10 * * * * $HOME/bin/server-snapshot >> $HOME/snapshot.log 2>&1
+40 3 * * * $HOME/bin/sync-config

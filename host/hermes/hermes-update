@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -eu
+export PATH="$HOME/.local/bin:$PATH"
+export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+cp -a ~/.hermes/config.yaml ~/.hermes/config.yaml.bak-$(date +%F)
+find ~/.hermes -maxdepth 1 -name 'config.yaml.bak-*' -mtime +14 -delete
+hermes update
+systemctl --user restart hermes-gateway
+hermes doctor | tail -n 15
