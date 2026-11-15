@@ -131,6 +131,7 @@ tcp 100.94.248.64%tailscale0:8463
 tcp 127.0.0.1:19999
 tcp 127.0.0.1:2283
 tcp 127.0.0.1:3030
+tcp 127.0.0.1:35697
 tcp 127.0.0.1:445
 tcp 127.0.0.1:5678
 tcp 127.0.0.1:6080
@@ -340,7 +341,7 @@ cde75582fdfe /home/ajinkya/docker/dozzle/compose.yaml
 0d040fc628cc /home/ajinkya/docker/homepage/compose.override.yaml
 94097127862e /home/ajinkya/docker/homepage/compose.yaml
 557dfd226c74 /home/ajinkya/docker/homepage-tab/compose.yaml
-aff40c0f1dbc /home/ajinkya/docker/immich/compose.yaml
+574ff774b593 /home/ajinkya/docker/immich/compose.yaml
 fcfaf516032a /home/ajinkya/docker/jellyfin/compose.override.yaml
 6c5c196681b8 /home/ajinkya/docker/jellyfin/compose.yaml
 e4f672f487a4 /home/ajinkya/docker/n8n/compose.yaml
@@ -352,4 +353,4 @@ e4f672f487a4 /home/ajinkya/docker/n8n/compose.yaml
 6a022230a456 /home/ajinkya/docker/scrutiny/docker-compose.yml
 ```
 
-_Last change recorded: 2026-11-16 00:00:12_
+_Last change recorded: 2026-11-16 00:10:15_
