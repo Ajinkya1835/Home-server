@@ -43,7 +43,7 @@ homepage-tab | ghcr.io/gethomepage/homepage:latest | da9dca9ec258
 immich_postgres | ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0@bcf63357191b | sha256:bcf63357191b76a916ae5eb93464d65c07511da41e3bf7a8416db519b40b1c23
 immich_redis | docker.io/valkey/valkey:9@4963247afc4c | sha256:4963247afc4cd33c7d3b2d2816b9f7f8eeebab148d29056c2ca4d7cbc966f2d9
 immich_server | ghcr.io/immich-app/immich-server:v3 | 7c489add298f
-jellyfin | jellyfin/jellyfin:pinned-fea863d | fea863d0cd9e
+jellyfin | jellyfin/jellyfin:latest | fea863d0cd9e
 n8n | n8n-n8n | 2b5228af4416
 netdata | netdata/netdata:stable | c7eab00e2090
 portainer | portainer/portainer-ce:latest | 5f9b4bda5582
@@ -235,6 +235,7 @@ yt-music.service
 30 3 * * * $HOME/bin/server-doc
 */5 * * * * $HOME/bin/deploy
 */10 * * * * $HOME/bin/server-snapshot >> $HOME/snapshot.log 2>&1
+40 3 * * * $HOME/bin/sync-config
 SHELL=/bin/sh
 30 7-23 * * *   root	[ -x /etc/init.d/anacron ] && if [ ! -d /run/systemd/system ]; then /usr/sbin/invoke-rc.d anacron start >/dev/null; fi
 30 3 * * 0 root test -e /run/systemd/system || SERVICE_MODE=1 /usr/lib/x86_64-linux-gnu/e2fsprogs/e2scrub_all_cron
@@ -339,6 +340,7 @@ b6fa9dae4b18 /home/ajinkya/bin/fullcheck.sh
 e41a1ac09045 /home/ajinkya/bin/server-doc
 7d628b01b582 /home/ajinkya/bin/server-snapshot
 75ff9166fa9b /home/ajinkya/bin/status-digest
+ee3b8e720bb6 /home/ajinkya/bin/sync-config
 f512666acfc4 /home/ajinkya/bin/watchdog
 9f7322bc7bf7 /home/ajinkya/bin/yt-music.sh
 cde75582fdfe /home/ajinkya/docker/dozzle/compose.yaml
@@ -357,4 +359,4 @@ e4f672f487a4 /home/ajinkya/docker/n8n/compose.yaml
 6a022230a456 /home/ajinkya/docker/scrutiny/docker-compose.yml
 ```
 
-_Last change recorded: 2026-11-16 00:20:04_
+_Last change recorded: 2026-11-16 00:30:04_
