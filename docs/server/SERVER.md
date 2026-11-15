@@ -131,9 +131,9 @@ tcp 100.94.248.64%tailscale0:8463
 tcp 127.0.0.1:19999
 tcp 127.0.0.1:2283
 tcp 127.0.0.1:3030
+tcp 127.0.0.1:42255
 tcp 127.0.0.1:445
 tcp 127.0.0.1:5678
-tcp 127.0.0.1:60161
 tcp 127.0.0.1:6080
 tcp 127.0.0.1:8081
 tcp 127.0.0.1:8085
@@ -250,9 +250,9 @@ PATH=/usr/lib/sysstat:/usr/sbin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
 
 # Funnel on:
+#     - https://ajinkya.tail32b205.ts.net:10000
 #     - https://ajinkya.tail32b205.ts.net
 #     - https://ajinkya.tail32b205.ts.net:8443
-#     - https://ajinkya.tail32b205.ts.net:10000
 
 https://ajinkya.tail32b205.ts.net:10000 (Funnel on)
 |-- / proxy http://127.0.0.1:8096
@@ -327,7 +327,8 @@ MACHINE_LEARNING_MODEL_TTL=
 a78e942f7650 /home/ajinkya/bin/backup
 fc6c7db84684 /home/ajinkya/bin/backup.bak
 75204d0e0414 /home/ajinkya/bin/backup.old
-d0764ab1a07d /home/ajinkya/bin/collect-config
+439f1ce3a377 /home/ajinkya/bin/collect-config
+d0764ab1a07d /home/ajinkya/bin/collect-config.bak-hermes
 f7efcf37f2d0 /home/ajinkya/bin/daily-check
 3168e5e0d08b /home/ajinkya/bin/deploy
 afdaddc01d1e /home/ajinkya/bin/deploy.old
@@ -359,4 +360,4 @@ e4f672f487a4 /home/ajinkya/docker/n8n/compose.yaml
 6a022230a456 /home/ajinkya/docker/scrutiny/docker-compose.yml
 ```
 
-_Last change recorded: 2026-11-16 00:40:05_
+_Last change recorded: 2026-11-16 00:50:12_
