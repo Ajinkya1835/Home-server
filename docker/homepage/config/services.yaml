@@ -93,6 +93,23 @@
       icon: mdi-router-wireless
       href: http://192.168.29.1
       description: Home gateway
+  - Dozzle:
+      icon: dozzle.png
+      href: https://ajinkya.tail32b205.ts.net:8454
+      description: Live container logs and alerts
+      server: homelab
+      container: dozzle
+  - Scrutiny:
+      icon: scrutiny.png
+      href: https://ajinkya.tail32b205.ts.net:8463
+      description: Drive health (SMART)
+      server: homelab
+      container: scrutiny
+  - Server docs:
+      icon: mdi-file-document-outline
+      href: https://github.com/Ajinkya1835/Home-server/blob/main/docs/server/SERVER.md
+      target: _blank
+      description: Auto-generated inventory and change log
 - Under the Hood:
   - Immich ML:
       icon: immich.png
@@ -114,6 +131,11 @@
       description: This dashboard
       server: homelab
       container: homepage
+  - Alert log:
+      icon: mdi-bell-alert-outline
+      description: Deploy, backup and SMART alerts (open in Dozzle)
+      server: homelab
+      container: serverlog
 - Hello World:
   - Resume:
       icon: mdi-file-download
@@ -122,14 +144,14 @@
       description: Download the PDF
   - Email:
       icon: mdi-email-fast
-      href: mailto:ajinkyayadav1803@gmail.com
+      href: mailto:{{HOMEPAGE_VAR_EMAIL}}
       target: _self
-      description: ajinkyayadav1803@gmail.com
+      description: {{HOMEPAGE_VAR_EMAIL}}
   - Phone:
       icon: mdi-phone
-      href: tel:+919892460089
+      href: tel:{{HOMEPAGE_VAR_PHONE}}
       target: _self
-      description: +91 98924 60089
+      description: {{HOMEPAGE_VAR_PHONE_DISPLAY}}
   - LinkedIn:
       icon: mdi-linkedin
       href: https://linkedin.com/in/ajinkya-yadav-70b3671a6
@@ -209,7 +231,7 @@
       widget:
         type: customapi
         url: http://netdata:19999/api/v1/data?chart=system.cpu&after=-1&points=1&format=json
-        refreshInterval: 2000
+        refreshInterval: 5000
         mappings:
         - field: data.0.6
           label: User
@@ -228,7 +250,7 @@
       widget:
         type: customapi
         url: http://netdata:19999/api/v1/data?chart=system.ram&after=-1&points=1&format=json
-        refreshInterval: 2000
+        refreshInterval: 5000
         mappings:
         - field: data.0.2
           label: Used
@@ -247,7 +269,7 @@
       widget:
         type: customapi
         url: http://netdata:19999/api/v1/data?chart=system.load&after=-1&points=1&format=json
-        refreshInterval: 2000
+        refreshInterval: 5000
         mappings:
         - field: data.0.1
           label: 1 min
@@ -263,7 +285,7 @@
       widget:
         type: customapi
         url: http://netdata:19999/api/v1/data?chart=system.net&after=-1&points=1&format=json
-        refreshInterval: 2000
+        refreshInterval: 5000
         mappings:
         - field: data.0.1
           label: Down
@@ -279,7 +301,7 @@
       widget:
         type: customapi
         url: http://netdata:19999/api/v1/data?chart=system.io&after=-1&points=1&format=json
-        refreshInterval: 2000
+        refreshInterval: 5000
         mappings:
         - field: data.0.1
           label: Read
@@ -294,8 +316,8 @@
       icon: mdi-harddisk
       widget:
         type: customapi
-        url: http://netdata:19999/api/v1/data?chart=disk.sdb&after=-1&points=1&format=json
-        refreshInterval: 2000
+        url: http://netdata:19999/api/v1/data?chart=disk.sda&after=-1&points=1&format=json
+        refreshInterval: 5000
         mappings:
         - field: data.0.1
           label: Read
@@ -310,8 +332,8 @@
       icon: mdi-speedometer
       widget:
         type: customapi
-        url: http://netdata:19999/api/v1/data?chart=disk_busy.sdb&after=-1&points=1&format=json
-        refreshInterval: 2000
+        url: http://netdata:19999/api/v1/data?chart=disk_busy.sda&after=-1&points=1&format=json
+        refreshInterval: 5000
         mappings:
         - field: data.0.1
           label: Busy
@@ -321,8 +343,8 @@
       icon: mdi-timer-outline
       widget:
         type: customapi
-        url: http://netdata:19999/api/v1/data?chart=disk_await.sdb&after=-1&points=1&format=json
-        refreshInterval: 2000
+        url: http://netdata:19999/api/v1/data?chart=disk_await.sda&after=-1&points=1&format=json
+        refreshInterval: 5000
         mappings:
         - field: data.0.1
           label: Read
@@ -337,8 +359,8 @@
       icon: mdi-harddisk
       widget:
         type: customapi
-        url: http://netdata:19999/api/v1/data?chart=disk.sda&after=-1&points=1&format=json
-        refreshInterval: 2000
+        url: http://netdata:19999/api/v1/data?chart=disk.sdb&after=-1&points=1&format=json
+        refreshInterval: 5000
         mappings:
         - field: data.0.1
           label: Read
@@ -353,8 +375,8 @@
       icon: mdi-speedometer
       widget:
         type: customapi
-        url: http://netdata:19999/api/v1/data?chart=disk_busy.sda&after=-1&points=1&format=json
-        refreshInterval: 2000
+        url: http://netdata:19999/api/v1/data?chart=disk_busy.sdb&after=-1&points=1&format=json
+        refreshInterval: 5000
         mappings:
         - field: data.0.1
           label: Busy
@@ -364,8 +386,8 @@
       icon: mdi-timer-outline
       widget:
         type: customapi
-        url: http://netdata:19999/api/v1/data?chart=disk_await.sda&after=-1&points=1&format=json
-        refreshInterval: 2000
+        url: http://netdata:19999/api/v1/data?chart=disk_await.sdb&after=-1&points=1&format=json
+        refreshInterval: 5000
         mappings:
         - field: data.0.1
           label: Read
@@ -381,7 +403,7 @@
       widget:
         type: customapi
         url: http://netdata:19999/api/v1/data?chart=disk.sdc&after=-1&points=1&format=json
-        refreshInterval: 2000
+        refreshInterval: 5000
         mappings:
         - field: data.0.1
           label: Read
@@ -397,7 +419,7 @@
       widget:
         type: customapi
         url: http://netdata:19999/api/v1/data?chart=disk_busy.sdc&after=-1&points=1&format=json
-        refreshInterval: 2000
+        refreshInterval: 5000
         mappings:
         - field: data.0.1
           label: Busy
@@ -408,7 +430,7 @@
       widget:
         type: customapi
         url: http://netdata:19999/api/v1/data?chart=disk_await.sdc&after=-1&points=1&format=json
-        refreshInterval: 2000
+        refreshInterval: 5000
         mappings:
         - field: data.0.1
           label: Read
@@ -424,7 +446,7 @@
       widget:
         type: customapi
         url: http://netdata:19999/api/v1/data?chart=sensors.temperature_k10temp-pci-00c3_temp1_Tctl_input&after=-1&points=1&format=json
-        refreshInterval: 2000
+        refreshInterval: 5000
         mappings:
         - field: data.0.1
           label: CPU
@@ -435,7 +457,7 @@
       widget:
         type: customapi
         url: http://netdata:19999/api/v1/data?chart=sensors.temperature_amdgpu-pci-0300_temp1_edge_input&after=-1&points=1&format=json
-        refreshInterval: 2000
+        refreshInterval: 5000
         mappings:
         - field: data.0.1
           label: GPU

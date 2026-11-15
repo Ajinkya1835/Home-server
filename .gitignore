@@ -16,3 +16,12 @@ bin/ntfy-send
 system/
 vaultwarden/data-*/
 scripts/
+.deploy.env
+*.img
+*.pem
+id_rsa*
+id_ed25519*
+*.sqlite*
+*.db
+thumbs/
+hdd1-luks*

@@ -1,0 +1,21 @@
+Status: active
+
+     To                         Action      From
+     --                         ------      ----
+[ 1] 2283/tcp on tailscale0     ALLOW IN    Anywhere                  
+[ 2] 9000/tcp on tailscale0     ALLOW IN    Anywhere                  
+[ 3] 19999/tcp on tailscale0    ALLOW IN    Anywhere                  
+[ 4] 22/tcp on tailscale0       ALLOW IN    Anywhere                  
+[ 5] 445/tcp on tailscale0      ALLOW IN    Anywhere                  
+[ 6] Anywhere on tailscale0     ALLOW IN    Anywhere                  
+[ 7] 41641/udp                  ALLOW IN    Anywhere                  
+[ 8] 8451/tcp on tailscale0     ALLOW IN    Anywhere                  
+[ 9] 2283/tcp (v6) on tailscale0 ALLOW IN    Anywhere (v6)             
+[10] 9000/tcp (v6) on tailscale0 ALLOW IN    Anywhere (v6)             
+[11] 19999/tcp (v6) on tailscale0 ALLOW IN    Anywhere (v6)             
+[12] 22/tcp (v6) on tailscale0  ALLOW IN    Anywhere (v6)             
+[13] 445/tcp (v6) on tailscale0 ALLOW IN    Anywhere (v6)             
+[14] Anywhere (v6) on tailscale0 ALLOW IN    Anywhere (v6)             
+[15] 41641/udp (v6)             ALLOW IN    Anywhere (v6)             
+[16] 8451/tcp (v6) on tailscale0 ALLOW IN    Anywhere (v6)             
+

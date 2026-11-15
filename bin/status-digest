@@ -1,0 +1,8 @@
+#!/bin/bash
+M="Uptime: $(uptime -p)"
+M="$M | Load: $(cut -d" " -f1-3 /proc/loadavg)"
+M="$M | RAM: $(free -h | awk "/Mem/{print \$3\"/\"\$2}")"
+M="$M | SSD: $(df -h / | awk "NR==2{print \$5}")"
+M="$M | HDD: $(df -h /mnt/hdd1 | awk "NR==2{print \$5}")"
+M="$M | Containers: $(docker ps -q | wc -l)"
+"$HOME/bin/ntfy-send" "Server status" "$M" default bar_chart

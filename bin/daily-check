@@ -1,0 +1,25 @@
+#!/bin/bash
+echo "===== UPTIME / LOAD"; uptime
+echo; echo "===== DRIVES"; mountpoint /mnt/hdd1; mountpoint /mnt/backup; df -h / /mnt/hdd1 /mnt/backup
+echo; echo "===== CONTAINERS"
+docker ps --format '{{.Names}}' | wc -l | xargs echo "running:"
+docker ps -a --format '{{.Names}} {{.Status}}' | grep -vE 'Up .*(healthy|hours|minutes|seconds)'
+echo "(above should be empty)"
+echo; echo "===== RESTARTS/OOM"
+docker inspect -f '{{.Name}} restarts={{.RestartCount}} oom={{.State.OOMKilled}}' $(docker ps -aq) | grep -v 'restarts=0 oom=false'
+echo "(above should be empty)"
+echo; echo "===== PROMETHEUS"
+docker exec prometheus wget -qO- http://localhost:9090/api/v1/targets 2>/dev/null | grep -o '"health":"[a-z]*"'
+echo; echo "===== FIRING ALERTS"; curl -s http://127.0.0.1:9093/api/v2/alerts 2>/dev/null | head -c 200; echo
+echo; echo "===== BACKUPS"
+ls -lh /mnt/backup/server-backups/$(date +%F)/ 2>&1 | tail -15
+echo "-- yesterday's mirror --"
+sudo tail -5 /var/log/mirror.log 2>&1
+echo; echo "===== IMMICH"
+docker exec immich_postgres psql -U postgres -d immich -Atc 'select count(*) from asset' 2>&1
+echo; echo "===== EXPOSED PORTS (should only be 22 and the Funnel ones)"
+ss -tlnH | awk '$4 !~ /^127\./ && $4 !~ /^\[::1\]/' 
+echo; echo "===== HOME FOLDER"; ls ~
+echo; echo "===== .bak FILES REMAINING"
+find ~/docker ~/stacks ~/Home-server -name '*.bak*' 2>/dev/null
+echo "(above should be empty)"

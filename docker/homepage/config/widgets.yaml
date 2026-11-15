@@ -1,0 +1,36 @@
+- greeting:
+    text_size: 3xl
+    text: Ajinkya's Homelab
+- resources:
+    label: Server
+    cpu: true
+    memory: true
+    cputemp: true
+    uptime: true
+    units: metric
+    refresh: 3000
+- resources:
+    label: Boot SSD
+    disk: /app/config
+- resources:
+    label: hdd1
+    disk: /mnt/hdd1
+- resources:
+    label: Backup
+    disk: /mnt/backup
+- openmeteo:
+    label: Thane
+    latitude: 19.2183
+    longitude: 72.9781
+    units: metric
+    cache: 5
+- datetime:
+    text_size: xl
+    locale: en-IN
+    format:
+      dateStyle: medium
+      timeStyle: short
+      hour12: true
+- search:
+    provider: google
+    target: _blank

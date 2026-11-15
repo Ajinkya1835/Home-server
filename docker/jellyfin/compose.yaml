@@ -1,6 +1,6 @@
 services:
   jellyfin:
-    image: jellyfin/jellyfin:pinned-fea863d
+    image: jellyfin/jellyfin:latest
     container_name: jellyfin
     restart: unless-stopped
     devices:
@@ -9,7 +9,7 @@ services:
       - "video"
       - "110"
     volumes:
-      - /home/ajinkya/docker-data/jellyfin/config:/config
+      - /mnt/backup/media/config:/config
       - /mnt/backup/media/movies:/media/movies
       - /mnt/backup/media/tv:/media/tv
       - /mnt/backup/media/youtube:/media/youtube
@@ -19,4 +19,3 @@ services:
       - "127.0.0.1:8096:8096"
     environment:
       - TZ=Asia/Kolkata
-      - JELLYFIN_WEB_DIR=/jellyfin/jellyfin-web

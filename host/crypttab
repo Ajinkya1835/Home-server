@@ -1,0 +1,2 @@
+# <target name>	<source device>		<key file>	<options>
+hdd1 UUID=b89a6da4-db12-4237-ba8a-abce7d212989 /etc/luks-keys/hdd1.key luks,nofail

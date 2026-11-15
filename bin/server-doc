@@ -1,0 +1,12 @@
+#!/bin/bash
+{
+echo "# Server map (generated $(date '+%F %T'))"
+echo; echo "## Services: compose folder and data"
+docker ps -a --format '{{.Names}}' | sort | while read n; do
+  docker inspect -f '- **{{.Name}}**: compose `{{index .Config.Labels "com.docker.compose.project.working_dir"}}`, data: {{range .Mounts}}`{{.Source}}` {{end}}' $n
+done
+echo; echo "## Tailscale addresses"; tailscale serve status 2>&1 | grep -E 'https|proxy'
+echo; echo "## Scheduled jobs (yours)"; crontab -l | grep -v '^#'
+echo; echo "## Backups"; ls -1 /mnt/backup /mnt/backup/server-backups | tail -20
+echo; echo "## Disks"; df -h / /mnt/hdd1 /mnt/backup
+} > ~/SERVER.md

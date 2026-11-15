@@ -1,0 +1,17 @@
+#!/bin/bash
+D=/tmp/watchdog.disks; S=/tmp/watchdog.state
+disks=""
+for m in /mnt/hdd1 /mnt/backup; do mountpoint -q $m && timeout 2 ls $m >/dev/null 2>&1 || disks="$disks$m "; done
+prev=$(cat $D 2>/dev/null); echo "$disks" > $D
+if [ "$disks" != "$prev" ]; then
+  if [ -n "$disks" ]; then "$HOME/bin/ntfy-send" "Drive missing" "$disks not available. Homepage and alerts keep running. Replug and unlock." high warning
+  else
+    case "$prev" in *mnt*) docker ps -aq | xargs -r docker inspect -f "{{.Name}} {{range .Mounts}}{{.Source}} {{end}}" | grep -E "/mnt/(hdd1|backup)" | awk "{print substr(\$1,2)}" | xargs -r docker restart >/dev/null;; esac
+    "$HOME/bin/ntfy-send" "Drives back" "Drives mounted, dependent containers restarted" default white_check_mark
+  fi
+fi
+[ -n "$disks" ] && exit 0
+B=$(docker ps -a --format "{{.Names}} {{.Status}}" | grep -E "Exited|unhealthy|Restarting" | awk "{print \$1}" | sort | tr "\n" " ")
+[ "$B" = "$(cat $S 2>/dev/null)" ] && exit 0
+echo "$B" > $S
+if [ -n "$B" ]; then "$HOME/bin/ntfy-send" "Container problem" "$B" high warning; else "$HOME/bin/ntfy-send" "All containers healthy" "Back to normal" default white_check_mark; fi

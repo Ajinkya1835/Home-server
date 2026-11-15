@@ -1,0 +1,4 @@
+#!/bin/bash
+# files everything in the inbox (or the folder you pass) into music/English
+"$HOME/beets-env/bin/beet" -c "$HOME/.config/beets/english.yaml" import "${@:-/mnt/backup/media/music-inbox}"
+find "/mnt/backup/media/music-inbox" -mindepth 1 -type d -empty -delete

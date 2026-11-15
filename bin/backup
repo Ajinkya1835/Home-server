@@ -1,0 +1,66 @@
+#!/bin/bash
+# ~/bin/backup - nightly config + database backup to /mnt/backup
+# Photos/files on hdd1 are covered separately by the root rsync mirror cron.
+set -o pipefail
+
+if ! mountpoint -q /mnt/backup; then
+  "$HOME/bin/ntfy-send" "Backup FAILED" "/mnt/backup not mounted" high warning
+  exit 1
+fi
+
+D=/mnt/backup/server-backups/$(date +%F)
+mkdir -p "$D"
+ok=1
+
+# dump NAME CMD...  -> gzip to $D/NAME; fails if command errors or output is empty
+dump() {
+  local name=$1; shift
+  if ! "$@" | gzip > "$D/$name"; then ok=0; return; fi
+  [ "$(stat -c %s "$D/$name")" -gt 200 ] || ok=0
+}
+
+# vaultwarden (stopped briefly for a consistent copy)
+docker stop vaultwarden >/dev/null
+docker run --rm -v /home/ajinkya/docker/vaultwarden/data:/d:ro -v "$D":/o alpine \
+  sh -c "tar czf /o/vaultwarden.tgz -C /d . && chown $(id -u):$(id -g) /o/vaultwarden.tgz" || ok=0
+docker start vaultwarden >/dev/null
+# databases
+dump immich-db.sql.gz docker exec immich_postgres pg_dump -U postgres immich
+
+# docker volumes (owned back to the current user)
+UIDGID="$(id -u):$(id -g)"
+for v in n8n_n8n_data portainer_data; do
+  docker run --rm -v "$v":/d:ro -v "$D":/o alpine \
+    sh -c "tar czf /o/$v.tgz -C /d . && chown $UIDGID /o/$v.tgz" || ok=0
+done
+
+
+# jellyfin config
+tar czf "$D/jellyfin-config.tgz" -C /mnt/backup/media config || ok=0
+
+# configs and scripts
+tar czf "$D/configs.tgz" --exclude='*.bak*' --exclude='*/postgres*' --exclude='*/cache' --exclude='*/data' \
+  -C /home/ajinkya docker stacks Home-server bin 2>/dev/null
+[ $? -le 1 ] || ok=0
+
+# system files (no secrets: LUKS key and ufw rules are root-only, not included)
+tar czf "$D/system.tgz" \
+  /etc/crypttab /etc/fstab \
+  /etc/systemd/system/docker.service.d /etc/systemd/system/novnc.service.d \
+  /etc/systemd/system/x11vnc.service /etc/gdm3/custom.conf \
+  /etc/systemd/system/hdd1-watchdog.service /etc/systemd/system/hdd1-watchdog.timer \
+  /etc/systemd/system/watchdog.service /etc/systemd/logind.conf.d \
+  /usr/local/bin/hdd1-watchdog.sh 2>/dev/null
+[ $? -le 1 ] || ok=0
+
+tailscale serve status > "$D/tailscale-serve.txt" 2>&1
+crontab -l > "$D/user-crontab.txt" 2>&1
+chmod -R go-rwx "$D" 2>/dev/null
+
+if [ $ok = 1 ]; then
+  # prune old backups only after a good run
+  find /mnt/backup/server-backups -maxdepth 1 -type d -name '20*' -mtime +14 -exec rm -rf {} +
+  "$HOME/bin/ntfy-send" "Backup ok" "$(du -sh "$D" | cut -f1) in $D" default white_check_mark
+else
+  "$HOME/bin/ntfy-send" "Backup FAILED" "Check $D" high warning
+fi

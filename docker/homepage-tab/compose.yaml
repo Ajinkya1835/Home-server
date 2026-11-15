@@ -1,13 +1,10 @@
 services:
-  homepage:
+  homepage-tab:
     image: ghcr.io/gethomepage/homepage:latest
-    container_name: homepage
+    container_name: homepage-tab
     restart: unless-stopped
     ports:
-      - "127.0.0.1:3030:3000"
+      - "192.168.29.106:3031:3000"
     volumes:
       - ./config:/app/config
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /mnt/hdd1:/mnt/hdd1:ro
-    environment:
-      - HOMEPAGE_ALLOWED_HOSTS=YOUR-HOST.YOUR-TAILNET.ts.net:8450

@@ -1,0 +1,88 @@
+title: Ajinkya's lab
+description: A self-hosted command center, and the developer behind it
+theme: dark
+color: slate
+headerStyle: boxedWidgets
+cardBlur: md
+statusStyle: dot
+iconStyle: theme
+useEqualHeights: true
+hideVersion: true
+hideErrors: false
+target: _blank
+language: en
+maxGroupColumns: 5
+quicklaunch:
+  searchDescriptions: true
+  hideInternetSearch: false
+  showSearchSuggestions: true
+  provider: google
+layout:
+  Media & Files:
+    tab: Home
+    icon: mdi-image-multiple
+    style: row
+    columns: 4
+  Security & Automation:
+    tab: Home
+    icon: mdi-shield-lock
+    style: row
+    columns: 4
+  Vitals:
+    tab: Home
+    icon: mdi-heart-pulse
+    style: row
+    columns: 2
+  Host telemetry:
+    tab: Observe
+    icon: mdi-gauge
+    style: row
+    columns: 4
+  Admin Tools:
+    tab: Admin
+    icon: mdi-wrench
+    style: row
+    columns: 4
+  Under the Hood:
+    tab: Admin
+    icon: mdi-engine
+    style: row
+    columns: 4
+  Hello World:
+    tab: About
+    icon: mdi-hand-wave
+    style: row
+    columns: 5
+  Experience:
+    tab: About
+    icon: mdi-briefcase
+    style: row
+    columns: 3
+  Projects:
+    tab: About
+    icon: mdi-hammer-wrench
+    style: row
+    columns: 4
+  Skills:
+    tab: About
+    icon: mdi-toolbox
+    style: row
+    columns: 4
+  Education & interests:
+    tab: About
+    icon: mdi-school
+    style: row
+    columns: 2
+  Live:
+    tab: Home
+    icon: mdi-pulse
+    style: row
+    columns: 5
+  Live graphs:
+    tab: Observe
+    style: row
+    columns: 1
+  Architecture:
+    tab: Map
+    style: row
+    columns: 1

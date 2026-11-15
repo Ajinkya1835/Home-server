@@ -1,0 +1,78 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<script src="/chart.umd.min.js"></script>
+<style>
+body{margin:0;background:transparent;color:#cbd5e1;font:12px system-ui,sans-serif}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(460px,1fr));gap:14px;padding:4px}
+.c{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:12px 14px;height:300px;box-sizing:border-box;backdrop-filter:blur(10px)}
+.c h3{margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.05em;color:#e2e8f0;text-transform:uppercase}
+.w{position:relative;height:calc(100% - 26px)}
+</style></head><body><div class="g" id="g"></div>
+<script>
+const API='/nd/api/v1/';
+const PAL=['#60a5fa','#34d399','#fbbf24','#f87171','#a78bfa','#f472b6','#2dd4bf','#fb923c','#94a3b8','#a3e635'];
+Chart.defaults.color='#94a3b8';Chart.defaults.borderColor='rgba(255,255,255,.06)';Chart.defaults.font.size=10;
+const J=u=>fetch(API+u).then(r=>r.text()).then(t=>{try{return JSON.parse(t)}catch(e){throw new Error('no data')}});
+const charts=[];
+function mk(title,spec){
+  const d=document.createElement('div');d.className='c';
+  d.innerHTML='<h3>'+title+'</h3><div class="w"><canvas></canvas></div>';
+  document.getElementById('g').appendChild(d);
+  const ch=new Chart(d.querySelector('canvas'),{type:'line',data:{labels:[],datasets:[]},options:{
+    animation:false,responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+    elements:{point:{radius:0},line:{borderWidth:1.5,tension:.3}},
+    plugins:{legend:{position:'bottom',labels:{boxWidth:8,boxHeight:8}}},
+    scales:{x:{ticks:{maxTicksLimit:6},grid:{display:false}},
+            y:{stacked:!!spec.stack,min:0,max:spec.max,title:{display:!!spec.unit,text:spec.unit||''}}}}});
+  charts.push({ch,spec});
+}
+async function nd(chart,o={}){
+  const r=await J('data?chart='+encodeURIComponent(chart)+'&after=-600&points=120&group=average&format=json');
+  const rows=r.data.slice().reverse();
+  const idx=r.labels.map((l,i)=>i).filter(i=>i>0&&(!o.only||o.only.includes(r.labels[i])));
+  return {labels:rows.map(x=>new Date(x[0]*1000).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})),
+    series:idx.map(i=>({name:r.labels[i],data:rows.map(x=>o.abs?Math.abs(x[i]):x[i])}))};
+}
+const one=(id,o)=>()=>nd(id,o);
+const multi=(list,o,sum)=>async()=>{
+  const rs=await Promise.all(list.map(c=>nd(c.id,o)));
+  const series=[];
+  rs.forEach((r,i)=>{
+    const base=list[i].id.replace(/^cgroup_/,'').replace(/\..*$/,'');
+    if(sum){
+      const n=r.labels.length;
+      series.push({name:base,data:Array.from({length:n},(_,k)=>r.series.reduce((a,s)=>a+(s.data[k]||0),0))});
+    } else r.series.forEach(s=>series.push({name:base+' '+s.name,data:s.data}));
+  });
+  return {labels:rs[0].labels,series};
+};
+async function refresh(){
+  for(const o of charts){
+    try{
+      const d=await o.spec.load();const c=o.ch;
+      c.data.labels=d.labels;
+      c.data.datasets=d.series.map((s,i)=>({label:s.name,data:s.data,borderColor:PAL[i%PAL.length],
+        backgroundColor:PAL[i%PAL.length]+(o.spec.stack?'77':'22'),fill:!!(o.spec.stack||o.spec.fill)}));
+      c.update('none');
+    }catch(e){const cd=o.ch.canvas.closest('.c');if(cd)cd.style.display='none'}
+  }
+}
+(async()=>{
+  let all=[];try{all=Object.values((await J('charts')).charts)}catch(e){}
+  mk('CPU',{load:one('system.cpu'),stack:true,max:100,unit:'%'});
+  mk('Load average',{load:one('system.load'),fill:true});
+  mk('RAM',{load:one('system.ram'),stack:true,unit:'MiB'});
+  mk('Swap',{load:one('system.swap'),stack:true,unit:'MiB'});
+  mk('Network',{load:one('system.net',{abs:true}),fill:true,unit:'kbit/s'});
+  mk('Disk IO',{load:one('system.io',{abs:true}),fill:true,unit:'KiB/s'});
+  mk('Processes',{load:one('system.processes'),fill:true});
+  mk('Context switches',{load:one('system.ctxt'),fill:true});
+  mk('Interrupts',{load:one('system.intr'),fill:true});
+  const temps=all.filter(c=>c.context==='sensors.temperature'||/temp/i.test(c.id)).slice(0,6);
+  if(temps.length)mk('Temperatures',{load:multi(temps),unit:'°C'});
+  const cpu=all.filter(c=>c.context==='cgroup.cpu');
+  if(cpu.length)mk('Container CPU',{load:multi(cpu,{},true),unit:'%'});
+  const mem=all.filter(c=>c.context==='cgroup.mem_usage');
+  if(mem.length)mk('Container RAM',{load:multi(mem,{only:['ram']},true),unit:'MiB'});
+  refresh();setInterval(refresh,10000);
+})();
+</script></body></html>

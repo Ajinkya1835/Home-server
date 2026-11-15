@@ -1,0 +1,54 @@
+#!/bin/bash
+# collect-config - copy NON-secret server config into ~/Home-server. Never commits or pushes.
+set -uo pipefail
+shopt -s nullglob
+R=${REPO:-$HOME/Home-server}; H=${HOME_DIR:-$HOME}; ETC=${ETC:-/etc}; LB=${LOCALBIN:-/usr/local/bin}
+SK=$(mktemp); N=0
+read -r -d '' SECRET_RE <<'RE' || true
+(PASS(WORD)?|PASSWD|SECRET|TOKEN|API_?KEY|PRIVATE_?KEY|ENCRYPTION_?KEY)[A-Za-z0-9_]*[[:space:]]*[:=][[:space:]]*["']?[^[:space:]$<#{"'][^[:space:]]{7,}|-----BEGIN [A-Z ]*PRIVATE KEY|[0-9]{8,10}:[A-Za-z0-9_-]{35}|gh[pousr]_[A-Za-z0-9]{30,}|sk-[A-Za-z0-9]{20,}|xox[baprs]-[A-Za-z0-9-]{10,}|AKIA[0-9A-Z]{16}
+RE
+looks_secret() { grep -IEin "$SECRET_RE" "$1" 2>/dev/null | grep -qviE 'CHANGE_?ME|example|your[-_ ]|<[^>]*>'; }
+safe_copy() { # src dest
+  local s=$1 d=$2
+  [ -f "$s" ] && [ ! -L "$s" ] || return 0
+  [ "$(realpath "$s")" = "$(realpath -m "$d")" ] && return 0
+  [ "$(stat -c %s "$s")" -lt 200000 ] || { echo "too big: $s" >> "$SK"; return 0; }
+  if [ -s "$s" ]; then grep -Iq . "$s" || { echo "binary: $s" >> "$SK"; return 0; }; fi
+  if looks_secret "$s"; then echo "SECRET-LIKE: $s" >> "$SK"; return 0; fi
+  mkdir -p "$(dirname "$d")" && cp "$s" "$d" && N=$((N+1))
+}
+cmd_copy() { # dest, command...
+  local d=$1; shift; local t; t=$(mktemp)
+  "$@" > "$t" 2>/dev/null || true
+  if [ -s "$t" ] && ! looks_secret "$t"; then mkdir -p "$(dirname "$d")"; cp "$t" "$d"; N=$((N+1)); elif [ -s "$t" ]; then echo "SECRET-LIKE output: $d" >> "$SK"; fi
+  rm -f "$t"
+}
+
+# 1. docker stacks: compose + small config files only (never data dirs); .env -> .env.example (names only)
+for d in "$H"/docker/*/; do
+  s=$(basename "$d"); o=$R/docker/$s
+  for f in "$d"compose*.y*ml "$d"docker-compose.y*ml "$d"Dockerfile* "$d"*.conf "$d"*.html "$d"*.sh "$d"*.py "$d"requirements.txt; do safe_copy "$f" "$o/$(basename "$f")"; done
+  for f in "$d"config/*.y*ml "$d"config/*.css "$d"config/*.js "$d"config/*.json; do safe_copy "$f" "$o/config/$(basename "$f")"; done
+  if [ -f "$d.env" ] && [ ! -f "$o/.env.example" ]; then mkdir -p "$o"; sed -E '/^[[:space:]]*#/d;/^[[:space:]]*$/d;s/=.*/=/' "$d.env" > "$o/.env.example"; N=$((N+1)); fi
+done
+# 2. scripts
+for f in "$H"/bin/*; do case "$f" in *.bak*|*.old|*.orig|*~|*ntfy-send*) continue;; esac; safe_copy "$f" "$R/bin/$(basename "$f")"; done
+[ -f "$H/.deploy.env" ] && [ ! -f "$R/bin/deploy.env.example" ] && { sed -E '/^[[:space:]]*#/d;/^[[:space:]]*$/d;s/=.*/=/' "$H/.deploy.env" > "$R/bin/deploy.env.example"; N=$((N+1)); }
+# 3. host config (lives in host/, because system/ is gitignored)
+O=$R/host
+for f in "$ETC"/fstab "$ETC"/crypttab "$ETC"/ssh/sshd_config "$ETC"/ssh/sshd_config.d/*.conf "$ETC"/fail2ban/jail.local "$ETC"/sysctl.d/99-*.conf "$ETC"/cron.d/*; do safe_copy "$f" "$O${f#"$ETC"}"; done
+for f in "$ETC"/systemd/system/*.service "$ETC"/systemd/system/*.timer "$LB"/*; do safe_copy "$f" "$O/$(basename "$(dirname "$f")")/$(basename "$f")"; done
+cmd_copy "$O/crontab.txt" bash -c "crontab -l | grep -vE '^#|^$'"
+cmd_copy "$O/ufw.txt" sudo -n ufw status numbered
+cmd_copy "$O/tailscale-serve.txt" tailscale serve status
+cmd_copy "$O/apt-manual.txt" bash -c "apt-mark showmanual | sort"
+# 4. make sure secrets stay ignored
+cd "$R" || exit 1
+for p in '.deploy.env' '*.img' '*.pem' 'id_rsa*' 'id_ed25519*' '*.sqlite*' '*.db' 'thumbs/' 'hdd1-luks*'; do grep -qxF "$p" .gitignore 2>/dev/null || echo "$p" >> .gitignore; done
+# 5. final gate: scan everything git would add
+git ls-files -o -m --exclude-standard | while read -r f; do [ -f "$f" ] && looks_secret "$f" && echo "SECRET-LIKE (not staged by script, check before adding): $f" >> "$SK"; done
+echo "copied/updated: $N files"
+echo "--- skipped / flagged ---"; sort -u "$SK"; echo "-------------------------"
+git status --short
+echo "Review: git diff --stat; then: git add -A && git commit -m 'sync server config' && git push"
+rm -f "$SK"

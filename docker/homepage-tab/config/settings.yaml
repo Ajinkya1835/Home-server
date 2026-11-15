@@ -1,0 +1,17 @@
+---
+title: Ajinkya Home Lab
+theme: dark
+color: slate
+headerStyle: boxed
+statusStyle: dot
+useEqualHeights: true
+hideVersion: true
+target: _blank
+
+layout:
+  Media:
+    style: row
+    columns: 1
+  Server:
+    style: row
+    columns: 1

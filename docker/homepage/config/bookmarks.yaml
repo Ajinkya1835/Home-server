@@ -1,0 +1,35 @@
+- Elsewhere:
+  - GitHub:
+    - abbr: GH
+      href: https://github.com/Ajinkya1835
+  - LinkedIn:
+    - abbr: LI
+      href: https://linkedin.com/in/ajinkya-yadav-70b3671a6
+  - Home-server repo:
+    - abbr: HS
+      href: https://github.com/Ajinkya1835/Home-server
+  - MetaGrad Labs:
+    - abbr: MG
+      href: https://metagrad.in
+  - OptimSkool:
+    - abbr: OS
+      href: https://optimskool.com
+- Docs & references:
+  - Homepage docs:
+    - abbr: HP
+      href: https://gethomepage.dev
+  - Docker docs:
+    - abbr: DK
+      href: https://docs.docker.com
+  - Next.js docs:
+    - abbr: NX
+      href: https://nextjs.org/docs
+  - n8n docs:
+    - abbr: N8
+      href: https://docs.n8n.io
+  - Tailscale admin:
+    - abbr: TS
+      href: https://login.tailscale.com/admin/machines
+  - Immich docs:
+    - abbr: IM
+      href: https://immich.app/docs
