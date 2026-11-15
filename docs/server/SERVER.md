@@ -131,9 +131,9 @@ tcp 100.94.248.64%tailscale0:8463
 tcp 127.0.0.1:19999
 tcp 127.0.0.1:2283
 tcp 127.0.0.1:3030
-tcp 127.0.0.1:35697
 tcp 127.0.0.1:445
 tcp 127.0.0.1:5678
+tcp 127.0.0.1:60161
 tcp 127.0.0.1:6080
 tcp 127.0.0.1:8081
 tcp 127.0.0.1:8085
@@ -250,9 +250,9 @@ PATH=/usr/lib/sysstat:/usr/sbin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
 
 # Funnel on:
-#     - https://ajinkya.tail32b205.ts.net:10000
 #     - https://ajinkya.tail32b205.ts.net
 #     - https://ajinkya.tail32b205.ts.net:8443
+#     - https://ajinkya.tail32b205.ts.net:10000
 
 https://ajinkya.tail32b205.ts.net:10000 (Funnel on)
 |-- / proxy http://127.0.0.1:8096
@@ -359,4 +359,4 @@ e4f672f487a4 /home/ajinkya/docker/n8n/compose.yaml
 6a022230a456 /home/ajinkya/docker/scrutiny/docker-compose.yml
 ```
 
-_Last change recorded: 2026-11-16 00:30:04_
+_Last change recorded: 2026-11-16 00:40:05_
