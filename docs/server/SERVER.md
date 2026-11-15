@@ -308,6 +308,9 @@ HOMEPAGE_VAR_TS_KEY=
 HOMEPAGE_VAR_TS_DEVICE=
 HOMEPAGE_VAR_TS_PHONE=
 HOMEPAGE_VAR_JELLYFIN_KEY=
+HOMEPAGE_VAR_EMAIL=
+HOMEPAGE_VAR_PHONE=
+HOMEPAGE_VAR_PHONE_DISPLAY=
 [/home/ajinkya/docker/immich/.env]
 UPLOAD_LOCATION=
 DB_DATA_LOCATION=
@@ -323,6 +326,7 @@ MACHINE_LEARNING_MODEL_TTL=
 a78e942f7650 /home/ajinkya/bin/backup
 fc6c7db84684 /home/ajinkya/bin/backup.bak
 75204d0e0414 /home/ajinkya/bin/backup.old
+d0764ab1a07d /home/ajinkya/bin/collect-config
 f7efcf37f2d0 /home/ajinkya/bin/daily-check
 3168e5e0d08b /home/ajinkya/bin/deploy
 afdaddc01d1e /home/ajinkya/bin/deploy.old
@@ -353,4 +357,4 @@ e4f672f487a4 /home/ajinkya/docker/n8n/compose.yaml
 6a022230a456 /home/ajinkya/docker/scrutiny/docker-compose.yml
 ```
 
-_Last change recorded: 2026-11-16 00:10:15_
+_Last change recorded: 2026-11-16 00:20:04_
