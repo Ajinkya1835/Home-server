@@ -121,6 +121,7 @@ tcp 100.94.248.64%tailscale0:8444
 tcp 100.94.248.64%tailscale0:8445
 tcp 100.94.248.64%tailscale0:8450
 tcp 100.94.248.64%tailscale0:8451
+tcp 100.94.248.64%tailscale0:8452
 tcp 100.94.248.64%tailscale0:8453
 tcp 100.94.248.64%tailscale0:8454
 tcp 100.94.248.64%tailscale0:8455
@@ -153,6 +154,7 @@ tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8444
 tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8445
 tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8450
 tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8451
+tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8452
 tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8453
 tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8454
 tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8455
@@ -275,6 +277,9 @@ https://ajinkya.tail32b205.ts.net:8450 (tailnet only)
 https://ajinkya.tail32b205.ts.net:8451 (tailnet only)
 |-- / proxy http://127.0.0.1:8092
 
+https://ajinkya.tail32b205.ts.net:8452 (tailnet only)
+|-- / proxy http://127.0.0.1:9120
+
 https://ajinkya.tail32b205.ts.net:8453 (tailnet only)
 |-- / proxy http://localhost:6080
 
@@ -360,4 +365,4 @@ e4f672f487a4 /home/ajinkya/docker/n8n/compose.yaml
 6a022230a456 /home/ajinkya/docker/scrutiny/docker-compose.yml
 ```
 
-_Last change recorded: 2026-11-16 19:00:04_
+_Last change recorded: 2026-11-16 19:20:05_
