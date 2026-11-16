@@ -121,10 +121,10 @@ tcp 100.94.248.64%tailscale0:8444
 tcp 100.94.248.64%tailscale0:8445
 tcp 100.94.248.64%tailscale0:8450
 tcp 100.94.248.64%tailscale0:8451
-tcp 100.94.248.64%tailscale0:8452
 tcp 100.94.248.64%tailscale0:8453
 tcp 100.94.248.64%tailscale0:8454
 tcp 100.94.248.64%tailscale0:8455
+tcp 100.94.248.64%tailscale0:8456
 tcp 100.94.248.64%tailscale0:8457
 tcp 100.94.248.64%tailscale0:8461
 tcp 100.94.248.64%tailscale0:8462
@@ -154,10 +154,10 @@ tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8444
 tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8445
 tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8450
 tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8451
-tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8452
 tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8453
 tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8454
 tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8455
+tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8456
 tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8457
 tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8461
 tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8462
@@ -252,9 +252,14 @@ PATH=/usr/lib/sysstat:/usr/sbin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
 
 # Funnel on:
+#     - https://ajinkya.tail32b205.ts.net:10000
 #     - https://ajinkya.tail32b205.ts.net
 #     - https://ajinkya.tail32b205.ts.net:8443
-#     - https://ajinkya.tail32b205.ts.net:10000
+
+|-- tcp://ajinkya.tail32b205.ts.net:8456 (tailnet only)
+|-- tcp://100.94.248.64:8456
+|-- tcp://[fd7a:115c:a1e0::5401:f8b2]:8456
+|--> tcp://127.0.0.1:9120
 
 https://ajinkya.tail32b205.ts.net:10000 (Funnel on)
 |-- / proxy http://127.0.0.1:8096
@@ -276,9 +281,6 @@ https://ajinkya.tail32b205.ts.net:8450 (tailnet only)
 
 https://ajinkya.tail32b205.ts.net:8451 (tailnet only)
 |-- / proxy http://127.0.0.1:8092
-
-https://ajinkya.tail32b205.ts.net:8452 (tailnet only)
-|-- / proxy http://127.0.0.1:9120
 
 https://ajinkya.tail32b205.ts.net:8453 (tailnet only)
 |-- / proxy http://localhost:6080
@@ -365,4 +367,4 @@ e4f672f487a4 /home/ajinkya/docker/n8n/compose.yaml
 6a022230a456 /home/ajinkya/docker/scrutiny/docker-compose.yml
 ```
 
-_Last change recorded: 2026-11-16 20:20:04_
+_Last change recorded: 2026-11-16 20:30:04_
