@@ -7,10 +7,16 @@ attachments:
   storage: "hermes-home"
 plugins:
   clone_timeout_seconds: 300
+  enabled:
+    - tool-slimmer
+  disabled: []
 model:
-  default: "gpt-6-luna"
-  provider: "openai-codex"
-  base_url: "https://chatgpt.com/backend-api/codex"
+  default: "deepseek-flash"
+  provider: "custom"
+  base_url: "https://api.deepseek.com/v1"
+  api_mode: chat_completions
+  api_key: <redacted>
+  streaming: false
 kanban:
   review_dispatch: true
 cron:
@@ -85,36 +91,9 @@ agent:
   fast_auto_seconds: 60
   personalities: {}
   disabled_toolsets:
-    - a2a
-    - bot_room
-    - browser
-    - catalog
-    - clarify
-    - code_execution
-    - computer_use
-    - connections
-    - context_engine
-    - cronjob
-    - delegation
-    - desktop_ui
-    - discord
-    - discord_admin
-    - feishu_doc
-    - feishu_drive
-    - image_gen
-    - kanban
-    - onboarding
-    - project
-    - search
-    - session_search
-    - stt
-    - todo
-    - tts
-    - video
-    - video_gen
     - web
-    - x_search
-    - yuanbao
+    - browser
+    - tts
 gateway:
   unmanaged_idle_exit_seconds: 600
   signal_interrupt_grace_timeout: 1
@@ -269,3 +248,14 @@ fallback_providers:
     base_url: https://integrate.api.nvidia.com/v1
 command_allowlist:
   - script execution via -e/-c flag
+webapp:
+  enabled: true
+  public_url: 'https://ajinkya.tail32b205.ts.net:8452'
+dashboard:
+  basic_auth:
+    username: ajinkya
+    password_hash: <redacted>
+voice:
+  voice_chat_mode: gpt-live
+wake_word:
+  enabled: true
