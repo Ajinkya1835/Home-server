@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 560" width="1040" height="560" role="img" aria-label="Simplified homelab architecture: internet and your devices reach one node through Tailscale; the node runs 14 containers and writes to an encrypted data disk and a nightly backup disk.">
+  <defs>
+    <style>
+      .lbl   { font: 600 14px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #f1f5f9; }
+      .sub   { font: 500 11.5px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #94a3b8; letter-spacing: .04em; }
+      .chip  { font: 500 12px system-ui, sans-serif; fill: #e2e8f0; }
+      .tag   { font: 600 10.5px ui-monospace, Menlo, monospace; fill: #0b1022; letter-spacing: .06em; }
+      .edge  { stroke-dasharray: 5 5; fill: none; stroke-width: 1.6; }
+    </style>
+  </defs>
+
+  <!-- ── internet ───────────────────────────────────────────── -->
+  <rect x="24" y="118" width="214" height="214" rx="18" fill="rgba(125,211,252,.07)" stroke="#7dd3fc" stroke-opacity=".55"/>
+  <text class="lbl" x="46" y="148">Internet</text>
+  <rect x="44" y="164" width="174" height="30" rx="9" fill="rgba(125,211,252,.12)" stroke="#7dd3fc" stroke-opacity=".4"/>
+  <text class="chip" x="58" y="183">Jellyfin · :10000</text>
+  <rect x="44" y="202" width="174" height="30" rx="9" fill="rgba(125,211,252,.12)" stroke="#7dd3fc" stroke-opacity=".4"/>
+  <text class="chip" x="58" y="221">Immich · :443</text>
+  <rect x="44" y="240" width="174" height="30" rx="9" fill="rgba(125,211,252,.12)" stroke="#7dd3fc" stroke-opacity=".4"/>
+  <text class="chip" x="58" y="259">Vaultwarden · :8443</text>
+  <text class="sub" x="46" y="300">3 funnel endpoints</text>
+  <text class="sub" x="46" y="318">no router ports open</text>
+
+  <!-- ── your devices ───────────────────────────────────────── -->
+  <rect x="24" y="368" width="214" height="120" rx="18" fill="rgba(196,181,253,.07)" stroke="#c4b5fd" stroke-opacity=".55"/>
+  <text class="lbl" x="46" y="398">Your devices</text>
+  <text class="sub" x="46" y="420">laptop · phone</text>
+  <text class="sub" x="46" y="438">tailnet only</text>
+  <text class="sub" x="46" y="456">wireguard mesh</text>
+
+  <!-- ── links into the node ────────────────────────────────── -->
+  <path class="edge" d="M238,224 C300,224 340,240 400,240" stroke="#7dd3fc"/>
+  <path d="M394,240 l8,-4 l0,8 z" fill="#7dd3fc"/>
+  <text class="sub" x="248" y="206">funnel</text>
+
+  <path class="edge" d="M238,428 C300,428 340,404 400,404" stroke="#c4b5fd"/>
+  <path d="M394,404 l8,-4 l0,8 z" fill="#c4b5fd"/>
+  <text class="sub" x="256" y="446">tailscale</text>
+
+  <!-- ── the node ───────────────────────────────────────────── -->
+  <rect x="400" y="86" width="372" height="392" rx="22" fill="rgba(110,231,183,.06)" stroke="#6ee7b7" stroke-opacity=".6"/>
+  <text class="lbl" x="426" y="120">homelab · one node</text>
+  <text class="sub" x="426" y="138">ubuntu · docker compose</text>
+
+  <!-- container chips: media -->
+  <text class="sub" x="426" y="172">MEDIA</text>
+  <rect x="426" y="180" width="150" height="28" rx="8" fill="rgba(244,114,182,.12)" stroke="#f472b6" stroke-opacity=".45"/>
+  <text class="chip" x="438" y="198">Jellyfin</text>
+  <rect x="586" y="180" width="164" height="28" rx="8" fill="rgba(244,114,182,.12)" stroke="#f472b6" stroke-opacity=".45"/>
+  <text class="chip" x="598" y="198">Immich · 4 services</text>
+  <rect x="426" y="214" width="150" height="28" rx="8" fill="rgba(244,114,182,.12)" stroke="#f472b6" stroke-opacity=".45"/>
+  <text class="chip" x="438" y="232">File Browser</text>
+
+  <!-- tools -->
+  <text class="sub" x="426" y="266">TOOLS</text>
+  <rect x="426" y="274" width="150" height="28" rx="8" fill="rgba(129,140,248,.12)" stroke="#818cf8" stroke-opacity=".45"/>
+  <text class="chip" x="438" y="292">Vaultwarden</text>
+  <rect x="586" y="274" width="164" height="28" rx="8" fill="rgba(129,140,248,.12)" stroke="#818cf8" stroke-opacity=".45"/>
+  <text class="chip" x="598" y="292">n8n</text>
+
+  <!-- ops -->
+  <text class="sub" x="426" y="326">OPS</text>
+  <rect x="426" y="334" width="150" height="28" rx="8" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-opacity=".45"/>
+  <text class="chip" x="438" y="352">Netdata</text>
+  <rect x="586" y="334" width="164" height="28" rx="8" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-opacity=".45"/>
+  <text class="chip" x="598" y="352">Dozzle · Scrutiny</text>
+  <rect x="426" y="370" width="150" height="28" rx="8" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-opacity=".45"/>
+  <text class="chip" x="438" y="388">Homepage</text>
+  <rect x="586" y="370" width="164" height="28" rx="8" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-opacity=".45"/>
+  <text class="chip" x="598" y="388">Tab Status</text>
+
+  <!-- node footer -->
+  <rect x="426" y="414" width="324" height="40" rx="10" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.12)"/>
+  <text class="sub" x="438" y="432">14 containers · 5.7 GiB RAM</text>
+  <text class="sub" x="438" y="447">git-defined · deployed every 5 min</text>
+
+  <!-- ── storage ────────────────────────────────────────────── -->
+  <path class="edge" d="M772,200 C790,200 792,200 800,200" stroke="#fdba74"/>
+  <rect x="800" y="146" width="216" height="112" rx="18" fill="rgba(253,186,116,.07)" stroke="#fdba74" stroke-opacity=".55"/>
+  <text class="lbl" x="822" y="176">Encrypted data</text>
+  <text class="sub" x="822" y="196">LUKS · 458 GB</text>
+  <text class="sub" x="822" y="214">photos · media</text>
+
+  <path class="edge" d="M908,258 C908,282 908,282 908,300" stroke="#fdba74"/>
+  <path d="M908,294 l-4,-8 l8,0 z" fill="#fdba74"/>
+  <text class="sub" x="920" y="284">03:00</text>
+
+  <rect x="800" y="300" width="216" height="112" rx="18" fill="rgba(253,186,116,.07)" stroke="#fdba74" stroke-opacity=".55"/>
+  <text class="lbl" x="822" y="330">Backup disk</text>
+  <text class="sub" x="822" y="350">916 GB · nightly</text>
+  <text class="sub" x="822" y="368">config + dumps</text>
+
+  <!-- ── trim ───────────────────────────────────────────────── -->
+  <g opacity=".8">
+    <path d="M352,60 l0,14 M345,67 l14,0" stroke="#6ee7b7" stroke-width="1.6"/>
+    <path d="M986,72 l0,12 M980,78 l12,0" stroke="#fdba74" stroke-width="1.6"/>
+    <path d="M966,492 l0,12 M960,498 l12,0" stroke="#c4b5fd" stroke-width="1.6"/>
+    <path d="M300,516 l0,10 M295,521 l10,0" stroke="#7dd3fc" stroke-width="1.6"/>
+  </g>
+  <text class="sub" x="24" y="528">single host · one compose project per stack · nothing published by default</text>
+</svg>

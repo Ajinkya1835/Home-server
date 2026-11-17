@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HOMELAB — self-hosted cloud infrastructure</title>
+<meta name="author" content="Ajinkya Yadav">
+<link rel="me" href="https://github.com/Ajinkya1835">
+<link rel="me" href="https://linkedin.com/in/ajinkya-yadav-70b3671a6">
+<meta name="description" content="A single-node, git-defined private cloud: 14 containers, zero-touch deploys, nightly encrypted backups, disk health telemetry.">
+<style>
+  :root{
+    --bg:#08090b; --panel:#0e1013; --panel-2:#12151a;
+    --line:rgba(255,255,255,.09); --line-2:rgba(255,255,255,.16);
+    --ink:#f2f4f5; --muted:#9aa4ad; --dim:#6b7480;
+    --green:#76b900; --green-soft:rgba(118,185,0,.14);
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(900px 460px at 78% -12%, rgba(118,185,0,.16), transparent 62%),
+      radial-gradient(760px 420px at 8% 8%, rgba(94,234,212,.09), transparent 60%),
+      linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size:auto, auto, 64px 64px, 64px 64px;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 26px}
+  a{color:inherit}
+
+  header{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);
+    background:rgba(8,9,11,.72);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;gap:26px;height:62px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.16em;font-size:.82rem}
+  .logo i{width:22px;height:22px;border-radius:5px;display:block;
+    background:linear-gradient(135deg,var(--green),#b6ff2e);box-shadow:0 0 18px rgba(118,185,0,.5)}
+  .nav nav{display:flex;gap:22px;margin-left:auto}
+  .nav nav a{color:var(--muted);text-decoration:none;font-size:.82rem;letter-spacing:.02em}
+  .nav nav a:hover{color:#fff}
+  .nav .ghost{border:1px solid var(--line-2);border-radius:4px;padding:.42rem .8rem;color:#fff;text-decoration:none;
+    font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+
+  .hero{padding:76px 0 44px;position:relative;overflow:hidden}
+  .eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--green);margin:0 0 18px;display:flex;align-items:center;gap:10px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--green)}
+  h1{margin:0;font-size:clamp(2.3rem,6vw,4.5rem);line-height:.98;letter-spacing:-.035em;font-weight:800}
+  h1 span{background:linear-gradient(100deg,#fff 20%,var(--green) 95%);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{margin:22px 0 30px;max-width:640px;color:var(--muted);font-size:1.03rem;line-height:1.65}
+  .cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:.72rem 1.25rem;border-radius:4px;
+    font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;
+    transition:transform .16s ease, box-shadow .16s ease, background .16s ease, border-color .16s ease}
+  .btn.p{background:var(--green);color:#070a04}
+  .btn.p:hover{transform:translateY(-1px);box-shadow:0 8px 30px rgba(118,185,0,.35)}
+  .btn.s{border:1px solid var(--line-2);color:#fff}
+  .btn.s:hover{border-color:var(--green);color:var(--green)}
+  .byline{display:flex;align-items:center;gap:14px;flex-wrap:wrap;color:var(--muted);
+    font-size:.86rem;margin:20px 0 0}
+  .byline b{color:#fff}
+  .byline a{color:var(--green);text-decoration:none;border-bottom:1px solid rgba(118,185,0,.35);
+    padding-bottom:1px;font-size:.82rem}
+  .byline a:hover{border-bottom-color:var(--green);color:#b6ff2e}
+  .hero-note{font-family:var(--mono);font-size:.72rem;color:var(--dim);margin-top:18px}
+
+  .rail{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);margin:14px 0 0}
+  .rail div{padding:20px 18px;border-right:1px solid var(--line)}
+  .rail div:last-child{border-right:0}
+  .rail b{display:block;font-size:1.6rem;letter-spacing:-.02em;font-weight:750}
+  .rail span{font-family:var(--mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+
+  .console{margin:56px 0 0;border:1px solid var(--line);border-radius:10px;overflow:hidden;
+    background:var(--panel);box-shadow:0 40px 120px rgba(0,0,0,.65)}
+  .chrome{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,rgba(255,255,255,.05),transparent)}
+  .dot{width:9px;height:9px;border-radius:50%;background:#2a2f36}
+  .chrome span{font-family:var(--mono);font-size:.7rem;color:var(--dim);margin-left:10px}
+  .console img{display:block;width:100%;height:auto}
+
+  section{padding:78px 0}
+  .kicker{font-family:var(--mono);font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;color:var(--green);margin:0 0 12px}
+  h2{font-size:clamp(1.5rem,2.6vw,2.1rem);letter-spacing:-.03em;margin:0 0 12px;font-weight:750}
+  .sec-sub{color:var(--muted);max-width:620px;margin:0 0 34px;font-size:.95rem;line-height:1.6}
+
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
+    border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .card{background:var(--panel);padding:26px 24px;position:relative;transition:background .2s ease}
+  .card:hover{background:var(--panel-2)}
+  .card::before{content:"";position:absolute;inset:0 auto 0 0;width:2px;background:var(--green);
+    opacity:0;transition:opacity .2s ease}
+  .card:hover::before{opacity:1}
+  .card .ic{width:34px;height:34px;border-radius:6px;display:grid;place-items:center;
+    background:var(--green-soft);border:1px solid rgba(118,185,0,.28);margin-bottom:16px}
+  .card h3{margin:0 0 8px;font-size:1rem;letter-spacing:-.01em}
+  .card p{margin:0;color:var(--muted);font-size:.86rem;line-height:1.6}
+  .card .meta{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--dim);margin-top:16px;display:block}
+
+  .pipe{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+    border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .step{background:var(--panel);padding:22px 20px}
+  .step .n{font-family:var(--mono);font-size:.68rem;color:var(--green);letter-spacing:.2em}
+  .step h4{margin:10px 0 6px;font-size:.92rem}
+  .step p{margin:0;color:var(--muted);font-size:.82rem;line-height:1.55}
+
+  .specs{border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .row{display:grid;grid-template-columns:220px 1fr;border-bottom:1px solid var(--line)}
+  .row:last-child{border-bottom:0}
+  .row dt{padding:14px 18px;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--dim);background:var(--panel-2);margin:0}
+  .row dd{margin:0;padding:14px 18px;color:#d6dbe0;font-size:.88rem;background:var(--panel)}
+
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:#cfd6dc;
+    border:1px solid var(--line-2);border-radius:999px;padding:.32rem .72rem;background:rgba(255,255,255,.02)}
+  .chip.g{color:var(--green);border-color:rgba(118,185,0,.4);background:var(--green-soft)}
+
+  .mapframe{border:1px solid var(--line);border-radius:12px;background:
+      radial-gradient(700px 320px at 70% 0%, rgba(110,231,183,.07), transparent 60%), var(--panel);
+    padding:14px;box-shadow:0 24px 80px rgba(0,0,0,.55)}
+  .mapframe img{display:block;width:100%;height:auto}
+  .maphint{color:var(--dim);font-size:.82rem;margin:14px 0 0}
+  .maphint a{color:var(--green);text-decoration:none}
+  .maphint a:hover{text-decoration:underline}
+
+  .band{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,rgba(118,185,0,.06),transparent)}
+  .band .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:34px 26px;flex-wrap:wrap}
+  .band h2{margin:0;font-size:1.35rem}
+
+  footer{border-top:1px solid var(--line);padding:34px 0 46px;color:var(--dim);font-size:.78rem}
+  footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  footer a{color:var(--muted);text-decoration:none;margin-right:16px}
+  footer a:hover{color:var(--green)}
+  .mono{font-family:var(--mono)}
+
+  @media (max-width:900px){
+    .cards,.pipe{grid-template-columns:1fr 1fr}
+    .rail{grid-template-columns:1fr 1fr}
+    .rail div:nth-child(2){border-right:0}
+    .row{grid-template-columns:1fr}
+    .nav nav{display:none}
+  }
+  @media (max-width:560px){
+    .cards,.pipe{grid-template-columns:1fr}
+    .hero{padding:52px 0 30px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo"><i></i>HOMELAB</div>
+    <nav>
+      <a href="#platform">Platform</a>
+      <a href="#pipeline">Pipeline</a>
+      <a href="#specs">Specs</a>
+      <a href="#map">Topology</a>
+      <a href="architecture.html">Architecture</a>
+    </nav>
+    <a class="ghost" href="https://github.com/Ajinkya1835">Repository</a>
+  </div>
+</header>
+
+<div class="wrap hero">
+  <p class="eyebrow">Self-hosted infrastructure · single node</p>
+  <h1>Your own cloud.<br><span>Running on a laptop.</span></h1>
+  <p class="sub">
+    Fourteen containers, an encrypted data volume and a git-defined configuration.
+    Photos, media, files, secrets and telemetry — all private, all reproducible,
+    deployed by a timer that validates before it touches anything.
+  </p>
+  <div class="cta">
+    <a class="btn p" href="architecture.html">View architecture →</a>
+    <a class="btn s" href="https://github.com/Ajinkya1835">Read the source</a>
+  </div>
+  <p class="byline">Built by <b>Ajinkya Yadav</b>
+    <a href="https://github.com/Ajinkya1835" target="_blank" rel="me noopener">GitHub ↗</a>
+    <a href="https://linkedin.com/in/ajinkya-yadav-70b3671a6" target="_blank" rel="me noopener">LinkedIn ↗</a>
+  </p>
+  <p class="hero-note mono">uptime 10d · 14/14 containers healthy · last deploy: automated</p>
+
+  <div class="rail">
+    <div><b>14</b><span>containers</span></div>
+    <div><b>3</b><span>public endpoints</span></div>
+    <div><b>5 min</b><span>deploy loop</span></div>
+    <div><b>0 B</b><span>lost on rebuild</span></div>
+  </div>
+
+  <div class="console">
+    <div class="chrome"><i class="dot"></i><i class="dot"></i><i class="dot"></i>
+      <span>homelab · dashboard</span></div>
+    <img src="dashboard.png" alt="Homelab control dashboard: CPU, memory, temperature, storage and per-service widgets">
+  </div>
+</div>
+
+<section id="platform">
+  <div class="wrap">
+    <p class="kicker">Platform</p>
+    <h2>One box that behaves like a small datacenter</h2>
+    <p class="sec-sub">Each layer has one job, one config file and one way to be deployed.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#76b900" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+        <h3>Media &amp; photos</h3>
+        <p>Jellyfin for films and music, Immich (server + ML + Postgres + Redis) for a 50 GiB photo library, File Browser over the encrypted disk.</p>
+        <span class="meta">6 containers · tailnet + funnel</span>
+      </div>
+      <div class="card">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#76b900" stroke-width="1.8"><path d="M3 13h4l2-7 4 14 3-7h5"/></svg></div>
+        <h3>Observability</h3>
+        <p>Netdata metrics, Dozzle logs, Scrutiny SMART health and a status endpoint — the dashboard reads all four live.</p>
+        <span class="meta">4 containers · internal</span>
+      </div>
+      <div class="card">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#76b900" stroke-width="1.8"><path d="M12 3l7 4v5c0 5-3 7-7 9-4-2-7-4-7-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Secrets &amp; identity</h3>
+        <p>Vaultwarden behind an authenticated endpoint; every service gets its own credentials, nothing is reused or stored in git.</p>
+        <span class="meta">1 container · funnel</span>
+      </div>
+      <div class="card">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#76b900" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></div>
+        <h3>Automation</h3>
+        <p>n8n workflows, nightly snapshots and a morning digest. Failures dedupe into a single alert instead of a mailstorm.</p>
+        <span class="meta">cron + n8n · internal</span>
+      </div>
+      <div class="card">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#76b900" stroke-width="1.8"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></div>
+        <h3>Storage</h3>
+        <p>LUKS-encrypted volume for live data, a separate backup disk, and SMART thresholds that fire before a drive dies.</p>
+        <span class="meta">3 drives · ext4</span>
+      </div>
+      <div class="card">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#76b900" stroke-width="1.8"><path d="M4 6h16M4 12h16M4 18h10"/></svg></div>
+        <h3>Network</h3>
+        <p>No router port-forwards. WireGuard mesh for devices, three explicit Funnel endpoints for the internet, private bridges for databases.</p>
+        <span class="meta">tailscale · wireguard</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pipeline">
+  <div class="wrap">
+    <p class="kicker">Pipeline</p>
+    <h2>Config is the deployment</h2>
+    <p class="sec-sub">Every change takes the same four steps. Nothing is edited by hand on a running container.</p>
+    <div class="pipe">
+      <div class="step"><div class="n">01</div><h4>Edit config</h4><p>Compose file or stack config lives in git, next to the code that runs it.</p></div>
+      <div class="step"><div class="n">02</div><h4>Validate</h4><p>CI resolves every compose file, lints deploy scripts and scans for secrets.</p></div>
+      <div class="step"><div class="n">03</div><h4>Deploy</h4><p>A 5-minute timer pulls, re-checks and recreates only the stacks whose hash changed.</p></div>
+      <div class="step"><div class="n">04</div><h4>Observe</h4><p>Metrics, logs and SMART health land on the dashboard; failures emit one event.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="specs">
+  <div class="wrap">
+    <p class="kicker">Specs</p>
+    <h2>What is actually running</h2>
+    <p class="sec-sub">Hardware is unremarkable on purpose — the point is that the platform survives losing it.</p>
+    <dl class="specs" style="margin:0">
+      <div class="row"><dt>Host</dt><dd>Ubuntu 22.04 · AMD laptop silicon · 5.7 GiB RAM + 2 GiB swap · always-on</dd></div>
+      <div class="row"><dt>Runtime</dt><dd>Docker Engine + Compose · one compose project per stack · read-only socket for dashboards</dd></div>
+      <div class="row"><dt>Network</dt><dd>Tailscale mesh · Funnel for 3 public endpoints · no inbound ports on the router</dd></div>
+      <div class="row"><dt>Storage</dt><dd>LUKS-encrypted 458 GB data volume · 916 GB backup disk · SMART watched</dd></div>
+      <div class="row"><dt>Delivery</dt><dd>Git-validated deploys every 5 minutes · automated rollback on invalid config</dd></div>
+      <div class="row"><dt>Recovery</dt><dd>Host rebuilt from repo after a boot-drive failure — zero data loss</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="kicker">Stack</p>
+    <h2>Composed of boring, proven parts</h2>
+    <div class="chips" style="margin-top:22px">
+      <span class="chip g">Docker Compose</span><span class="chip">Ubuntu</span><span class="chip">Tailscale</span>
+      <span class="chip">Jellyfin</span><span class="chip">Immich</span><span class="chip">Postgres</span>
+      <span class="chip">Redis / Valkey</span><span class="chip">Vaultwarden</span><span class="chip">n8n</span>
+      <span class="chip">Netdata</span><span class="chip">Dozzle</span><span class="chip">Scrutiny</span>
+      <span class="chip">Homepage</span><span class="chip">GitHub Actions</span><span class="chip">gitleaks</span>
+      <span class="chip">LUKS</span><span class="chip">systemd</span>
+    </div>
+  </div>
+</section>
+
+<section id="map">
+  <div class="wrap">
+    <p class="kicker">Topology</p>
+    <h2>Everything in one picture</h2>
+    <p class="sec-sub">Two ways in — the public internet through three Funnel endpoints, and your own devices over WireGuard. One node in the middle, two disks behind it.</p>
+    <div class="mapframe">
+      <img src="architecture-simple.svg" alt="Simplified topology: internet and your devices connect over Tailscale to one homelab node running media, tools and ops containers, which write to an encrypted data disk and a nightly backup disk.">
+    </div>
+    <p class="maphint">Need ports, container names and bridge networks? <a href="architecture.html">Open the detailed map →</a></p>
+  </div>
+</section>
+
+<div class="band">
+  <div class="wrap">
+    <h2>See how it is wired</h2>
+    <div class="cta">
+      <a class="btn p" href="architecture.html">Open architecture map →</a>
+      <a class="btn s" href="https://github.com/Ajinkya1835">Repository</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a href="https://github.com/Ajinkya1835" target="_blank" rel="me noopener">GitHub · @Ajinkya1835</a>
+      <a href="https://linkedin.com/in/ajinkya-yadav-70b3671a6" target="_blank" rel="me noopener">LinkedIn</a>
+      <a href="architecture.html">Architecture</a>
+      <a href="https://github.com/Ajinkya1835/Home-Lab/blob/main/docs/runbook.md">Runbook</a>
+      <a href="https://github.com/Ajinkya1835/Home-Lab/blob/main/README.md">README</a>
+    </div>
+    <div class="mono">screenshots from the live instance · hostnames sanitized</div>
+  </div>
+</footer>
+
+
+</body>
+</html>
