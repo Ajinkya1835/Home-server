@@ -19,5 +19,9 @@ iframe { border: 0 !important; background: transparent !important; width: 100%; 
 h2, .service-group-name { letter-spacing: .04em; text-shadow: 0 2px 10px rgba(0,0,0,.6); }
 
 /* iframe sizes (graphs + architecture map) */
-div:has(> iframe[src*="arch.html"]), iframe[src*="arch.html"] { height: 1180px !important; min-height: 1180px !important; }
-div:has(> iframe[src*=":8462"]:not([src*="arch"])), iframe[src*=":8462"]:not([src*="arch"]) { height: 1500px !important; min-height: 1500px !important; }
+iframe[src*="/arch.html"] { height: 1180px; min-height: 1180px; }
+iframe[src*=":8462"]:not([src*="/arch.html"]) { height: 1500px; min-height: 1500px; }
+
+/* status accent: a down service is visible at a glance */
+.service-card { border-left: 3px solid rgba(129,140,248,.55) !important; }
+.service-card:hover { border-left-color: rgba(129,140,248,.95) !important; }

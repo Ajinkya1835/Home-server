@@ -13,7 +13,6 @@
         type: iframe
         name: graphs
         src: https://ajinkya.tail32b205.ts.net:8462
-        classes: h-[1250px]
         loadingStrategy: eager
 - Media & Files:
   - Immich:
@@ -146,12 +145,12 @@
       icon: mdi-email-fast
       href: mailto:{{HOMEPAGE_VAR_EMAIL}}
       target: _self
-      description: {{HOMEPAGE_VAR_EMAIL}}
+      description: '{{HOMEPAGE_VAR_EMAIL}}'
   - Phone:
       icon: mdi-phone
       href: tel:{{HOMEPAGE_VAR_PHONE}}
       target: _self
-      description: {{HOMEPAGE_VAR_PHONE_DISPLAY}}
+      description: '{{HOMEPAGE_VAR_PHONE_DISPLAY}}'
   - LinkedIn:
       icon: mdi-linkedin
       href: https://linkedin.com/in/ajinkya-yadav-70b3671a6
@@ -231,7 +230,7 @@
       widget:
         type: customapi
         url: http://netdata:19999/api/v1/data?chart=system.cpu&after=-1&points=1&format=json
-        refreshInterval: 5000
+        refreshInterval: 10000
         mappings:
         - field: data.0.6
           label: User
@@ -250,7 +249,7 @@
       widget:
         type: customapi
         url: http://netdata:19999/api/v1/data?chart=system.ram&after=-1&points=1&format=json
-        refreshInterval: 5000
+        refreshInterval: 10000
         mappings:
         - field: data.0.2
           label: Used
@@ -269,7 +268,7 @@
       widget:
         type: customapi
         url: http://netdata:19999/api/v1/data?chart=system.load&after=-1&points=1&format=json
-        refreshInterval: 5000
+        refreshInterval: 10000
         mappings:
         - field: data.0.1
           label: 1 min
@@ -285,7 +284,7 @@
       widget:
         type: customapi
         url: http://netdata:19999/api/v1/data?chart=system.net&after=-1&points=1&format=json
-        refreshInterval: 5000
+        refreshInterval: 10000
         mappings:
         - field: data.0.1
           label: Down
@@ -301,7 +300,7 @@
       widget:
         type: customapi
         url: http://netdata:19999/api/v1/data?chart=system.io&after=-1&points=1&format=json
-        refreshInterval: 5000
+        refreshInterval: 10000
         mappings:
         - field: data.0.1
           label: Read
@@ -312,141 +311,12 @@
           format: float
           scale: -1
           suffix: ' KiB/s'
-  - Boot SSD I/O:
-      icon: mdi-harddisk
-      widget:
-        type: customapi
-        url: http://netdata:19999/api/v1/data?chart=disk.sda&after=-1&points=1&format=json
-        refreshInterval: 5000
-        mappings:
-        - field: data.0.1
-          label: Read
-          format: float
-          suffix: ' KiB/s'
-        - field: data.0.2
-          label: Write
-          format: float
-          scale: -1
-          suffix: ' KiB/s'
-  - Boot SSD busy:
-      icon: mdi-speedometer
-      widget:
-        type: customapi
-        url: http://netdata:19999/api/v1/data?chart=disk_busy.sda&after=-1&points=1&format=json
-        refreshInterval: 5000
-        mappings:
-        - field: data.0.1
-          label: Busy
-          format: float
-          suffix: ' %'
-  - Boot SSD latency:
-      icon: mdi-timer-outline
-      widget:
-        type: customapi
-        url: http://netdata:19999/api/v1/data?chart=disk_await.sda&after=-1&points=1&format=json
-        refreshInterval: 5000
-        mappings:
-        - field: data.0.1
-          label: Read
-          format: float
-          suffix: ' ms'
-        - field: data.0.2
-          label: Write
-          format: float
-          scale: -1
-          suffix: ' ms'
-  - hdd1 I/O:
-      icon: mdi-harddisk
-      widget:
-        type: customapi
-        url: http://netdata:19999/api/v1/data?chart=disk.sdb&after=-1&points=1&format=json
-        refreshInterval: 5000
-        mappings:
-        - field: data.0.1
-          label: Read
-          format: float
-          suffix: ' KiB/s'
-        - field: data.0.2
-          label: Write
-          format: float
-          scale: -1
-          suffix: ' KiB/s'
-  - hdd1 busy:
-      icon: mdi-speedometer
-      widget:
-        type: customapi
-        url: http://netdata:19999/api/v1/data?chart=disk_busy.sdb&after=-1&points=1&format=json
-        refreshInterval: 5000
-        mappings:
-        - field: data.0.1
-          label: Busy
-          format: float
-          suffix: ' %'
-  - hdd1 latency:
-      icon: mdi-timer-outline
-      widget:
-        type: customapi
-        url: http://netdata:19999/api/v1/data?chart=disk_await.sdb&after=-1&points=1&format=json
-        refreshInterval: 5000
-        mappings:
-        - field: data.0.1
-          label: Read
-          format: float
-          suffix: ' ms'
-        - field: data.0.2
-          label: Write
-          format: float
-          scale: -1
-          suffix: ' ms'
-  - Backup I/O:
-      icon: mdi-harddisk
-      widget:
-        type: customapi
-        url: http://netdata:19999/api/v1/data?chart=disk.sdc&after=-1&points=1&format=json
-        refreshInterval: 5000
-        mappings:
-        - field: data.0.1
-          label: Read
-          format: float
-          suffix: ' KiB/s'
-        - field: data.0.2
-          label: Write
-          format: float
-          scale: -1
-          suffix: ' KiB/s'
-  - Backup busy:
-      icon: mdi-speedometer
-      widget:
-        type: customapi
-        url: http://netdata:19999/api/v1/data?chart=disk_busy.sdc&after=-1&points=1&format=json
-        refreshInterval: 5000
-        mappings:
-        - field: data.0.1
-          label: Busy
-          format: float
-          suffix: ' %'
-  - Backup latency:
-      icon: mdi-timer-outline
-      widget:
-        type: customapi
-        url: http://netdata:19999/api/v1/data?chart=disk_await.sdc&after=-1&points=1&format=json
-        refreshInterval: 5000
-        mappings:
-        - field: data.0.1
-          label: Read
-          format: float
-          suffix: ' ms'
-        - field: data.0.2
-          label: Write
-          format: float
-          scale: -1
-          suffix: ' ms'
   - CPU temp:
       icon: mdi-thermometer
       widget:
         type: customapi
         url: http://netdata:19999/api/v1/data?chart=sensors.temperature_k10temp-pci-00c3_temp1_Tctl_input&after=-1&points=1&format=json
-        refreshInterval: 5000
+        refreshInterval: 10000
         mappings:
         - field: data.0.1
           label: CPU
@@ -457,7 +327,7 @@
       widget:
         type: customapi
         url: http://netdata:19999/api/v1/data?chart=sensors.temperature_amdgpu-pci-0300_temp1_edge_input&after=-1&points=1&format=json
-        refreshInterval: 5000
+        refreshInterval: 10000
         mappings:
         - field: data.0.1
           label: GPU
@@ -471,5 +341,4 @@
         type: iframe
         name: arch
         src: https://ajinkya.tail32b205.ts.net:8462/arch.html
-        classes: h-[1130px]
         loadingStrategy: eager

@@ -28,11 +28,6 @@ layout:
     icon: mdi-shield-lock
     style: row
     columns: 4
-  Vitals:
-    tab: Home
-    icon: mdi-heart-pulse
-    style: row
-    columns: 2
   Host telemetry:
     tab: Observe
     icon: mdi-gauge
@@ -74,10 +69,10 @@ layout:
     style: row
     columns: 2
   Live:
-    tab: Home
+    tab: Observe
     icon: mdi-pulse
     style: row
-    columns: 5
+    columns: 3
   Live graphs:
     tab: Observe
     style: row

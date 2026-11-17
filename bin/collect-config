@@ -29,7 +29,7 @@ for d in "$H"/docker/*/; do
   s=$(basename "$d"); o=$R/docker/$s
   for f in "$d"compose*.y*ml "$d"docker-compose.y*ml "$d"Dockerfile* "$d"*.conf "$d"*.html "$d"*.sh "$d"*.py "$d"requirements.txt; do safe_copy "$f" "$o/$(basename "$f")"; done
   for f in "$d"config/*.y*ml "$d"config/*.css "$d"config/*.js "$d"config/*.json; do safe_copy "$f" "$o/config/$(basename "$f")"; done
-  if [ -f "$d.env" ] && [ ! -f "$o/.env.example" ]; then mkdir -p "$o"; sed -E '/^[[:space:]]*#/d;/^[[:space:]]*$/d;s/=.*/=/' "$d.env" > "$o/.env.example"; N=$((N+1)); fi
+  if [ -f "$d.env" ]; then mkdir -p "$o"; sed -E '/^[[:space:]]*#/d;/^[[:space:]]*$/d;s/=.*/=/' "$d.env" > "$o/.env.example"; N=$((N+1)); fi
 done
 # 2. scripts
 for f in "$H"/bin/*; do case "$f" in *.bak*|*.old|*.orig|*~|*ntfy-send*) continue;; esac; safe_copy "$f" "$R/bin/$(basename "$f")"; done
