@@ -211,3 +211,14 @@ iframe[src*=":8462"]:not([src*="/arch.html"]) { height: 1500px !important; min-h
 #Map-tab {
   --tab-icon: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M9 2h6v5H9zM2 17h6v5H2zM16 17h6v5h-6zM11 7h2v3h4v3h-2v-1H9v1H7v-3h4z'/></svg>");
 }
+
+/* ---- contrast guard -------------------------------------------------
+   Widget internals use the app theme tokens; pin them to the light palette
+   so a theme flip can never wash the numbers out again. */
+.information-widget, .information-widget * { color: #2b2431 !important; }
+.information-widget .label,
+.information-widget [class*="text-theme-muted"],
+.information-widget [class*="text-theme-400"] { color: #8b7583 !important; }
+.service-card .service-name, .service-card .service-description,
+.service-card .text-xs, .service-card [class*="text-theme"] { color: #6f5f6c !important; }
+.service-card .service-name { color: #2b2431 !important; }

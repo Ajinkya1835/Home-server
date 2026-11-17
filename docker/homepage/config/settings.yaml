@@ -1,7 +1,7 @@
 title: Ajinkya's Homelab
 description: Self-hosted control centre
-theme: dark
-color: slate
+theme: light
+color: rose
 headerStyle: boxedWidgets
 cardBlur: md
 statusStyle: dot
