@@ -2,6 +2,12 @@
 
 Auto-generated, newest first.
 
+## 2026-11-18 01:40:05
+```diff
+-#     - https://ajinkya.tail32b205.ts.net:10000
++#     - https://ajinkya.tail32b205.ts.net:10000
+```
+
 ## 2026-11-18 01:30:05
 ```diff
 +*/30 * * * * $HOME/bin/hevy-sync >> $HOME/hevy-sync.log 2>&1
