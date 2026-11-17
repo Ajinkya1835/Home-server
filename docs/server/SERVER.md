@@ -80,7 +80,7 @@ NAME                STATUS              CONFIG FILES
 dozzle              running(1)          /home/ajinkya/docker/dozzle/compose.yaml
 filebrowser         running(1)          /home/ajinkya/docker/filebrowser/docker-compose.yml
 graphs              running(1)          /home/ajinkya/docker/graphs/docker-compose.yml
-homepage            running(1)          /home/ajinkya/docker/homepage/compose.yaml,/home/ajinkya/docker/homepage/compose.override.yaml
+homepage            running(1)          /home/ajinkya/docker/homepage/compose.yaml
 homepage-tab        exited(1)           /home/ajinkya/docker/homepage-tab/compose.yaml
 immich              running(3)          /home/ajinkya/docker/immich/compose.yaml
 jellyfin            running(1)          /home/ajinkya/Home-server/docker/jellyfin/compose.yaml,/home/ajinkya/Home-server/docker/jellyfin/compose.override.yaml
@@ -252,9 +252,9 @@ PATH=/usr/lib/sysstat:/usr/sbin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
 
 # Funnel on:
+#     - https://ajinkya.tail32b205.ts.net:8443
 #     - https://ajinkya.tail32b205.ts.net:10000
 #     - https://ajinkya.tail32b205.ts.net
-#     - https://ajinkya.tail32b205.ts.net:8443
 
 |-- tcp://ajinkya.tail32b205.ts.net:8456 (tailnet only)
 |-- tcp://100.94.248.64:8456
@@ -334,7 +334,7 @@ MACHINE_LEARNING_MODEL_TTL=
 a78e942f7650 /home/ajinkya/bin/backup
 fc6c7db84684 /home/ajinkya/bin/backup.bak
 75204d0e0414 /home/ajinkya/bin/backup.old
-439f1ce3a377 /home/ajinkya/bin/collect-config
+e868a0642707 /home/ajinkya/bin/collect-config
 d0764ab1a07d /home/ajinkya/bin/collect-config.bak-hermes
 f7efcf37f2d0 /home/ajinkya/bin/daily-check
 3168e5e0d08b /home/ajinkya/bin/deploy
@@ -352,8 +352,7 @@ ee3b8e720bb6 /home/ajinkya/bin/sync-config
 f512666acfc4 /home/ajinkya/bin/watchdog
 9f7322bc7bf7 /home/ajinkya/bin/yt-music.sh
 cde75582fdfe /home/ajinkya/docker/dozzle/compose.yaml
-0d040fc628cc /home/ajinkya/docker/homepage/compose.override.yaml
-94097127862e /home/ajinkya/docker/homepage/compose.yaml
+eabf006d2eb4 /home/ajinkya/docker/homepage/compose.yaml
 557dfd226c74 /home/ajinkya/docker/homepage-tab/compose.yaml
 574ff774b593 /home/ajinkya/docker/immich/compose.yaml
 3f23bbe751fc /home/ajinkya/docker/jellyfin/compose.override.yaml
@@ -367,4 +366,4 @@ e4f672f487a4 /home/ajinkya/docker/n8n/compose.yaml
 6a022230a456 /home/ajinkya/docker/scrutiny/docker-compose.yml
 ```
 
-_Last change recorded: 2026-11-17 23:10:05_
+_Last change recorded: 2026-11-17 23:20:10_
