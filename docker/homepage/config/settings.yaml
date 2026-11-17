@@ -1,5 +1,5 @@
-title: Ajinkya's lab
-description: A self-hosted command center, and the developer behind it
+title: Ajinkya's Homelab
+description: Self-hosted control centre
 theme: dark
 color: slate
 headerStyle: boxedWidgets
@@ -11,63 +11,28 @@ hideVersion: true
 hideErrors: false
 target: _blank
 language: en
-maxGroupColumns: 5
+maxGroupColumns: 4
 quicklaunch:
   searchDescriptions: true
   hideInternetSearch: false
   showSearchSuggestions: true
   provider: google
 layout:
-  Media & Files:
+  Media:
     tab: Home
-    icon: mdi-image-multiple
-    style: row
-    columns: 4
-  Security & Automation:
-    tab: Home
-    icon: mdi-shield-lock
-    style: row
-    columns: 4
-  Host telemetry:
-    tab: Observe
-    icon: mdi-gauge
-    style: row
-    columns: 4
-  Admin Tools:
-    tab: Admin
-    icon: mdi-wrench
-    style: row
-    columns: 4
-  Under the Hood:
-    tab: Admin
-    icon: mdi-engine
-    style: row
-    columns: 4
-  Hello World:
-    tab: About
-    icon: mdi-hand-wave
-    style: row
-    columns: 5
-  Experience:
-    tab: About
-    icon: mdi-briefcase
+    icon: mdi-play-box-multiple
     style: row
     columns: 3
-  Projects:
-    tab: About
-    icon: mdi-hammer-wrench
+  Tools:
+    tab: Home
+    icon: mdi-toolbox-outline
     style: row
     columns: 4
-  Skills:
-    tab: About
-    icon: mdi-toolbox
+  Ops:
+    tab: Home
+    icon: mdi-shield-check-outline
     style: row
-    columns: 4
-  Education & interests:
-    tab: About
-    icon: mdi-school
-    style: row
-    columns: 2
+    columns: 5
   Live:
     tab: Observe
     icon: mdi-pulse
@@ -75,9 +40,11 @@ layout:
     columns: 3
   Live graphs:
     tab: Observe
+    icon: mdi-chart-areaspline
     style: row
     columns: 1
   Architecture:
     tab: Map
+    icon: mdi-sitemap
     style: row
     columns: 1

@@ -1,24 +1,8 @@
-- Live graphs:
-  - Netdata alerts:
-      icon: netdata.png
-      description: Live from Netdata
-      href: https://ajinkya.tail32b205.ts.net:8461
-      widget:
-        type: netdata
-        url: http://netdata:19999
-  - System graphs:
-      icon: mdi-chart-areaspline
-      description: CPU, RAM, network, disk, temps, containers
-      widget:
-        type: iframe
-        name: graphs
-        src: https://ajinkya.tail32b205.ts.net:8462
-        loadingStrategy: eager
-- Media & Files:
+- Media:
   - Immich:
       icon: immich.png
       href: https://ajinkya.tail32b205.ts.net
-      description: Photos and videos
+      description: Photos & videos
       server: homelab
       container: immich_server
       widget:
@@ -29,7 +13,7 @@
   - Jellyfin:
       icon: jellyfin.png
       href: https://ajinkya.tail32b205.ts.net:10000
-      description: Movies and shows
+      description: Movies & shows
       server: homelab
       container: jellyfin
       siteMonitor: http://jellyfin:8096
@@ -39,194 +23,82 @@
         key: '{{HOMEPAGE_VAR_JELLYFIN_KEY}}'
         version: 2
         enableUser: true
-        enableBlocks: true
         enableNowPlaying: true
   - File Browser:
       icon: filebrowser.png
       href: https://ajinkya.tail32b205.ts.net:8451
-      description: Files on hdd1
+      description: hdd1 files
       server: homelab
       container: filebrowser
-- Security & Automation:
+- Tools:
   - Vaultwarden:
       icon: vaultwarden.png
       href: https://ajinkya.tail32b205.ts.net:8443
-      description: Password vault
+      description: Passwords
       server: homelab
       container: vaultwarden
   - n8n:
       icon: n8n.png
       href: https://ajinkya.tail32b205.ts.net:8445
-      description: Workflows and outreach
+      description: Workflows
       server: homelab
       container: n8n
-  - Tailscale:
-      icon: tailscale.png
-      href: https://login.tailscale.com/admin/machines
-      description: Private network admin
-- Host telemetry:
-  - Compute:
-      icon: mdi-cpu-64-bit
-      description: CPU and temperature
-  - Storage:
-      icon: mdi-harddisk
-      description: Disk fill and throughput
-  - Network:
-      icon: mdi-lan
-      description: Traffic on real interfaces
-  - Biggest appetites:
-      icon: mdi-memory
-      description: RAM by container (cAdvisor)
-- Admin Tools:
-  - Remote Desktop:
-      icon: mdi-monitor-screenshot
-      href: https://ajinkya.tail32b205.ts.net:8453
-      description: noVNC screen of the server
+  - Dozzle:
+      icon: dozzle.png
+      href: https://ajinkya.tail32b205.ts.net:8454
+      description: Container logs
+      server: homelab
+      container: dozzle
+  - Scrutiny:
+      icon: scrutiny.png
+      href: https://ajinkya.tail32b205.ts.net:8463
+      description: Drive health
+      server: homelab
+      container: scrutiny
+  - DeepSeek:
+      icon: deepseek.png
+      href: https://platform.deepseek.com/usage
+      description: API balance
+      widget:
+        type: customapi
+        url: http://127.0.0.1:3000/deepseek.json
+        refreshInterval: 60000
+        mappings:
+        - field: balance
+          label: Balance
+          format: float
+          suffix: ' USD'
+        - field: spent_today
+          label: Today
+          format: float
+          suffix: ' USD'
+- Ops:
   - Tab Status:
       icon: mdi-tab
       href: https://ajinkya.tail32b205.ts.net:8457
       description: Status page
       server: homelab
       container: tabstatus
+  - Remote Desktop:
+      icon: novnc.png
+      href: https://ajinkya.tail32b205.ts.net:8453
+      description: noVNC
   - Router:
       icon: mdi-router-wireless
       href: http://192.168.29.1
       description: Home gateway
-  - Dozzle:
-      icon: dozzle.png
-      href: https://ajinkya.tail32b205.ts.net:8454
-      description: Live container logs and alerts
-      server: homelab
-      container: dozzle
-  - Scrutiny:
-      icon: scrutiny.png
-      href: https://ajinkya.tail32b205.ts.net:8463
-      description: Drive health (SMART)
-      server: homelab
-      container: scrutiny
+  - Tailscale:
+      icon: tailscale.png
+      href: https://login.tailscale.com/admin/machines
+      description: Private network
   - Server docs:
-      icon: mdi-file-document-outline
+      icon: github.png
       href: https://github.com/Ajinkya1835/Home-server/blob/main/docs/server/SERVER.md
-      target: _blank
-      description: Auto-generated inventory and change log
-- Under the Hood:
-  - Immich ML:
-      icon: immich.png
-      description: Face and search AI
-      server: homelab
-      container: immich_machine_learning
-  - Immich DB:
-      icon: postgres.png
-      description: Photo database
-      server: homelab
-      container: immich_postgres
-  - Immich Redis:
-      icon: redis.png
-      description: Immich cache
-      server: homelab
-      container: immich_redis
-  - Homepage:
-      icon: homepage.png
-      description: This dashboard
-      server: homelab
-      container: homepage
-  - Alert log:
-      icon: mdi-bell-alert-outline
-      description: Deploy, backup and SMART alerts (open in Dozzle)
-      server: homelab
-      container: serverlog
-- Hello World:
-  - Resume:
-      icon: mdi-file-download
-      href: https://ajinkya.tail32b205.ts.net:8462/resume.pdf
-      target: _blank
-      description: Download the PDF
-  - Email:
-      icon: mdi-email-fast
-      href: mailto:{{HOMEPAGE_VAR_EMAIL}}
-      target: _self
-      description: '{{HOMEPAGE_VAR_EMAIL}}'
-  - Phone:
-      icon: mdi-phone
-      href: tel:{{HOMEPAGE_VAR_PHONE}}
-      target: _self
-      description: '{{HOMEPAGE_VAR_PHONE_DISPLAY}}'
-  - LinkedIn:
-      icon: mdi-linkedin
-      href: https://linkedin.com/in/ajinkya-yadav-70b3671a6
-      description: ajinkya-yadav-70b3671a6
-  - GitHub:
-      icon: mdi-github
-      href: https://github.com/Ajinkya1835
-      description: Ajinkya1835
-- Experience:
-  - MetaGrad Labs:
-      icon: mdi-rocket-launch
-      href: https://metagrad.in
-      description: Software Engineer Intern, Jun 2026 to now, remote. Moved metagrad.in
-        from Vite to Next.js 14, added prerendering and JSON-LD across 18 pages, and
-        built an n8n sales outreach pipeline for 70+ school leads.
-  - OptimSkool:
-      icon: mdi-school-outline
-      href: https://optimskool.com
-      description: 'Work done at MetaGrad: built 8 ERP module pages and a reusable
-        PageHero in Next.js, and fixed production nginx 403s caused by trailing slashes
-        in the static export.'
-  - Vibrant Viral Media:
-      icon: mdi-palette
-      description: Graphic Design Intern, Jun to Jul 2025, remote. Social media and
-        campaign graphics, plus visual assets for client websites.
-- Projects:
-  - Home server:
-      icon: mdi-server-network
-      href: https://github.com/Ajinkya1835/Home-server
-      description: This machine. Ubuntu, Docker Compose and Tailscale, with a LUKS
-        data drive, nightly backups, and a full migration after a boot-drive failure
-        with zero data loss.
-  - NeuroAI care platform:
-      icon: mdi-brain
-      description: Parent and therapist platform on Next.js 14, Express and MongoDB
-        with JWT roles, PDF worksheets, and optional Ollama analysis.
-  - PVMS:
-      icon: mdi-map-marker-alert
-      description: Municipal violation portal with four roles, Google Maps reporting,
-        automatic fines, and GitHub Actions CI.
-  - Price comparison tool:
-      icon: mdi-tag-multiple
-      description: Python scraper and REST API that compares product prices across
-        e-commerce sites in real time.
-- Skills:
-  - Languages:
-      icon: mdi-code-braces
-      description: JavaScript, Python, SQL, Java, C
-  - Frontend:
-      icon: si-react
-      description: React, Next.js 14 App Router, Tailwind CSS, technical SEO
-  - Backend:
-      icon: si-nodedotjs
-      description: Node.js, Express, REST design, JWT auth, role-based access
-  - Databases:
-      icon: si-mongodb
-      description: MongoDB, MySQL, SQLite
-  - DevOps:
-      icon: si-docker
-      description: Docker, Compose, Linux, Nginx, AWS EC2, GitHub Actions, Tailscale
-  - Automation and AI:
-      icon: mdi-robot-outline
-      description: n8n, Playwright, scraping, OpenRouter, Ollama
-  - ML and data:
-      icon: si-tensorflow
-      description: NumPy, Pandas, TensorFlow, Scikit-learn
-- Education & interests:
-  - B.E. Computer Science (AI & ML):
-      icon: mdi-school
-      description: Lokmanya Tilak College of Engineering, Mumbai. 2023 to 2027 (expected).
-  - Off the clock:
-      icon: mdi-dumbbell
-      description: Weight lifting, badminton, home-lab, IoT and automation.
+      description: Inventory & changelog
 - Live:
-  - CPU now:
+  - CPU:
       icon: mdi-cpu-64-bit
+      description: Load by core
       widget:
         type: customapi
         url: http://netdata:19999/api/v1/data?chart=system.cpu&after=-1&points=1&format=json
@@ -241,11 +113,12 @@
           format: float
           suffix: '%'
         - field: data.0.9
-          label: IO wait
+          label: IOWait
           format: float
           suffix: '%'
-  - RAM now:
+  - RAM:
       icon: mdi-memory
+      description: Memory
       widget:
         type: customapi
         url: http://netdata:19999/api/v1/data?chart=system.ram&after=-1&points=1&format=json
@@ -265,6 +138,7 @@
           suffix: ' MiB'
   - Load:
       icon: mdi-gauge
+      description: 1 / 5 / 15 min
       widget:
         type: customapi
         url: http://netdata:19999/api/v1/data?chart=system.load&after=-1&points=1&format=json
@@ -281,6 +155,7 @@
           format: float
   - Network:
       icon: mdi-lan
+      description: Throughput
       widget:
         type: customapi
         url: http://netdata:19999/api/v1/data?chart=system.net&after=-1&points=1&format=json
@@ -295,8 +170,9 @@
           format: float
           scale: -1
           suffix: ' kb/s'
-  - Total disk I/O:
+  - Disk I/O:
       icon: mdi-harddisk
+      description: All devices
       widget:
         type: customapi
         url: http://netdata:19999/api/v1/data?chart=system.io&after=-1&points=1&format=json
@@ -313,6 +189,7 @@
           suffix: ' KiB/s'
   - CPU temp:
       icon: mdi-thermometer
+      description: Package
       widget:
         type: customapi
         url: http://netdata:19999/api/v1/data?chart=sensors.temperature_k10temp-pci-00c3_temp1_Tctl_input&after=-1&points=1&format=json
@@ -324,6 +201,7 @@
           suffix: ' °C'
   - GPU temp:
       icon: mdi-expansion-card
+      description: Edge
       widget:
         type: customapi
         url: http://netdata:19999/api/v1/data?chart=sensors.temperature_amdgpu-pci-0300_temp1_edge_input&after=-1&points=1&format=json
@@ -333,12 +211,28 @@
           label: GPU
           format: float
           suffix: ' °C'
+- Live graphs:
+  - Netdata alerts:
+      icon: netdata.png
+      description: Live from Netdata
+      href: https://ajinkya.tail32b205.ts.net:8461
+      widget:
+        type: netdata
+        url: http://netdata:19999
+  - System graphs:
+      icon: mdi-chart-areaspline
+      description: CPU, RAM, network, disk, temps
+      widget:
+        type: iframe
+        name: graphs
+        src: https://ajinkya.tail32b205.ts.net:8462
+        loadingStrategy: lazy
 - Architecture:
   - Infrastructure map:
       icon: mdi-sitemap
-      description: 'Live topology: ports, containers, storage, exposure'
+      description: Ports, containers, storage, exposure
       widget:
         type: iframe
         name: arch
         src: https://ajinkya.tail32b205.ts.net:8462/arch.html
-        loadingStrategy: eager
+        loadingStrategy: lazy

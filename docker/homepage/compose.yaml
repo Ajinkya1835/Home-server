@@ -9,6 +9,7 @@ services:
       - "127.0.0.1:3030:3000"
     volumes:
       - ./config:/app/config
+      - ./public:/app/public:ro
       # read-only: widgets only inspect containers, they never write
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /mnt:/mnt:ro,rslave

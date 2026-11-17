@@ -1,0 +1,66 @@
+#!/bin/bash
+# deepseek-balance - snapshot the DeepSeek API balance and publish it for the dashboard widget.
+# Writes ~/docker/homepage/public/deepseek.json (served by the homepage container) and keeps
+# a small history file so "spent today / last 7 days" can be derived.
+set -uo pipefail
+KEYFILE=${DEEPSEEK_KEYFILE:-$HOME/.deepseek.key}
+PUB=${DEEPSEEK_PUB:-$HOME/docker/homepage/public}
+STATE=${DEEPSEEK_STATE:-$HOME/.deepseek-history.json}
+OUT="$PUB/deepseek.json"
+
+[ -f "$KEYFILE" ] || { echo "$(date '+%F %T') no key file: $KEYFILE" >&2; exit 1; }
+KEY=$(tr -d '\r\n' < "$KEYFILE")
+RAW=$(curl -s --max-time 15 -H "Authorization: Bearer $KEY" https://api.deepseek.com/user/balance) || {
+  echo "$(date '+%F %T') balance request failed" >&2; exit 1; }
+
+python3 - "$RAW" "$STATE" "$OUT" <<'PY'
+import datetime, json, os, sys
+
+raw, state, out = sys.argv[1:4]
+try:
+    d = json.loads(raw)
+except Exception as e:
+    print(f"bad json from api: {e}", file=sys.stderr)
+    raise SystemExit(1)
+
+infos = d.get("balance_infos") or []
+usd = next((x for x in infos if x.get("currency") == "USD"), infos[0] if infos else {})
+bal = round(float(usd.get("total_balance") or 0), 4)
+
+now = datetime.datetime.now().astimezone()
+hist = []
+if os.path.exists(state):
+    try:
+        hist = json.load(open(state))
+    except Exception:
+        hist = []
+hist.append({"t": now.isoformat(timespec="minutes"), "balance": bal})
+hist = hist[-4000:]
+
+def parsed(h):
+    return datetime.datetime.fromisoformat(h["t"])
+
+def spent(delta):
+    cut = now - delta
+    pts = [h for h in hist if parsed(h) >= cut]
+    return round(pts[0]["balance"] - bal, 2) if len(pts) >= 2 else None
+
+midnight = now.replace(hour=0, minute=0, second=0, microsecond=0)
+today_pts = [h for h in hist if parsed(h) >= midnight]
+spent_today = round(today_pts[0]["balance"] - bal, 2) if len(today_pts) >= 2 else None
+
+payload = {
+    "balance": round(bal, 2),
+    "spent_today": spent_today,
+    "spent_7d": spent(datetime.timedelta(days=7)),
+    "updated": now.strftime("%Y-%m-%d %H:%M"),
+    "available": bool(d.get("is_available")),
+}
+os.makedirs(os.path.dirname(out), exist_ok=True)
+tmp = out + ".tmp"
+with open(tmp, "w") as f:
+    json.dump(payload, f)
+os.replace(tmp, out)
+json.dump(hist, open(state, "w"))
+print(json.dumps(payload))
+PY
