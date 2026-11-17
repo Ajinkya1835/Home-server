@@ -4,3 +4,6 @@
 */5 * * * * $HOME/bin/deploy
 */10 * * * * $HOME/bin/server-snapshot >> $HOME/snapshot.log 2>&1
 40 3 * * * $HOME/bin/sync-config
+*/15 * * * * $HOME/bin/deepseek-balance >> $HOME/deepseek-balance.log 2>&1
+*/30 * * * * $HOME/bin/deployments-sync >> $HOME/deployments-sync.log 2>&1
+*/30 * * * * $HOME/bin/hevy-sync >> $HOME/hevy-sync.log 2>&1
