@@ -57,10 +57,10 @@ payload = {
     "available": bool(d.get("is_available")),
 }
 os.makedirs(os.path.dirname(out), exist_ok=True)
-tmp = out + ".tmp"
-with open(tmp, "w") as f:
+# write in place: /app/public/deepseek.json is a single-file bind mount, so replacing
+# the inode (os.replace) would leave the container reading the old file forever.
+with open(out, "w") as f:
     json.dump(payload, f)
-os.replace(tmp, out)
 json.dump(hist, open(state, "w"))
 print(json.dumps(payload))
 PY

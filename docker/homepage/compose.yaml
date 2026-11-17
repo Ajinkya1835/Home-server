@@ -9,7 +9,14 @@ services:
       - "127.0.0.1:3030:3000"
     volumes:
       - ./config:/app/config
-      - ./public:/app/public:ro
+      # NOTE: never mount a whole directory over /app/public - it hides the app's own
+      # locales/ and assets, and every UI label then renders as a raw i18n key.
+      - ./public/favicon.ico:/app/public/favicon.ico:ro
+      - ./public/favicon-32.png:/app/public/favicon-32.png:ro
+      - ./public/icon-192.png:/app/public/icon-192.png:ro
+      - ./public/icon-512.png:/app/public/icon-512.png:ro
+      - ./public/apple-touch-icon.png:/app/public/apple-touch-icon.png:ro
+      - ./public/deepseek.json:/app/public/deepseek.json:ro
       # read-only: widgets only inspect containers, they never write
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /mnt:/mnt:ro,rslave
