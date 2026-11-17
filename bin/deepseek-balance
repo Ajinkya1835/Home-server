@@ -13,10 +13,15 @@ KEY=$(tr -d '\r\n' < "$KEYFILE")
 RAW=$(curl -s --max-time 15 -H "Authorization: Bearer $KEY" https://api.deepseek.com/user/balance) || {
   echo "$(date '+%F %T') balance request failed" >&2; exit 1; }
 
-python3 - "$RAW" "$STATE" "$OUT" <<'PY'
+# also publish host facts for the dashboard subtitle (containers, uptime)
+HOSTNAME_RAW=$(uname -n 2>/dev/null || echo server)
+CONTAINERS=$(docker ps -q 2>/dev/null | wc -l | tr -d ' ')
+UPTIME_H=$(awk '{printf "%.1f", $1/3600}' /proc/uptime 2>/dev/null || echo "")
+
+python3 - "$RAW" "$STATE" "$OUT" "$HOSTNAME_RAW" "$CONTAINERS" "$UPTIME_H" <<'PY'
 import datetime, json, os, sys
 
-raw, state, out = sys.argv[1:4]
+raw, state, out, host_raw, containers, uptime_h = sys.argv[1:7]
 try:
     d = json.loads(raw)
 except Exception as e:
@@ -55,6 +60,9 @@ payload = {
     "spent_7d": spent(datetime.timedelta(days=7)),
     "updated": now.strftime("%Y-%m-%d %H:%M"),
     "available": bool(d.get("is_available")),
+    "host": host_raw or "server",
+    "containers": int(containers) if str(containers).strip().isdigit() else None,
+    "uptime_hours": float(uptime_h) if str(uptime_h).strip() else None,
 }
 os.makedirs(os.path.dirname(out), exist_ok=True)
 # write in place: /app/public/deepseek.json is a single-file bind mount, so replacing

@@ -7,8 +7,8 @@
   --bl-ink: #2b2431;
   --bl-muted: #8b7583;
   --bl-line: rgba(120, 80, 100, .14);
-  --bl-card: rgba(255, 255, 255, .78);
-  --bl-card-hover: rgba(255, 255, 255, .94);
+  --bl-card: rgba(255, 255, 255, .72);
+  --bl-card-hover: rgba(255, 255, 255, .90);
   --bl-accent: #f472b6;
 }
 
@@ -63,6 +63,7 @@ iframe[src*=":8462"]:not([src*="/arch.html"]) { height: 1500px !important; min-h
   iframe[src*="/arch.html"] { height: 3450px !important; min-height: 3450px !important; }
   iframe[src*=":8462"]:not([src*="/arch.html"]) { height: 1200px !important; min-height: 1200px !important; }
 }
+
 /* ---------------------------------------------------------------
    Header polish - makes the top band feel designed, not assembled
    Greeting becomes a headline, stats share one rhythm, tabs match.
@@ -75,7 +76,12 @@ iframe[src*=":8462"]:not([src*="/arch.html"]) { height: 1500px !important; min-h
   box-shadow: none !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  padding-left: 2.1rem !important;
+  padding-left: 2.5rem !important;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1px;
   position: relative;
   letter-spacing: -.02em !important;
 }
@@ -84,8 +90,8 @@ iframe[src*=":8462"]:not([src*="/arch.html"]) { height: 1500px !important; min-h
   position: absolute;
   left: .15rem;
   top: 50%;
-  width: 1.35rem;
-  height: 1.35rem;
+  width: 1.7rem;
+  height: 1.7rem;
   transform: translateY(-50%);
   background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g fill='%23f472b6'><ellipse cx='12' cy='6.2' rx='3.1' ry='2.4'/><ellipse cx='17.3' cy='10' rx='3.1' ry='2.4' transform='rotate(72 17.3 10)'/><ellipse cx='15.3' cy='16.2' rx='3.1' ry='2.4' transform='rotate(144 15.3 16.2)'/><ellipse cx='8.7' cy='16.2' rx='3.1' ry='2.4' transform='rotate(216 8.7 16.2)'/><ellipse cx='6.7' cy='10' rx='3.1' ry='2.4' transform='rotate(288 6.7 10)'/><circle cx='12' cy='11.6' r='1.7' fill='%23fbbf24'/></g></svg>")
     center / contain no-repeat;
@@ -170,3 +176,38 @@ iframe[src*=":8462"]:not([src*="/arch.html"]) { height: 1500px !important; min-h
   color: #be185d !important;
 }
 [role="tab"][aria-selected="true"]:hover { color: #fff !important; }
+
+/* 6. greeting subtitle, filled in by custom.js from /deepseek.json */
+.information-widget-greeting .hp-sub {
+  font-size: .72rem !important;
+  font-weight: 500;
+  letter-spacing: .05em;
+  color: #9c8794 !important;
+  text-transform: none;
+  margin-top: 2px;
+}
+
+/* 7. tab icons (masked with currentColor, so they follow the tab state) */
+[role="tab"] {
+  display: inline-flex !important;
+  align-items: center;
+  gap: .42rem;
+}
+[role="tab"]::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+  background: currentColor;
+  -webkit-mask: var(--tab-icon) center / contain no-repeat;
+  mask: var(--tab-icon) center / contain no-repeat;
+}
+#Home-tab {
+  --tab-icon: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 3 2 12h3v8h5v-6h4v6h5v-8h3z'/></svg>");
+}
+#Observe-tab {
+  --tab-icon: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M2 12h4l2.5-6 4 14 3-8H22v2h-4.6L14 21 10 7.6 8.6 14H2z'/></svg>");
+}
+#Map-tab {
+  --tab-icon: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M9 2h6v5H9zM2 17h6v5H2zM16 17h6v5h-6zM11 7h2v3h4v3h-2v-1H9v1H7v-3h4z'/></svg>");
+}
