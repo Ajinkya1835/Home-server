@@ -17,6 +17,7 @@ services:
       - ./public/icon-512.png:/app/public/icon-512.png:ro
       - ./public/apple-touch-icon.png:/app/public/apple-touch-icon.png:ro
       - ./public/deepseek.json:/app/public/deepseek.json:ro
+      - ./public/blossom-day.svg:/app/public/blossom-day.svg:ro
       # read-only: widgets only inspect containers, they never write
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /mnt:/mnt:ro,rslave
