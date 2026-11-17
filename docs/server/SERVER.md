@@ -243,6 +243,7 @@ yt-music.service
 */10 * * * * $HOME/bin/server-snapshot >> $HOME/snapshot.log 2>&1
 40 3 * * * $HOME/bin/sync-config
 */15 * * * * $HOME/bin/deepseek-balance >> $HOME/deepseek-balance.log 2>&1
+*/30 * * * * $HOME/bin/deployments-sync >> $HOME/deployments-sync.log 2>&1
 SHELL=/bin/sh
 30 7-23 * * *   root	[ -x /etc/init.d/anacron ] && if [ ! -d /run/systemd/system ]; then /usr/sbin/invoke-rc.d anacron start >/dev/null; fi
 30 3 * * 0 root test -e /run/systemd/system || SERVICE_MODE=1 /usr/lib/x86_64-linux-gnu/e2fsprogs/e2scrub_all_cron
@@ -346,6 +347,7 @@ f7efcf37f2d0 /home/ajinkya/bin/daily-check
 493021cf73cc /home/ajinkya/bin/deepseek-balance.bak-2026-11-17-2356
 f3acefebfbb6 /home/ajinkya/bin/deploy
 3168e5e0d08b /home/ajinkya/bin/deploy.bak-2026-11-17-2333
+447b7ba6c174 /home/ajinkya/bin/deployments-sync
 afdaddc01d1e /home/ajinkya/bin/deploy.old
 8dfa0982b54f /home/ajinkya/bin/event
 b6fa9dae4b18 /home/ajinkya/bin/fullcheck.sh
@@ -377,4 +379,4 @@ e4f672f487a4 /home/ajinkya/docker/n8n/compose.yaml
 6a022230a456 /home/ajinkya/docker/scrutiny/docker-compose.yml
 ```
 
-_Last change recorded: 2026-11-18 00:50:05_
+_Last change recorded: 2026-11-18 01:10:05_
