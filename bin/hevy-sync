@@ -1,0 +1,94 @@
+#!/bin/bash
+# hevy-sync - pull recent workouts from the Hevy API and publish a small JSON for the dashboard.
+# Reads the key from ~/.hevy.key (chmod 600). Writes IN PLACE because the dashboard mounts
+# the file as a single-file bind (replacing the inode would leave the container on the old file).
+set -uo pipefail
+KEYFILE=${HEVY_KEYFILE:-$HOME/.hevy.key}
+PUB=${HEVY_PUB:-$HOME/docker/homepage/public}
+OUT="$PUB/hevy.json"
+BASE=https://api.hevyapp.com
+
+[ -f "$KEYFILE" ] || { echo "$(date '+%F %T') no key at $KEYFILE" >&2; exit 1; }
+KEY=$(tr -d '\r\n' < "$KEYFILE")
+[ -n "$KEY" ] || { echo "$(date '+%F %T') empty key" >&2; exit 1; }
+
+get() { curl -s --max-time 20 -H "api-key: $KEY" -H "Accept: application/json" "$BASE$1"; }
+
+WORKOUTS=$(get "/v1/workouts?page=1&pageSize=20") || exit 1
+COUNT=$(get "/v1/workouts/count")
+
+python3 - "$WORKOUTS" "$COUNT" "$OUT" <<'PY'
+import datetime, json, os, sys
+
+raw, count_raw, out = sys.argv[1:4]
+try:
+    data = json.loads(raw)
+except Exception:
+    print("bad json from hevy", file=sys.stderr)
+    raise SystemExit(1)
+if isinstance(data, dict) and data.get("error"):
+    print(f"hevy error: {data}", file=sys.stderr)
+    raise SystemExit(1)
+
+workouts = data.get("workouts", []) if isinstance(data, dict) else []
+total = None
+try:
+    c = json.loads(count_raw)
+    total = c.get("workout_count") if isinstance(c, dict) else None
+except Exception:
+    pass
+
+def vol(w):
+    v = 0.0
+    for ex in w.get("exercises", []):
+        for s in ex.get("sets", []):
+            if s.get("type") in ("warmup", "warm_up"):
+                continue
+            v += float(s.get("weight_kg") or 0) * float(s.get("reps") or 0)
+    return v
+
+now = datetime.datetime.now().astimezone()
+week_start = (now - datetime.timedelta(days=now.weekday())).replace(hour=0, minute=0, second=0, microsecond=0)
+week = [w for w in workouts if (w.get("start_time") or "") >= week_start.isoformat()]
+week_volume = sum(vol(w) for w in week)
+
+def age_days(w):
+    try:
+        t = datetime.datetime.fromisoformat((w.get("start_time") or "").replace("Z", "+00:00"))
+        return (now - t).days
+    except Exception:
+        return None
+
+last = workouts[0] if workouts else None
+
+# day streak: count consecutive calendar days (walking back from today/yesterday) with a workout
+days = set()
+for w in workouts:
+    try:
+        days.add(datetime.datetime.fromisoformat((w.get("start_time") or "").replace("Z", "+00:00")).date())
+    except Exception:
+        pass
+streak = 0
+d = now.date()
+if d not in days and (d - datetime.timedelta(days=1)) in days:
+    d -= datetime.timedelta(days=1)
+while d in days:
+    streak += 1
+    d -= datetime.timedelta(days=1)
+
+payload = {
+    "week_workouts": len(week),
+    "week_volume_kg": round(week_volume),
+    "streak_days": streak,
+    "total_workouts": total,
+    "last_title": (last or {}).get("title") or None,
+    "last_when": (last or {}).get("start_time") or None,
+    "last_age_days": age_days(last) if last else None,
+    "updated": now.strftime("%Y-%m-%d %H:%M"),
+}
+
+os.makedirs(os.path.dirname(out), exist_ok=True)
+with open(out, "w") as f:            # in place: single-file bind mount
+    json.dump(payload, f)
+print(json.dumps(payload))
+PY

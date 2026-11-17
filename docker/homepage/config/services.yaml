@@ -80,6 +80,24 @@
           label: Today
           format: float
           suffix: ' USD'
+  - Hevy:
+      icon: mdi-dumbbell
+      href: https://hevy.com
+      description: Training log
+      widget:
+        type: customapi
+        url: http://127.0.0.1:3000/hevy.json
+        refreshInterval: 300000
+        mappings:
+        - field: week_workouts
+          label: This week
+          format: number
+        - field: week_volume_kg
+          label: Volume kg
+          format: number
+        - field: streak_days
+          label: Streak d
+          format: number
 - Ops:
   - Tab Status:
       icon: mdi-tab
