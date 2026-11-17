@@ -35,7 +35,7 @@
   function fmtUptime(hours) {
     if (hours === undefined || hours === null) return '';
     var d = Math.floor(hours / 24);
-    var h = Math.round(hours % 24);
+    var h = Math.floor(hours % 24);
     return d > 0 ? d + 'd ' + h + 'h' : h + 'h';
   }
 
