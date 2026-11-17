@@ -25,3 +25,8 @@ iframe[src*=":8462"]:not([src*="/arch.html"]) { height: 1500px; min-height: 1500
 /* status accent: a down service is visible at a glance */
 .service-card { border-left: 3px solid rgba(129,140,248,.55) !important; }
 .service-card:hover { border-left-color: rgba(129,140,248,.95) !important; }
+
+/* phone: the map switches to a stacked list, so give it room */
+@media (max-width: 820px) {
+  iframe[src*="/arch.html"] { height: 3450px !important; min-height: 3450px !important; }
+}
