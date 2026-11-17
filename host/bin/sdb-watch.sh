@@ -7,5 +7,5 @@ UNC=$(echo "$OUT" | awk '/Offline_Uncorrectable/ {print $NF}')
 if [ "${ERR:-0}" -gt 8 ] || [ "${REA:-0}" -gt 0 ] || [ "${PEN:-0}" -gt 0 ] || [ "${UNC:-0}" -gt 0 ]; then
   echo "$(date) sdb WARNING err=$ERR realloc=$REA pending=$PEN uncorr=$UNC" >> /var/log/sdb-watch.log
   logger -p user.crit "sdb SMART warning: err=$ERR realloc=$REA pending=$PEN uncorr=$UNC"
-  runuser -u ajinkya -- env NOTIFY_HOME=/home/ajinkya /home/ajinkya/bin/notify "sdb SMART warning" "err=$ERR realloc=$REA pending=$PEN uncorr=$UNC" high
+  runuser -u ajinkya -- env EVENT_HOME=/home/ajinkya /home/ajinkya/bin/event "sdb SMART warning" "err=$ERR realloc=$REA pending=$PEN uncorr=$UNC" high
 fi

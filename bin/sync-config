@@ -3,7 +3,7 @@
 exec 9>/tmp/repo.lock; flock -w 120 9 || exit 0
 OUT=$(~/bin/collect-config 2>&1)
 if echo "$OUT" | grep -q 'SECRET-LIKE (not staged'; then
-  ~/bin/notify "Config sync blocked" "secret-like file found, see ~/sync-config.log" high
+  ~/bin/event "Config sync blocked" "secret-like file found, see ~/sync-config.log" high
   { echo "$(date '+%F %T') BLOCKED"; echo "$OUT"; } >> ~/sync-config.log; exit 1
 fi
 cd ~/Home-server || exit 1

@@ -1,0 +1,27 @@
+#!/bin/bash
+# event TITLE MESSAGE [priority]
+# Server-side event sink. Writes a human line to ~/alerts.log (visible in Dozzle) and appends
+# a JSON line to the shared spool the Hermes cron job reads and forwards to Telegram.
+# Replaces the old ~/bin/notify (no ntfy, no GitHub issues, no tokens on the host).
+T="${1:-alert}"; M="${2:-}"; P="${3:-default}"
+H=${EVENT_HOME:-$HOME}
+SPOOL=${EVENT_SPOOL:-/tmp/homelab-events.jsonl}
+
+mkdir -p "$(dirname "$SPOOL")" 2>/dev/null
+chmod 666 "$SPOOL" 2>/dev/null || true
+echo "$(date '+%F %T') [$P] $T - $M" >> "$H/alerts.log"
+
+python3 - "$P" "$T" "$M" "$SPOOL" <<'PY' 2>/dev/null || true
+import datetime, json, sys
+prio, title, msg, spool = sys.argv[1:5]
+line = {
+    "ts": datetime.datetime.now().astimezone().isoformat(timespec="seconds"),
+    "priority": prio,
+    "title": title,
+    "message": msg,
+    "host": "ajinkya",
+}
+with open(spool, "a", encoding="utf-8") as f:
+    f.write(json.dumps(line) + "\n")
+PY
+exit 0

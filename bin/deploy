@@ -22,7 +22,7 @@ git fetch -q origin || { log "fetch failed"; exit 1; }
 if ! git pull --rebase --autostash -q origin main 2>>"$LOG"; then
   git rebase --abort 2>/dev/null
   log "pull/rebase FAILED"
-  "$HOME/bin/notify" "Deploy FAILED" "git pull/rebase conflict, see ~/deploy.log" high
+  "$HOME/bin/event" "Deploy FAILED" "git pull/rebase conflict, see ~/deploy.log" high
   exit 1
 fi
 [ "$(git rev-parse HEAD)" = "$(git rev-parse origin/main)" ] || git push -q origin main 2>>"$LOG" || log "push failed"
@@ -46,14 +46,14 @@ for d in docker/*/; do
     echo "$H" > "$ST/$s.ok"; rm -f "$ST/$s.fail"; done_list="$done_list $s"; log "deployed $s"
   else
     echo "$H" > "$ST/$s.fail"; log "FAILED $s"
-    "$HOME/bin/notify" "Deploy FAILED: $s" "compose invalid or up failed, see ~/deploy.log" high
+    "$HOME/bin/event" "Deploy FAILED: $s" "compose invalid or up failed, see ~/deploy.log" high
   fi
 done
 
 if [ -n "$done_list" ]; then
   SUBJ=$(git log -1 --format='%h %s')
   log "ok $SUBJ [$done_list ]"
-  "$HOME/bin/notify" "Deploy ok" "$SUBJ |$done_list" default
+  "$HOME/bin/event" "Deploy ok" "$SUBJ |$done_list" default
   if [ -n "$N8N_WEBHOOK" ]; then
     python3 -c 'import json,sys;print(json.dumps({"commit":sys.argv[1],"status":"ok","stacks":sys.argv[2]}))' "$SUBJ" "$done_list" \
       | curl -fsS -m 10 -H 'Content-Type: application/json' -d @- "$N8N_WEBHOOK" >/dev/null 2>&1
