@@ -338,7 +338,8 @@ fc6c7db84684 /home/ajinkya/bin/backup.bak
 e868a0642707 /home/ajinkya/bin/collect-config
 d0764ab1a07d /home/ajinkya/bin/collect-config.bak-hermes
 f7efcf37f2d0 /home/ajinkya/bin/daily-check
-493021cf73cc /home/ajinkya/bin/deepseek-balance
+257020b4dd3d /home/ajinkya/bin/deepseek-balance
+493021cf73cc /home/ajinkya/bin/deepseek-balance.bak-2026-11-17-2356
 f3acefebfbb6 /home/ajinkya/bin/deploy
 3168e5e0d08b /home/ajinkya/bin/deploy.bak-2026-11-17-2333
 afdaddc01d1e /home/ajinkya/bin/deploy.old
@@ -357,7 +358,7 @@ ee3b8e720bb6 /home/ajinkya/bin/sync-config.bak-2026-11-17-2333
 f512666acfc4 /home/ajinkya/bin/watchdog
 9f7322bc7bf7 /home/ajinkya/bin/yt-music.sh
 cde75582fdfe /home/ajinkya/docker/dozzle/compose.yaml
-c2139fc43313 /home/ajinkya/docker/homepage/compose.yaml
+f05fe3ade182 /home/ajinkya/docker/homepage/compose.yaml
 557dfd226c74 /home/ajinkya/docker/homepage-tab/compose.yaml
 574ff774b593 /home/ajinkya/docker/immich/compose.yaml
 3f23bbe751fc /home/ajinkya/docker/jellyfin/compose.override.yaml
@@ -371,4 +372,4 @@ e4f672f487a4 /home/ajinkya/docker/n8n/compose.yaml
 6a022230a456 /home/ajinkya/docker/scrutiny/docker-compose.yml
 ```
 
-_Last change recorded: 2026-11-17 23:50:05_
+_Last change recorded: 2026-11-18 00:00:11_
