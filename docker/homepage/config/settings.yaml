@@ -1,7 +1,7 @@
 title: Ajinkya's Homelab
 description: Self-hosted control centre
-theme: light
-color: rose
+theme: dark
+color: slate
 headerStyle: boxedWidgets
 cardBlur: md
 statusStyle: dot
@@ -18,6 +18,11 @@ quicklaunch:
   showSearchSuggestions: true
   provider: google
 layout:
+  Deployments:
+    tab: Home
+    icon: mdi-rocket-launch-outline
+    style: row
+    columns: 4
   Media:
     tab: Home
     icon: mdi-play-box-multiple
