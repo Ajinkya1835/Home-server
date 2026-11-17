@@ -270,7 +270,7 @@ https://ajinkya.tail32b205.ts.net:10000 (Funnel on)
 |-- / proxy http://127.0.0.1:8096
 
 https://ajinkya.tail32b205.ts.net (Funnel on)
-|-- / proxy http://127.0.0.1:2283
+|-- / proxy http://127.0.0.1:8480
 
 https://ajinkya.tail32b205.ts.net:8443 (Funnel on)
 |-- / proxy http://127.0.0.1:8081
@@ -377,4 +377,4 @@ e4f672f487a4 /home/ajinkya/docker/n8n/compose.yaml
 6a022230a456 /home/ajinkya/docker/scrutiny/docker-compose.yml
 ```
 
-_Last change recorded: 2026-11-18 00:40:13_
+_Last change recorded: 2026-11-18 00:50:05_

@@ -2,6 +2,12 @@
 
 Auto-generated, newest first.
 
+## 2026-11-18 00:50:05
+```diff
+-|-- / proxy http://127.0.0.1:2283
++|-- / proxy http://127.0.0.1:8480
+```
+
 ## 2026-11-18 00:40:13
 ```diff
 +#     - https://ajinkya.tail32b205.ts.net:10000
