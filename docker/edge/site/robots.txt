@@ -1,0 +1,5 @@
+# Public site: crawlers are welcome (Immich's disallow-all no longer applies host-wide)
+User-agent: *
+Allow: /
+
+Sitemap: https://ajinkya.tail32b205.ts.net/portfolio/sitemap.xml
