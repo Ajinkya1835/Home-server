@@ -35,6 +35,7 @@ UUID=2761df04-6297-4f34-8333-9e58640a360c /mnt/backup ext4 defaults,nofail,x-sys
 ## Containers (name | image | image id)
 ```
 dozzle | amir20/dozzle:latest | 08cd5230e21e
+edge | nginx:alpine | 713fc2ebfd92
 filebrowser | filebrowser/filebrowser:latest | a469ea076d4a
 graphs | nginx:alpine | 713fc2ebfd92
 hermes-848e7779 | nousresearch/hermes-sandbox:desktop | c7d8607d076f
@@ -56,6 +57,7 @@ vaultwarden | vaultwarden/server:1.37.1 | ebdfe70701c6
 ## Container ports
 ```
 dozzle | 127.0.0.1:8888->8080/tcp
+edge | 127.0.0.1:8480->80/tcp
 filebrowser | 127.0.0.1:8092->80/tcp
 graphs | 127.0.0.1:8462->80/tcp
 hermes-848e7779 | 
@@ -78,6 +80,7 @@ vaultwarden | 127.0.0.1:8081->80/tcp
 ```
 NAME                STATUS              CONFIG FILES
 dozzle              running(1)          /home/ajinkya/docker/dozzle/compose.yaml
+edge                running(1)          /home/ajinkya/docker/edge/compose.yaml
 filebrowser         running(1)          /home/ajinkya/docker/filebrowser/docker-compose.yml
 graphs              running(1)          /home/ajinkya/docker/graphs/docker-compose.yml
 homepage            running(1)          /home/ajinkya/docker/homepage/compose.yaml
@@ -141,6 +144,7 @@ tcp 127.0.0.1:8090
 tcp 127.0.0.1:8092
 tcp 127.0.0.1:8096
 tcp 127.0.0.1:8462
+tcp 127.0.0.1:8480
 tcp 127.0.0.1:8888
 tcp 127.0.0.1:9120
 tcp 127.0.0.53%lo:53
@@ -253,9 +257,9 @@ PATH=/usr/lib/sysstat:/usr/sbin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
 
 # Funnel on:
-#     - https://ajinkya.tail32b205.ts.net:10000
 #     - https://ajinkya.tail32b205.ts.net
 #     - https://ajinkya.tail32b205.ts.net:8443
+#     - https://ajinkya.tail32b205.ts.net:10000
 
 |-- tcp://ajinkya.tail32b205.ts.net:8456 (tailnet only)
 |-- tcp://100.94.248.64:8456
@@ -358,6 +362,7 @@ ee3b8e720bb6 /home/ajinkya/bin/sync-config.bak-2026-11-17-2333
 f512666acfc4 /home/ajinkya/bin/watchdog
 9f7322bc7bf7 /home/ajinkya/bin/yt-music.sh
 cde75582fdfe /home/ajinkya/docker/dozzle/compose.yaml
+dc501dcbc105 /home/ajinkya/docker/edge/compose.yaml
 f05fe3ade182 /home/ajinkya/docker/homepage/compose.yaml
 557dfd226c74 /home/ajinkya/docker/homepage-tab/compose.yaml
 574ff774b593 /home/ajinkya/docker/immich/compose.yaml
@@ -372,4 +377,4 @@ e4f672f487a4 /home/ajinkya/docker/n8n/compose.yaml
 6a022230a456 /home/ajinkya/docker/scrutiny/docker-compose.yml
 ```
 
-_Last change recorded: 2026-11-18 00:20:04_
+_Last change recorded: 2026-11-18 00:30:05_
