@@ -238,6 +238,7 @@ yt-music.service
 */5 * * * * $HOME/bin/deploy
 */10 * * * * $HOME/bin/server-snapshot >> $HOME/snapshot.log 2>&1
 40 3 * * * $HOME/bin/sync-config
+*/15 * * * * $HOME/bin/deepseek-balance >> $HOME/deepseek-balance.log 2>&1
 SHELL=/bin/sh
 30 7-23 * * *   root	[ -x /etc/init.d/anacron ] && if [ ! -d /run/systemd/system ]; then /usr/sbin/invoke-rc.d anacron start >/dev/null; fi
 30 3 * * 0 root test -e /run/systemd/system || SERVICE_MODE=1 /usr/lib/x86_64-linux-gnu/e2fsprogs/e2scrub_all_cron
@@ -252,9 +253,9 @@ PATH=/usr/lib/sysstat:/usr/sbin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
 
 # Funnel on:
+#     - https://ajinkya.tail32b205.ts.net:10000
 #     - https://ajinkya.tail32b205.ts.net
 #     - https://ajinkya.tail32b205.ts.net:8443
-#     - https://ajinkya.tail32b205.ts.net:10000
 
 |-- tcp://ajinkya.tail32b205.ts.net:8456 (tailnet only)
 |-- tcp://100.94.248.64:8456
@@ -337,22 +338,26 @@ fc6c7db84684 /home/ajinkya/bin/backup.bak
 e868a0642707 /home/ajinkya/bin/collect-config
 d0764ab1a07d /home/ajinkya/bin/collect-config.bak-hermes
 f7efcf37f2d0 /home/ajinkya/bin/daily-check
-3168e5e0d08b /home/ajinkya/bin/deploy
+29cfcb60760e /home/ajinkya/bin/deepseek-balance
+f3acefebfbb6 /home/ajinkya/bin/deploy
+3168e5e0d08b /home/ajinkya/bin/deploy.bak-2026-11-17-2333
 afdaddc01d1e /home/ajinkya/bin/deploy.old
+8dfa0982b54f /home/ajinkya/bin/event
 b6fa9dae4b18 /home/ajinkya/bin/fullcheck.sh
 5746da486c82 /home/ajinkya/bin/music-english
 5e5096f49d92 /home/ajinkya/bin/music-hindi
-8867629b8db8 /home/ajinkya/bin/notify
+8867629b8db8 /home/ajinkya/bin/notify.bak-2026-11-17-2333
 63dd8b7e587c /home/ajinkya/bin/ntfy-send
 14d87c201b7d /home/ajinkya/bin/ntfy-send.orig
 e41a1ac09045 /home/ajinkya/bin/server-doc
 7d628b01b582 /home/ajinkya/bin/server-snapshot
 75ff9166fa9b /home/ajinkya/bin/status-digest
-ee3b8e720bb6 /home/ajinkya/bin/sync-config
+701b572915ee /home/ajinkya/bin/sync-config
+ee3b8e720bb6 /home/ajinkya/bin/sync-config.bak-2026-11-17-2333
 f512666acfc4 /home/ajinkya/bin/watchdog
 9f7322bc7bf7 /home/ajinkya/bin/yt-music.sh
 cde75582fdfe /home/ajinkya/docker/dozzle/compose.yaml
-eabf006d2eb4 /home/ajinkya/docker/homepage/compose.yaml
+c5b11b570a36 /home/ajinkya/docker/homepage/compose.yaml
 557dfd226c74 /home/ajinkya/docker/homepage-tab/compose.yaml
 574ff774b593 /home/ajinkya/docker/immich/compose.yaml
 3f23bbe751fc /home/ajinkya/docker/jellyfin/compose.override.yaml
@@ -366,4 +371,4 @@ e4f672f487a4 /home/ajinkya/docker/n8n/compose.yaml
 6a022230a456 /home/ajinkya/docker/scrutiny/docker-compose.yml
 ```
 
-_Last change recorded: 2026-11-17 23:30:10_
+_Last change recorded: 2026-11-17 23:40:13_
