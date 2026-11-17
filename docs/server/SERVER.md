@@ -356,7 +356,7 @@ cde75582fdfe /home/ajinkya/docker/dozzle/compose.yaml
 94097127862e /home/ajinkya/docker/homepage/compose.yaml
 557dfd226c74 /home/ajinkya/docker/homepage-tab/compose.yaml
 574ff774b593 /home/ajinkya/docker/immich/compose.yaml
-fcfaf516032a /home/ajinkya/docker/jellyfin/compose.override.yaml
+3f23bbe751fc /home/ajinkya/docker/jellyfin/compose.override.yaml
 6c5c196681b8 /home/ajinkya/docker/jellyfin/compose.yaml
 e4f672f487a4 /home/ajinkya/docker/n8n/compose.yaml
 177ca1d00e00 /home/ajinkya/docker/netdata/compose.yaml
@@ -367,4 +367,4 @@ e4f672f487a4 /home/ajinkya/docker/n8n/compose.yaml
 6a022230a456 /home/ajinkya/docker/scrutiny/docker-compose.yml
 ```
 
-_Last change recorded: 2026-11-17 22:00:12_
+_Last change recorded: 2026-11-17 22:30:10_
