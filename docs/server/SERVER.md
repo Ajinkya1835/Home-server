@@ -244,6 +244,7 @@ yt-music.service
 40 3 * * * $HOME/bin/sync-config
 */15 * * * * $HOME/bin/deepseek-balance >> $HOME/deepseek-balance.log 2>&1
 */30 * * * * $HOME/bin/deployments-sync >> $HOME/deployments-sync.log 2>&1
+*/30 * * * * $HOME/bin/hevy-sync >> $HOME/hevy-sync.log 2>&1
 SHELL=/bin/sh
 30 7-23 * * *   root	[ -x /etc/init.d/anacron ] && if [ ! -d /run/systemd/system ]; then /usr/sbin/invoke-rc.d anacron start >/dev/null; fi
 30 3 * * 0 root test -e /run/systemd/system || SERVICE_MODE=1 /usr/lib/x86_64-linux-gnu/e2fsprogs/e2scrub_all_cron
@@ -351,6 +352,7 @@ f3acefebfbb6 /home/ajinkya/bin/deploy
 afdaddc01d1e /home/ajinkya/bin/deploy.old
 8dfa0982b54f /home/ajinkya/bin/event
 b6fa9dae4b18 /home/ajinkya/bin/fullcheck.sh
+36cafc2e5c72 /home/ajinkya/bin/hevy-sync
 5746da486c82 /home/ajinkya/bin/music-english
 5e5096f49d92 /home/ajinkya/bin/music-hindi
 8867629b8db8 /home/ajinkya/bin/notify.bak-2026-11-17-2333
@@ -365,7 +367,7 @@ f512666acfc4 /home/ajinkya/bin/watchdog
 9f7322bc7bf7 /home/ajinkya/bin/yt-music.sh
 cde75582fdfe /home/ajinkya/docker/dozzle/compose.yaml
 dc501dcbc105 /home/ajinkya/docker/edge/compose.yaml
-f05fe3ade182 /home/ajinkya/docker/homepage/compose.yaml
+1aebff3450ae /home/ajinkya/docker/homepage/compose.yaml
 557dfd226c74 /home/ajinkya/docker/homepage-tab/compose.yaml
 574ff774b593 /home/ajinkya/docker/immich/compose.yaml
 3f23bbe751fc /home/ajinkya/docker/jellyfin/compose.override.yaml
@@ -379,4 +381,4 @@ e4f672f487a4 /home/ajinkya/docker/n8n/compose.yaml
 6a022230a456 /home/ajinkya/docker/scrutiny/docker-compose.yml
 ```
 
-_Last change recorded: 2026-11-18 01:10:05_
+_Last change recorded: 2026-11-18 01:30:05_
