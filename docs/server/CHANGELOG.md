@@ -2,6 +2,24 @@
 
 Auto-generated, newest first.
 
+## 2026-11-18 06:50:11
+```diff
+pkg -gstreamer1.0-alsa:amd64	1.20.1-1ubuntu0.8
+pkg +gstreamer1.0-alsa:amd64	1.20.1-1ubuntu0.9
+pkg -gstreamer1.0-gl:amd64	1.20.1-1ubuntu0.8
+pkg +gstreamer1.0-gl:amd64	1.20.1-1ubuntu0.9
+pkg -gstreamer1.0-plugins-base:amd64	1.20.1-1ubuntu0.8
+pkg -gstreamer1.0-plugins-base-apps	1.20.1-1ubuntu0.8
+pkg +gstreamer1.0-plugins-base:amd64	1.20.1-1ubuntu0.9
+pkg +gstreamer1.0-plugins-base-apps	1.20.1-1ubuntu0.9
+pkg -gstreamer1.0-x:amd64	1.20.1-1ubuntu0.8
+pkg +gstreamer1.0-x:amd64	1.20.1-1ubuntu0.9
+pkg -libgstreamer-gl1.0-0:amd64	1.20.1-1ubuntu0.8
+pkg -libgstreamer-plugins-base1.0-0:amd64	1.20.1-1ubuntu0.8
+pkg +libgstreamer-gl1.0-0:amd64	1.20.1-1ubuntu0.9
+pkg +libgstreamer-plugins-base1.0-0:amd64	1.20.1-1ubuntu0.9
+```
+
 ## 2026-11-18 06:40:05
 ```diff
 -#     - https://ajinkya.tail32b205.ts.net:8443
