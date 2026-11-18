@@ -1,8 +1,8 @@
 
 # Funnel on:
-#     - https://ajinkya.tail32b205.ts.net:8443
 #     - https://ajinkya.tail32b205.ts.net:10000
 #     - https://ajinkya.tail32b205.ts.net
+#     - https://ajinkya.tail32b205.ts.net:8443
 
 |-- tcp://ajinkya.tail32b205.ts.net:8456 (tailnet only)
 |-- tcp://100.94.248.64:8456
