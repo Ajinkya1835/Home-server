@@ -166,6 +166,7 @@ tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8457
 tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8461
 tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8462
 tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8463
+udp 0.0.0.0:34584
 udp 0.0.0.0:41641
 udp 127.0.0.53%lo:53
 udp [::]:41641
@@ -259,9 +260,9 @@ PATH=/usr/lib/sysstat:/usr/sbin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
 
 # Funnel on:
-#     - https://ajinkya.tail32b205.ts.net
 #     - https://ajinkya.tail32b205.ts.net:8443
 #     - https://ajinkya.tail32b205.ts.net:10000
+#     - https://ajinkya.tail32b205.ts.net
 
 |-- tcp://ajinkya.tail32b205.ts.net:8456 (tailnet only)
 |-- tcp://100.94.248.64:8456
@@ -381,4 +382,4 @@ e4f672f487a4 /home/ajinkya/docker/n8n/compose.yaml
 6a022230a456 /home/ajinkya/docker/scrutiny/docker-compose.yml
 ```
 
-_Last change recorded: 2026-11-19 22:50:14_
+_Last change recorded: 2026-11-19 23:00:04_
