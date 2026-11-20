@@ -132,6 +132,7 @@ tcp 100.94.248.64%tailscale0:8457
 tcp 100.94.248.64%tailscale0:8461
 tcp 100.94.248.64%tailscale0:8462
 tcp 100.94.248.64%tailscale0:8463
+tcp 100.94.248.64%tailscale0:8464
 tcp 127.0.0.1:19999
 tcp 127.0.0.1:2283
 tcp 127.0.0.1:3030
@@ -146,6 +147,7 @@ tcp 127.0.0.1:8096
 tcp 127.0.0.1:8462
 tcp 127.0.0.1:8480
 tcp 127.0.0.1:8888
+tcp 127.0.0.1:9119
 tcp 127.0.0.1:9120
 tcp 127.0.0.53%lo:53
 tcp [::1]:445
@@ -166,6 +168,7 @@ tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8457
 tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8461
 tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8462
 tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8463
+tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8464
 udp 0.0.0.0:41641
 udp 127.0.0.53%lo:53
 udp [::]:41641
@@ -310,6 +313,9 @@ https://ajinkya.tail32b205.ts.net:8462 (tailnet only)
 https://ajinkya.tail32b205.ts.net:8463 (tailnet only)
 |-- / proxy http://127.0.0.1:8085
 
+https://ajinkya.tail32b205.ts.net:8464 (tailnet only)
+|-- / proxy http://127.0.0.1:9119
+
 ```
 
 ## .env variable names (values never stored)
@@ -381,4 +387,4 @@ e4f672f487a4 /home/ajinkya/docker/n8n/compose.yaml
 6a022230a456 /home/ajinkya/docker/scrutiny/docker-compose.yml
 ```
 
-_Last change recorded: 2026-11-20 17:30:12_
+_Last change recorded: 2026-11-20 17:40:10_

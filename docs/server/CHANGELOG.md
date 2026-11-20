@@ -2,6 +2,16 @@
 
 Auto-generated, newest first.
 
+## 2026-11-20 17:40:10
+```diff
++tcp 100.94.248.64%tailscale0:8464
++tcp 127.0.0.1:9119
++tcp [fd7a:115c:a1e0::5401:f8b2]%tailscale0:8464
++
++https://ajinkya.tail32b205.ts.net:8464 (tailnet only)
++|-- / proxy http://127.0.0.1:9119
+```
+
 ## 2026-11-20 17:30:12
 ```diff
 -#     - https://ajinkya.tail32b205.ts.net:8443
