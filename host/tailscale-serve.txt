@@ -51,3 +51,6 @@ https://ajinkya.tail32b205.ts.net:8462 (tailnet only)
 https://ajinkya.tail32b205.ts.net:8463 (tailnet only)
 |-- / proxy http://127.0.0.1:8085
 
+https://ajinkya.tail32b205.ts.net:8464 (tailnet only)
+|-- / proxy http://127.0.0.1:9119
+
