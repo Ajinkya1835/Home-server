@@ -2,6 +2,28 @@
 
 Auto-generated, newest first.
 
+## 2026-11-20 06:40:10
+```diff
+pkg -gir1.2-gstreamer-1.0:amd64	1.20.3-0ubuntu1.1
+pkg +gir1.2-gstreamer-1.0:amd64	1.20.3-0ubuntu1.2
+pkg -gstreamer1.0-tools	1.20.3-0ubuntu1.1
+pkg +gstreamer1.0-tools	1.20.3-0ubuntu1.2
+pkg -hplip	3.21.12+dfsg0-1ubuntu0.3
+pkg -hplip-data	3.21.12+dfsg0-1ubuntu0.3
+pkg +hplip	3.21.12+dfsg0-1ubuntu0.4
+pkg +hplip-data	3.21.12+dfsg0-1ubuntu0.4
+pkg -libgstreamer1.0-0:amd64	1.20.3-0ubuntu1.1
+pkg +libgstreamer1.0-0:amd64	1.20.3-0ubuntu1.2
+pkg -libhpmud0:amd64	3.21.12+dfsg0-1ubuntu0.3
+pkg +libhpmud0:amd64	3.21.12+dfsg0-1ubuntu0.4
+pkg -libsane-hpaio:amd64	3.21.12+dfsg0-1ubuntu0.3
+pkg +libsane-hpaio:amd64	3.21.12+dfsg0-1ubuntu0.4
+pkg -printer-driver-hpcups	3.21.12+dfsg0-1ubuntu0.3
+pkg +printer-driver-hpcups	3.21.12+dfsg0-1ubuntu0.4
+pkg -printer-driver-postscript-hp	3.21.12+dfsg0-1ubuntu0.3
+pkg +printer-driver-postscript-hp	3.21.12+dfsg0-1ubuntu0.4
+```
+
 ## 2026-11-20 06:10:04
 ```diff
 +#     - https://ajinkya.tail32b205.ts.net:10000
