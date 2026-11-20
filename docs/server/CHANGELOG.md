@@ -2,6 +2,12 @@
 
 Auto-generated, newest first.
 
+## 2026-11-20 19:20:10
+```diff
+-#     - https://ajinkya.tail32b205.ts.net:10000
++#     - https://ajinkya.tail32b205.ts.net:10000
+```
+
 ## 2026-11-20 17:40:10
 ```diff
 +tcp 100.94.248.64%tailscale0:8464
