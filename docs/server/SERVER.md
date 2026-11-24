@@ -261,10 +261,6 @@ PATH=/usr/lib/sysstat:/usr/sbin:/usr/sbin:/usr/bin:/sbin:/bin
 ## Tailscale serve
 ```
 
-# Funnel on:
-#     - https://ajinkya.tail32b205.ts.net:10000
-#     - https://ajinkya.tail32b205.ts.net
-#     - https://ajinkya.tail32b205.ts.net:8443
 
 |-- tcp://ajinkya.tail32b205.ts.net:8456 (tailnet only)
 |-- tcp://100.94.248.64:8456
@@ -365,7 +361,7 @@ b6fa9dae4b18 /home/ajinkya/bin/fullcheck.sh
 63dd8b7e587c /home/ajinkya/bin/ntfy-send
 14d87c201b7d /home/ajinkya/bin/ntfy-send.orig
 e41a1ac09045 /home/ajinkya/bin/server-doc
-7d628b01b582 /home/ajinkya/bin/server-snapshot
+530cf70d6357 /home/ajinkya/bin/server-snapshot
 75ff9166fa9b /home/ajinkya/bin/status-digest
 701b572915ee /home/ajinkya/bin/sync-config
 ee3b8e720bb6 /home/ajinkya/bin/sync-config.bak-2026-11-17-2333
@@ -387,4 +383,4 @@ e4f672f487a4 /home/ajinkya/docker/n8n/compose.yaml
 6a022230a456 /home/ajinkya/docker/scrutiny/docker-compose.yml
 ```
 
-_Last change recorded: 2026-11-24 19:20:13_
+_Last change recorded: 2026-11-24 19:39:59_
