@@ -325,3 +325,12 @@ auxiliary:
   compression:
     provider: gemini
     model: gemini-3-flash-preview
+  title_generation:
+    provider: nvidia
+    model: nvidia/nemotron-3.5-lightning-30b-a3b
+  approval:
+    provider: nvidia
+    model: nvidia/nemotron-3.5-lightning-30b-a3b
+  memory_query_rewrite:
+    provider: nvidia
+    model: nvidia/nemotron-3.5-lightning-30b-a3b
