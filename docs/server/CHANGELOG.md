@@ -2,6 +2,18 @@
 
 Auto-generated, newest first.
 
+## 2026-11-25 06:30:04
+```diff
+pkg -libssh-4:amd64	0.9.6-2ubuntu0.22.04.8
+pkg -libssh-gcrypt-4:amd64	0.9.6-2ubuntu0.22.04.8
+pkg +libssh-4:amd64	0.9.6-2ubuntu0.22.04.9
+pkg +libssh-gcrypt-4:amd64	0.9.6-2ubuntu0.22.04.9
+pkg -python3-oauthlib	3.2.0-1ubuntu0.1
+pkg +python3-oauthlib	3.2.0-1ubuntu0.2
+pkg -tzdata	2026e-0ubuntu0.22.04.1
+pkg +tzdata	2026f-0ubuntu0.22.04.1
+```
+
 ## 2026-11-24 19:40:49
 ```diff
 -udp 0.0.0.0:36598
