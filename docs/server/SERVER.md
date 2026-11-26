@@ -34,19 +34,19 @@ UUID=2761df04-6297-4f34-8333-9e58640a360c /mnt/backup ext4 defaults,nofail,x-sys
 
 ## Containers (name | image | image id)
 ```
-dozzle | amir20/dozzle:latest | 08cd5230e21e
-edge | nginx:alpine | 713fc2ebfd92
+dozzle | amir20/dozzle:latest | 74600d62dd73
+edge | nginx:alpine | 7fc0fb4af7bf
 filebrowser | filebrowser/filebrowser:latest | a469ea076d4a
-graphs | nginx:alpine | 713fc2ebfd92
+graphs | nginx:alpine | 7fc0fb4af7bf
 hermes-848e7779 | nousresearch/hermes-sandbox:desktop | c7d8607d076f
-homepage | ghcr.io/gethomepage/homepage:latest | 19c5c0918445
-homepage-tab | ghcr.io/gethomepage/homepage:latest | da9dca9ec258
+homepage | ghcr.io/gethomepage/homepage:latest | 019d8f063a72
+homepage-tab | ghcr.io/gethomepage/homepage:latest | 019d8f063a72
 immich_postgres | ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0@bcf63357191b | sha256:bcf63357191b76a916ae5eb93464d65c07511da41e3bf7a8416db519b40b1c23
 immich_redis | docker.io/valkey/valkey:9@4963247afc4c | sha256:4963247afc4cd33c7d3b2d2816b9f7f8eeebab148d29056c2ca4d7cbc966f2d9
 immich_server | ghcr.io/immich-app/immich-server:v3 | 7c489add298f
 jellyfin | jellyfin/jellyfin:latest | fea863d0cd9e
 n8n | n8n-n8n | 2b5228af4416
-netdata | netdata/netdata:stable | c7eab00e2090
+netdata | netdata/netdata:stable | 2da510023297
 portainer | portainer/portainer-ce:latest | 5f9b4bda5582
 scrutiny | ghcr.io/analogj/scrutiny:latest-omnibus | 90062edac57a
 serverlog | alpine | be2656061b53
@@ -84,7 +84,7 @@ edge                running(1)          /home/ajinkya/docker/edge/compose.yaml
 filebrowser         running(1)          /home/ajinkya/docker/filebrowser/docker-compose.yml
 graphs              running(1)          /home/ajinkya/docker/graphs/docker-compose.yml
 homepage            running(1)          /home/ajinkya/docker/homepage/compose.yaml
-homepage-tab        exited(1)           /home/ajinkya/docker/homepage-tab/compose.yaml
+homepage-tab        created(1)          /home/ajinkya/docker/homepage-tab/compose.yaml
 immich              running(3)          /home/ajinkya/docker/immich/compose.yaml
 jellyfin            running(1)          /home/ajinkya/Home-server/docker/jellyfin/compose.yaml,/home/ajinkya/Home-server/docker/jellyfin/compose.override.yaml
 n8n                 running(1)          /home/ajinkya/docker/n8n/compose.yaml
@@ -381,4 +381,4 @@ e4f672f487a4 /home/ajinkya/docker/n8n/compose.yaml
 6a022230a456 /home/ajinkya/docker/scrutiny/docker-compose.yml
 ```
 
-_Last change recorded: 2026-11-26 16:50:12_
+_Last change recorded: 2026-11-26 19:00:14_

@@ -2,6 +2,24 @@
 
 Auto-generated, newest first.
 
+## 2026-11-26 19:00:14
+```diff
+-dozzle | amir20/dozzle:latest | 08cd5230e21e
+-edge | nginx:alpine | 713fc2ebfd92
++dozzle | amir20/dozzle:latest | 74600d62dd73
++edge | nginx:alpine | 7fc0fb4af7bf
+-graphs | nginx:alpine | 713fc2ebfd92
++graphs | nginx:alpine | 7fc0fb4af7bf
+-homepage | ghcr.io/gethomepage/homepage:latest | 19c5c0918445
+-homepage-tab | ghcr.io/gethomepage/homepage:latest | da9dca9ec258
++homepage | ghcr.io/gethomepage/homepage:latest | 019d8f063a72
++homepage-tab | ghcr.io/gethomepage/homepage:latest | 019d8f063a72
+-netdata | netdata/netdata:stable | c7eab00e2090
++netdata | netdata/netdata:stable | 2da510023297
+-homepage-tab        exited(1)           /home/ajinkya/docker/homepage-tab/compose.yaml
++homepage-tab        created(1)          /home/ajinkya/docker/homepage-tab/compose.yaml
+```
+
 ## 2026-11-26 16:50:12
 ```diff
 -- Docker: Docker version 29.9.2, build a82e528
