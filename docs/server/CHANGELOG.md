@@ -2,6 +2,21 @@
 
 Auto-generated, newest first.
 
+## 2026-11-26 19:30:17
+```diff
+-- Kernel: 6.8.0-138-generic
++- Kernel: 6.8.0-149-generic
+-sda    238.5G CONSISTENT SSD S7 256GB             
+-├─sda1   512M                         vfat        /boot/efi
+-└─sda2   238G                         ext4        /
+-sdb    465.8G Tech                    crypto_LUKS 
++sda    465.8G Tech                    crypto_LUKS 
++sdb    238.5G CONSISTENT SSD S7 256GB             
++├─sdb1   512M                         vfat        /boot/efi
++└─sdb2   238G                         ext4        /
+-tcp 127.0.0.1:9119
+```
+
 ## 2026-11-26 19:20:10
 ```diff
 -homepage-tab | ghcr.io/gethomepage/homepage:latest | 019d8f063a72
