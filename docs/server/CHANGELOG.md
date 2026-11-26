@@ -2,6 +2,88 @@
 
 Auto-generated, newest first.
 
+## 2026-11-26 16:50:12
+```diff
+-- Docker: Docker version 29.9.2, build a82e528
+-- Tailscale: 1.104.5
++- Docker: Docker version 29.10.1, build c48360f
++- Tailscale: 1.104.7
+pkg -containerd.io	2.4.2-3~ubuntu.22.04~jammy
+pkg +containerd.io	2.4.2-4~ubuntu.22.04~jammy
+pkg -distro-info	1.1ubuntu0.2
+pkg +distro-info	1.1ubuntu0.3
+pkg -docker-buildx-plugin	0.38.1-1~ubuntu.22.04~jammy
+pkg -docker-ce	5:29.9.2-1~ubuntu.22.04~jammy
+pkg -docker-ce-cli	5:29.9.2-1~ubuntu.22.04~jammy
+pkg -docker-ce-rootless-extras	5:29.9.2-1~ubuntu.22.04~jammy
+pkg -docker-compose-plugin	5.6.1-1~ubuntu.22.04~jammy
+pkg +docker-buildx-plugin	0.39.1-1~ubuntu.22.04~jammy
+pkg +docker-ce	5:29.10.1-1~ubuntu.22.04~jammy
+pkg +docker-ce-cli	5:29.10.1-1~ubuntu.22.04~jammy
+pkg +docker-ce-rootless-extras	5:29.10.1-1~ubuntu.22.04~jammy
+pkg +docker-compose-plugin	5.8.0-1~ubuntu.22.04~jammy
+pkg -gir1.2-nm-1.0:amd64	1.36.6-0ubuntu2.5
+pkg +gir1.2-nm-1.0:amd64	1.36.6-0ubuntu2.6
+pkg -libasound2:amd64	1.2.6.1-1ubuntu1.2
+pkg -libasound2-data	1.2.6.1-1ubuntu1.2
+pkg +libasound2:amd64	1.2.6.1-1ubuntu1.3
+pkg +libasound2-data	1.2.6.1-1ubuntu1.3
+pkg -libatopology2:amd64	1.2.6.1-1ubuntu1.2
+pkg +libatopology2:amd64	1.2.6.1-1ubuntu1.3
+pkg -libdav1d5:amd64	0.9.2-1
+pkg +libdav1d5:amd64	0.9.2-1ubuntu0.1
+pkg -libdebuginfod1:amd64	0.186-1ubuntu0.1
+pkg -libdebuginfod-common	0.186-1ubuntu0.1
+pkg +libdebuginfod1:amd64	0.186-1ubuntu0.2
+pkg +libdebuginfod-common	0.186-1ubuntu0.2
+pkg -libdw1:amd64	0.186-1ubuntu0.1
+pkg +libdw1:amd64	0.186-1ubuntu0.2
+pkg -libelf1:amd64	0.186-1ubuntu0.1
+pkg +libelf1:amd64	0.186-1ubuntu0.2
+pkg -libexpat1:amd64	2.4.7-1ubuntu0.9
+pkg -libexpat1-dev:amd64	2.4.7-1ubuntu0.9
+pkg +libexpat1:amd64	2.4.7-1ubuntu0.10
+pkg +libexpat1-dev:amd64	2.4.7-1ubuntu0.10
+pkg -libglib2.0-0:amd64	2.72.4-0ubuntu2.10
+pkg -libglib2.0-bin	2.72.4-0ubuntu2.10
+pkg -libglib2.0-data	2.72.4-0ubuntu2.10
+pkg +libglib2.0-0:amd64	2.72.4-0ubuntu2.11
+pkg +libglib2.0-bin	2.72.4-0ubuntu2.11
+pkg +libglib2.0-data	2.72.4-0ubuntu2.11
+pkg -libgssapi-krb5-2:amd64	1.19.2-2ubuntu0.10
+pkg +libgssapi-krb5-2:amd64	1.19.2-2ubuntu0.12
+pkg -libk5crypto3:amd64	1.19.2-2ubuntu0.10
+pkg +libk5crypto3:amd64	1.19.2-2ubuntu0.12
+pkg -libkrb5-3:amd64	1.19.2-2ubuntu0.10
+pkg -libkrb5support0:amd64	1.19.2-2ubuntu0.10
+pkg +libkrb5-3:amd64	1.19.2-2ubuntu0.12
+pkg +libkrb5support0:amd64	1.19.2-2ubuntu0.12
+pkg -libnm0:amd64	1.36.6-0ubuntu2.5
+pkg +libnm0:amd64	1.36.6-0ubuntu2.6
+pkg -libpcap0.8:amd64	1.10.1-4ubuntu1.22.04.2
+pkg +libpcap0.8:amd64	1.10.1-4ubuntu1.22.04.3
+pkg -libsdl2-2.0-0:amd64	2.0.20+dfsg-2ubuntu1.22.04.1
+pkg +libsdl2-2.0-0:amd64	2.0.20+dfsg-2ubuntu1.22.04.2
+pkg -libspeex1:amd64	1.2~rc1.2-1.1ubuntu3
+pkg -libspeexdsp1:amd64	1.2~rc1.2-1.1ubuntu3
+pkg +libspeex1:amd64	1.2~rc1.2-1.1ubuntu3.1
+pkg +libspeexdsp1:amd64	1.2~rc1.2-1.1ubuntu3.1
+pkg -libtiff5:amd64	4.3.0-6ubuntu0.13
+pkg +libtiff5:amd64	4.3.0-6ubuntu0.14
+pkg -libxrender1:amd64	1:0.9.10-1build4
+pkg +libxrender1:amd64	1:0.9.10-1ubuntu0.22.04.1
+pkg -network-manager	1.36.6-0ubuntu2.5
+pkg -network-manager-config-connectivity-ubuntu	1.36.6-0ubuntu2.5
+pkg +network-manager	1.36.6-0ubuntu2.6
+pkg +network-manager-config-connectivity-ubuntu	1.36.6-0ubuntu2.6
+pkg -python3-distro-info	1.1ubuntu0.2
+pkg +python3-distro-info	1.1ubuntu0.3
+pkg -snapd	2.77.1+ubuntu22.04.1
+pkg +snapd	2.78+ubuntu22.04
+pkg -tailscale	1.104.5
+pkg +tailscale	1.104.7
+```
+
 ## 2026-11-25 06:30:04
 ```diff
 pkg -libssh-4:amd64	0.9.6-2ubuntu0.22.04.8
