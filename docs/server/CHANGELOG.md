@@ -2,6 +2,12 @@
 
 Auto-generated, newest first.
 
+## 2026-11-26 19:10:05
+```diff
+-immich_server | ghcr.io/immich-app/immich-server:v3 | 7c489add298f
++immich_server | ghcr.io/immich-app/immich-server:v3 | fc880c1bf665
+```
+
 ## 2026-11-26 19:00:14
 ```diff
 -dozzle | amir20/dozzle:latest | 08cd5230e21e

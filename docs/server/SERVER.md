@@ -43,7 +43,7 @@ homepage | ghcr.io/gethomepage/homepage:latest | 019d8f063a72
 homepage-tab | ghcr.io/gethomepage/homepage:latest | 019d8f063a72
 immich_postgres | ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0@bcf63357191b | sha256:bcf63357191b76a916ae5eb93464d65c07511da41e3bf7a8416db519b40b1c23
 immich_redis | docker.io/valkey/valkey:9@4963247afc4c | sha256:4963247afc4cd33c7d3b2d2816b9f7f8eeebab148d29056c2ca4d7cbc966f2d9
-immich_server | ghcr.io/immich-app/immich-server:v3 | 7c489add298f
+immich_server | ghcr.io/immich-app/immich-server:v3 | fc880c1bf665
 jellyfin | jellyfin/jellyfin:latest | fea863d0cd9e
 n8n | n8n-n8n | 2b5228af4416
 netdata | netdata/netdata:stable | 2da510023297
@@ -381,4 +381,4 @@ e4f672f487a4 /home/ajinkya/docker/n8n/compose.yaml
 6a022230a456 /home/ajinkya/docker/scrutiny/docker-compose.yml
 ```
 
-_Last change recorded: 2026-11-26 19:00:14_
+_Last change recorded: 2026-11-26 19:10:05_
