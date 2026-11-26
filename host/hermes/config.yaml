@@ -8,8 +8,11 @@ attachments:
 plugins:
   clone_timeout_seconds: 300
   enabled:
+    - minimalist-themes
+    - quota
     - tool-slimmer
   disabled: []
+  auto_apply: true
 model:
   default: deepseek-flash
   provider: custom
@@ -36,6 +39,7 @@ terminal:
   container_persistent: true
 browser:
   inactivity_timeout: 120
+  use_real_profile: true
 tool_loop_guardrails:
   warnings_enabled: true
   hard_stop_enabled: false
@@ -92,10 +96,7 @@ agent:
   service_tier: ''
   fast_auto_seconds: 60
   personalities: {}
-  disabled_toolsets:
-    - web
-    - browser
-    - tts
+  disabled_toolsets: []
 gateway:
   unmanaged_idle_exit_seconds: 600
   signal_interrupt_grace_timeout: 1
@@ -140,11 +141,23 @@ gateway:
     history_tool_output_max_chars: 0
 platform_toolsets:
   cli:
+    - a2a
+    - browser
+    - computer_use
+    - connections
+    - cronjob
     - file
+    - image_gen
+    - kanban
     - memory
+    - session_search
     - skills
     - terminal
+    - todo
+    - tool-slimmer
+    - tts
     - vision
+    - web
   telegram:
     - hermes-telegram
   discord:
@@ -222,6 +235,7 @@ prefetch_spill_enabled: true
 known_plugin_toolsets:
   cli:
     - a2a
+    - tool-slimmer
 known_builtin_toolsets:
   cli:
     - browser
@@ -249,7 +263,6 @@ known_builtin_toolsets:
     - vision
     - web
     - x_search
-    - yuanbao
 onboarding:
   seen:
     tool_progress_prompt: true
