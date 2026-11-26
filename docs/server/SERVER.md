@@ -144,6 +144,7 @@ tcp 127.0.0.1:8096
 tcp 127.0.0.1:8462
 tcp 127.0.0.1:8480
 tcp 127.0.0.1:8888
+tcp 127.0.0.1:9119
 tcp 127.0.0.1:9120
 tcp 127.0.0.53%lo:53
 tcp [::1]:445
@@ -376,4 +377,4 @@ e4f672f487a4 /home/ajinkya/docker/n8n/compose.yaml
 6a022230a456 /home/ajinkya/docker/scrutiny/docker-compose.yml
 ```
 
-_Last change recorded: 2026-11-26 19:30:17_
+_Last change recorded: 2026-11-26 19:40:08_
