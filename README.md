@@ -1,4 +1,6 @@
-﻿![Ubuntu](https://img.shields.io/badge/Ubuntu-22.04-E95420?logo=ubuntu)
+> ⚠️ Superseded by [Home-Lab](https://github.com/Ajinkya1835/Home-Lab).
+
+![Ubuntu](https://img.shields.io/badge/Ubuntu-22.04-E95420?logo=ubuntu)
 ![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED?logo=docker)
 ![License](https://img.shields.io/github/license/Ajinkya1835/Home-server)
 ![Last Commit](https://img.shields.io/github/last-commit/Ajinkya1835/Home-server)
@@ -118,7 +120,7 @@ Home-server/
 â”œâ”€â”€ CHANGELOG.md
 â”œâ”€â”€ LICENSE
 â”œâ”€â”€ README.md
-â””â”€â”€ .gitignore
+â””â”€â”” .gitignore
 ```
 
 ## Documentation Index
@@ -212,4 +214,3 @@ Community docs and tools used:
 - Tailscale
 - Netdata
 - Uptime Kuma
-
