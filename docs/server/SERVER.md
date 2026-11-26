@@ -40,7 +40,6 @@ filebrowser | filebrowser/filebrowser:latest | a469ea076d4a
 graphs | nginx:alpine | 7fc0fb4af7bf
 hermes-848e7779 | nousresearch/hermes-sandbox:desktop | c7d8607d076f
 homepage | ghcr.io/gethomepage/homepage:latest | 019d8f063a72
-homepage-tab | ghcr.io/gethomepage/homepage:latest | 019d8f063a72
 immich_postgres | ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0@bcf63357191b | sha256:bcf63357191b76a916ae5eb93464d65c07511da41e3bf7a8416db519b40b1c23
 immich_redis | docker.io/valkey/valkey:9@4963247afc4c | sha256:4963247afc4cd33c7d3b2d2816b9f7f8eeebab148d29056c2ca4d7cbc966f2d9
 immich_server | ghcr.io/immich-app/immich-server:v3 | fc880c1bf665
@@ -62,7 +61,6 @@ filebrowser | 127.0.0.1:8092->80/tcp
 graphs | 127.0.0.1:8462->80/tcp
 hermes-848e7779 | 
 homepage | 127.0.0.1:3030->3000/tcp
-homepage-tab | 
 immich_postgres | 5432/tcp
 immich_redis | 6379/tcp
 immich_server | 127.0.0.1:2283->2283/tcp
@@ -84,7 +82,6 @@ edge                running(1)          /home/ajinkya/docker/edge/compose.yaml
 filebrowser         running(1)          /home/ajinkya/docker/filebrowser/docker-compose.yml
 graphs              running(1)          /home/ajinkya/docker/graphs/docker-compose.yml
 homepage            running(1)          /home/ajinkya/docker/homepage/compose.yaml
-homepage-tab        created(1)          /home/ajinkya/docker/homepage-tab/compose.yaml
 immich              running(3)          /home/ajinkya/docker/immich/compose.yaml
 jellyfin            running(1)          /home/ajinkya/Home-server/docker/jellyfin/compose.yaml,/home/ajinkya/Home-server/docker/jellyfin/compose.override.yaml
 n8n                 running(1)          /home/ajinkya/docker/n8n/compose.yaml
@@ -368,7 +365,6 @@ f512666acfc4 /home/ajinkya/bin/watchdog
 cde75582fdfe /home/ajinkya/docker/dozzle/compose.yaml
 dc501dcbc105 /home/ajinkya/docker/edge/compose.yaml
 1aebff3450ae /home/ajinkya/docker/homepage/compose.yaml
-557dfd226c74 /home/ajinkya/docker/homepage-tab/compose.yaml
 574ff774b593 /home/ajinkya/docker/immich/compose.yaml
 3f23bbe751fc /home/ajinkya/docker/jellyfin/compose.override.yaml
 6c5c196681b8 /home/ajinkya/docker/jellyfin/compose.yaml
@@ -381,4 +377,4 @@ e4f672f487a4 /home/ajinkya/docker/n8n/compose.yaml
 6a022230a456 /home/ajinkya/docker/scrutiny/docker-compose.yml
 ```
 
-_Last change recorded: 2026-11-26 19:10:05_
+_Last change recorded: 2026-11-26 19:20:10_

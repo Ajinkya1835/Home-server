@@ -2,6 +2,14 @@
 
 Auto-generated, newest first.
 
+## 2026-11-26 19:20:10
+```diff
+-homepage-tab | ghcr.io/gethomepage/homepage:latest | 019d8f063a72
+-homepage-tab | 
+-homepage-tab        created(1)          /home/ajinkya/docker/homepage-tab/compose.yaml
+-557dfd226c74 /home/ajinkya/docker/homepage-tab/compose.yaml
+```
+
 ## 2026-11-26 19:10:05
 ```diff
 -immich_server | ghcr.io/immich-app/immich-server:v3 | 7c489add298f
