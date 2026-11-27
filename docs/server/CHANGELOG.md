@@ -2,6 +2,26 @@
 
 Auto-generated, newest first.
 
+## 2026-11-27 06:10:05
+```diff
+pkg -binutils	2.38-4ubuntu2.12
+pkg -binutils-common:amd64	2.38-4ubuntu2.12
+pkg -binutils-x86-64-linux-gnu	2.38-4ubuntu2.12
+pkg +binutils	2.38-4ubuntu2.14
+pkg +binutils-common:amd64	2.38-4ubuntu2.14
+pkg +binutils-x86-64-linux-gnu	2.38-4ubuntu2.14
+pkg -libbinutils:amd64	2.38-4ubuntu2.12
+pkg +libbinutils:amd64	2.38-4ubuntu2.14
+pkg -libctf0:amd64	2.38-4ubuntu2.12
+pkg -libctf-nobfd0:amd64	2.38-4ubuntu2.12
+pkg +libctf0:amd64	2.38-4ubuntu2.14
+pkg +libctf-nobfd0:amd64	2.38-4ubuntu2.14
+pkg -libxi6:amd64	2:1.8-1build1
+pkg +libxi6:amd64	2:1.8-1ubuntu0.1
+pkg -python3-jwt	2.3.0-1ubuntu0.7
+pkg +python3-jwt	2.3.0-1ubuntu0.8
+```
+
 ## 2026-11-26 19:40:08
 ```diff
 +tcp 127.0.0.1:9119
